@@ -1,5 +1,5 @@
 // Wedding date — TODO: replace with real date
-const WEDDING_DATE = new Date('2027-04-14T14:00:00');
+const WEDDING_DATE = new Date('2027-04-24T14:00:00');
 
 function updateCountdown() {
   const now = new Date();

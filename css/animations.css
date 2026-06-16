@@ -1,8 +1,6 @@
 /* =============================================
    FALLING PETALS — the signature moment
    ============================================= */
-
-/* Individual petal fall paths — 6 variations for natural look */
 @keyframes petalFall-1 {
   0%   { transform: translateY(-60px) translateX(0px)   rotate(0deg);   opacity: 0; }
   8%   { opacity: 0.85; }
@@ -40,7 +38,6 @@
   100% { transform: translateY(110vh) translateX(-95px) rotate(-310deg); opacity: 0; }
 }
 
-/* JS assigns these classes */
 .petal-anim-1 { animation: petalFall-1 var(--dur, 4s) var(--delay, 0s) ease-in forwards; }
 .petal-anim-2 { animation: petalFall-2 var(--dur, 4s) var(--delay, 0s) ease-in forwards; }
 .petal-anim-3 { animation: petalFall-3 var(--dur, 4s) var(--delay, 0s) ease-in forwards; }
@@ -52,83 +49,116 @@
    ENVELOPE
    ============================================= */
 @keyframes sealGlow {
-  0%, 100% { filter: drop-shadow(0 0 6px rgba(184,134,63,0.4)); }
-  50%       { filter: drop-shadow(0 0 14px rgba(184,134,63,0.7)); }
+  0%, 100% { filter: drop-shadow(0 0 8px rgba(107, 127, 107, 0.35)); }
+  50%      { filter: drop-shadow(0 0 18px rgba(107, 127, 107, 0.6)); }
 }
-
-.wax-seal { animation: sealGlow 2.5s ease-in-out infinite; }
+.wax-seal { animation: sealGlow 2.8s ease-in-out infinite; }
 .envelope-wrap.opening .wax-seal { animation: none; }
 
-@keyframes tapFloat {
-  0%, 100% { transform: translateY(0);   opacity: 0.75; }
-  50%       { transform: translateY(5px); opacity: 0.4; }
+/* Subtle shimmer sweep across envelope to draw the eye */
+@keyframes envShimmer {
+  0%   { transform: translateX(-120%) skewX(-18deg); opacity: 0; }
+  40%  { opacity: 0.55; }
+  100% { transform: translateX(220%) skewX(-18deg); opacity: 0; }
 }
-.tap-hint { animation: tapFloat 1.9s ease-in-out infinite; }
+.envelope-wrap::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 45%;
+  height: 100%;
+  z-index: 6;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.55), transparent);
+  animation: envShimmer 4.5s ease-in-out 1.5s infinite;
+}
+.envelope-wrap.opening::after { animation: none; opacity: 0; }
+
+@keyframes tapFloat {
+  0%, 100% { transform: translateY(0);   opacity: 0.7; }
+  50%      { transform: translateY(5px); opacity: 0.35; }
+}
+.tap-hint { animation: tapFloat 2s ease-in-out infinite; }
 
 /* Envelope screen exit */
-@keyframes screenSlideOut {
-  from { transform: translateY(0);    opacity: 1; }
-  to   { transform: translateY(100%); opacity: 0; }
+@keyframes screenFadeOut {
+  from { transform: scale(1)    translateY(0);    opacity: 1; }
+  to   { transform: scale(1.08) translateY(-30px); opacity: 0; }
 }
 #envelope-screen.closing {
-  animation: screenSlideOut 0.65s cubic-bezier(0.55, 0, 1, 0.55) 0.55s forwards;
+  animation: screenFadeOut 0.9s var(--ease) 0.55s forwards;
   pointer-events: none;
 }
 
 /* =============================================
-   HERO — staggered entrance
+   HERO — staggered entrance + Ken Burns
    ============================================= */
 @keyframes riseIn {
-  from { opacity: 0; transform: translateY(22px); }
+  from { opacity: 0; transform: translateY(28px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* Only animate once main-content is visible */
-#main-content.visible .hero-eyebrow  { animation: riseIn 0.8s ease 0.1s both; }
-#main-content.visible .hero-names    { animation: riseIn 0.9s ease 0.3s both; }
-#main-content.visible .hero-divider  { animation: riseIn 0.7s ease 0.55s both; }
-#main-content.visible .hero-date     { animation: riseIn 0.7s ease 0.65s both; }
-#main-content.visible .hero-location { animation: riseIn 0.7s ease 0.75s both; }
-#main-content.visible .countdown     { animation: riseIn 0.7s ease 0.9s both; }
-#main-content.visible .hero-cta      { animation: riseIn 0.7s ease 1.05s both; }
+/* Slow cinematic zoom on the hero photo */
+@keyframes kenBurns {
+  0%   { transform: scale(1.05) translate(0, 0); }
+  100% { transform: scale(1.18) translate(-1.5%, -1.5%); }
+}
+#main-content.visible .hero-bg {
+  animation: kenBurns 24s ease-out forwards;
+}
 
-/* Hide before reveal */
+#main-content.visible .hero-eyebrow  { animation: riseIn 1s var(--ease) 0.2s both; }
+#main-content.visible .hero-names    { animation: riseIn 1.1s var(--ease) 0.4s both; }
+#main-content.visible .hero-intro    { animation: riseIn 1s var(--ease) 0.65s both; }
+#main-content.visible .countdown     { animation: riseIn 1s var(--ease) 0.85s both; }
+#main-content.visible .hero-date     { animation: riseIn 1s var(--ease) 1s both; }
+#main-content.visible .hero-location { animation: riseIn 1s var(--ease) 1.1s both; }
+#main-content.visible .hero-cta      { animation: riseIn 1s var(--ease) 1.25s both; }
+#main-content.visible .scroll-cue    { animation: riseIn 1.2s var(--ease) 1.8s both; }
+
 #main-content:not(.visible) .hero-eyebrow,
 #main-content:not(.visible) .hero-names,
-#main-content:not(.visible) .hero-divider,
+#main-content:not(.visible) .hero-intro,
+#main-content:not(.visible) .countdown,
 #main-content:not(.visible) .hero-date,
 #main-content:not(.visible) .hero-location,
-#main-content:not(.visible) .countdown,
-#main-content:not(.visible) .hero-cta {
+#main-content:not(.visible) .hero-cta,
+#main-content:not(.visible) .scroll-cue {
   opacity: 0;
 }
 
-/* Subtle gold shimmer on names */
-@keyframes nameShimmer {
-  0%   { text-shadow: 0 0 60px rgba(184,134,63,0.45), 0 2px 30px rgba(0,0,0,0.4); }
-  50%  { text-shadow: 0 0 80px rgba(184,134,63,0.65), 0 2px 30px rgba(0,0,0,0.4); }
-  100% { text-shadow: 0 0 60px rgba(184,134,63,0.45), 0 2px 30px rgba(0,0,0,0.4); }
+/* =============================================
+   MUSIC BARS
+   ============================================= */
+@keyframes musicBar {
+  0%, 100% { transform: scaleY(0.4); }
+  50%      { transform: scaleY(1); }
 }
-#main-content.visible .hero-names { animation: riseIn 0.9s ease 0.3s both, nameShimmer 4s ease 1.2s infinite; }
 
 /* =============================================
-   SCROLL REVEAL
+   SCROLL CUE
+   ============================================= */
+@keyframes scrollCue {
+  0%   { transform: translateY(0);    opacity: 1; }
+  100% { transform: translateY(14px); opacity: 0; }
+}
+
+/* =============================================
+   SCROLL REVEAL — slow & fluid
    ============================================= */
 .reveal {
   opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.75s ease, transform 0.75s ease;
+  transform: translateY(34px);
+  transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
 }
-
 .reveal.visible {
   opacity: 1;
   transform: translateY(0);
 }
-
-.reveal-delay-1 { transition-delay: 0.1s; }
-.reveal-delay-2 { transition-delay: 0.2s; }
-.reveal-delay-3 { transition-delay: 0.32s; }
-.reveal-delay-4 { transition-delay: 0.44s; }
+.reveal-delay-1 { transition-delay: 0.12s; }
+.reveal-delay-2 { transition-delay: 0.24s; }
+.reveal-delay-3 { transition-delay: 0.36s; }
+.reveal-delay-4 { transition-delay: 0.48s; }
 
 /* =============================================
    COUNTDOWN number flip
@@ -137,7 +167,7 @@
   from { opacity: 0; transform: translateY(-8px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-.countdown-number.updated { animation: countFlip 0.22s ease forwards; }
+.countdown-number.updated { animation: countFlip 0.25s ease forwards; }
 
 /* =============================================
    REDUCED MOTION
@@ -150,4 +180,6 @@
   }
   .reveal { opacity: 1; transform: none; }
   .petal  { display: none; }
+  .envelope-wrap::after { display: none; }
+  #main-content.visible .hero-bg { animation: none; transform: scale(1.05); }
 }
