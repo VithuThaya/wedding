@@ -1,0 +1,153 @@
+/* =============================================
+   FALLING PETALS — the signature moment
+   ============================================= */
+
+/* Individual petal fall paths — 6 variations for natural look */
+@keyframes petalFall-1 {
+  0%   { transform: translateY(-60px) translateX(0px)   rotate(0deg);   opacity: 0; }
+  8%   { opacity: 0.85; }
+  85%  { opacity: 0.6; }
+  100% { transform: translateY(110vh) translateX(80px)  rotate(420deg); opacity: 0; }
+}
+@keyframes petalFall-2 {
+  0%   { transform: translateY(-60px) translateX(0px)   rotate(30deg);  opacity: 0; }
+  8%   { opacity: 0.75; }
+  85%  { opacity: 0.5; }
+  100% { transform: translateY(110vh) translateX(-110px) rotate(-380deg); opacity: 0; }
+}
+@keyframes petalFall-3 {
+  0%   { transform: translateY(-60px) translateX(0px)   rotate(-15deg); opacity: 0; }
+  8%   { opacity: 0.9; }
+  85%  { opacity: 0.55; }
+  100% { transform: translateY(110vh) translateX(50px)  rotate(290deg); opacity: 0; }
+}
+@keyframes petalFall-4 {
+  0%   { transform: translateY(-60px) translateX(0px)   rotate(60deg);  opacity: 0; }
+  8%   { opacity: 0.7; }
+  85%  { opacity: 0.4; }
+  100% { transform: translateY(110vh) translateX(-70px) rotate(-450deg); opacity: 0; }
+}
+@keyframes petalFall-5 {
+  0%   { transform: translateY(-60px) translateX(0px)   rotate(-40deg); opacity: 0; }
+  8%   { opacity: 0.8; }
+  85%  { opacity: 0.65; }
+  100% { transform: translateY(110vh) translateX(130px) rotate(360deg); opacity: 0; }
+}
+@keyframes petalFall-6 {
+  0%   { transform: translateY(-60px) translateX(0px)   rotate(10deg);  opacity: 0; }
+  8%   { opacity: 0.85; }
+  85%  { opacity: 0.5; }
+  100% { transform: translateY(110vh) translateX(-95px) rotate(-310deg); opacity: 0; }
+}
+
+/* JS assigns these classes */
+.petal-anim-1 { animation: petalFall-1 var(--dur, 4s) var(--delay, 0s) ease-in forwards; }
+.petal-anim-2 { animation: petalFall-2 var(--dur, 4s) var(--delay, 0s) ease-in forwards; }
+.petal-anim-3 { animation: petalFall-3 var(--dur, 4s) var(--delay, 0s) ease-in forwards; }
+.petal-anim-4 { animation: petalFall-4 var(--dur, 4s) var(--delay, 0s) ease-in forwards; }
+.petal-anim-5 { animation: petalFall-5 var(--dur, 4s) var(--delay, 0s) ease-in forwards; }
+.petal-anim-6 { animation: petalFall-6 var(--dur, 4s) var(--delay, 0s) ease-in forwards; }
+
+/* =============================================
+   ENVELOPE
+   ============================================= */
+@keyframes sealGlow {
+  0%, 100% { filter: drop-shadow(0 0 6px rgba(184,134,63,0.4)); }
+  50%       { filter: drop-shadow(0 0 14px rgba(184,134,63,0.7)); }
+}
+
+.wax-seal { animation: sealGlow 2.5s ease-in-out infinite; }
+.envelope-wrap.opening .wax-seal { animation: none; }
+
+@keyframes tapFloat {
+  0%, 100% { transform: translateY(0);   opacity: 0.75; }
+  50%       { transform: translateY(5px); opacity: 0.4; }
+}
+.tap-hint { animation: tapFloat 1.9s ease-in-out infinite; }
+
+/* Envelope screen exit */
+@keyframes screenSlideOut {
+  from { transform: translateY(0);    opacity: 1; }
+  to   { transform: translateY(100%); opacity: 0; }
+}
+#envelope-screen.closing {
+  animation: screenSlideOut 0.65s cubic-bezier(0.55, 0, 1, 0.55) 0.55s forwards;
+  pointer-events: none;
+}
+
+/* =============================================
+   HERO — staggered entrance
+   ============================================= */
+@keyframes riseIn {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Only animate once main-content is visible */
+#main-content.visible .hero-eyebrow  { animation: riseIn 0.8s ease 0.1s both; }
+#main-content.visible .hero-names    { animation: riseIn 0.9s ease 0.3s both; }
+#main-content.visible .hero-divider  { animation: riseIn 0.7s ease 0.55s both; }
+#main-content.visible .hero-date     { animation: riseIn 0.7s ease 0.65s both; }
+#main-content.visible .hero-location { animation: riseIn 0.7s ease 0.75s both; }
+#main-content.visible .countdown     { animation: riseIn 0.7s ease 0.9s both; }
+#main-content.visible .hero-cta      { animation: riseIn 0.7s ease 1.05s both; }
+
+/* Hide before reveal */
+#main-content:not(.visible) .hero-eyebrow,
+#main-content:not(.visible) .hero-names,
+#main-content:not(.visible) .hero-divider,
+#main-content:not(.visible) .hero-date,
+#main-content:not(.visible) .hero-location,
+#main-content:not(.visible) .countdown,
+#main-content:not(.visible) .hero-cta {
+  opacity: 0;
+}
+
+/* Subtle gold shimmer on names */
+@keyframes nameShimmer {
+  0%   { text-shadow: 0 0 60px rgba(184,134,63,0.45), 0 2px 30px rgba(0,0,0,0.4); }
+  50%  { text-shadow: 0 0 80px rgba(184,134,63,0.65), 0 2px 30px rgba(0,0,0,0.4); }
+  100% { text-shadow: 0 0 60px rgba(184,134,63,0.45), 0 2px 30px rgba(0,0,0,0.4); }
+}
+#main-content.visible .hero-names { animation: riseIn 0.9s ease 0.3s both, nameShimmer 4s ease 1.2s infinite; }
+
+/* =============================================
+   SCROLL REVEAL
+   ============================================= */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.75s ease, transform 0.75s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.32s; }
+.reveal-delay-4 { transition-delay: 0.44s; }
+
+/* =============================================
+   COUNTDOWN number flip
+   ============================================= */
+@keyframes countFlip {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.countdown-number.updated { animation: countFlip 0.22s ease forwards; }
+
+/* =============================================
+   REDUCED MOTION
+   ============================================= */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration:       0.01ms !important;
+    animation-iteration-count: 1     !important;
+    transition-duration:      0.01ms !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+  .petal  { display: none; }
+}

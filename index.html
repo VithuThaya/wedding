@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>[Partner 1] &amp; [Partner 2] — We're Getting Married</title>
+  <meta name="description" content="Join us to celebrate our special day. RSVP online." />
+  <meta name="robots" content="noindex" />
+
+  <!-- Fonts: Cormorant Garamond (display) + DM Sans (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,700;1,700&family=DM+Sans:wght@300;400;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+</head>
+<body>
+
+  <!-- Petal layer — petals fall here on envelope open & RSVP success -->
+  <div id="petal-layer" aria-hidden="true"></div>
+
+
+  <!-- ==========================================
+       ENVELOPE INTRO
+       ========================================== -->
+  <div id="envelope-screen">
+    <div class="envelope-wrap" role="button" tabindex="0" aria-label="Open your invitation">
+
+      <div class="env-body"></div>
+      <div class="env-sides"></div>
+      <div class="env-bottom"></div>
+      <div class="env-flap"></div>
+
+      <!-- Wax seal -->
+      <div class="wax-seal">
+        <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="40" cy="40" r="38" fill="#6B9E6B"/>
+          <circle cx="40" cy="40" r="34" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/>
+          <circle cx="40" cy="40" r="30" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="0.8"/>
+          <!-- Highlight -->
+          <ellipse cx="32" cy="26" rx="8" ry="5" fill="rgba(255,255,255,0.08)" transform="rotate(-25 32 26)"/>
+          <!-- Heart -->
+          <path d="M40 52C40 52 24 41 24 31c0-5.5 4.5-8.5 8.5-8.5C35 22.5 38 24 40 27c2-3 5-4.5 7.5-4.5C51.5 22.5 56 25.5 56 31c0 10-16 21-16 21z" fill="white" opacity="0.88"/>
+          <!-- Text path -->
+          <path id="tp" d="M40 7 A33 33 0 1 1 39.95 7" fill="none"/>
+          <text font-size="6.8" fill="rgba(255,255,255,0.8)" font-family="DM Sans, sans-serif" letter-spacing="2.8" font-weight="700">
+            <textPath href="#tp" startOffset="1%">OUR INVITATION ✦ OUR INVITATION ✦</textPath>
+          </text>
+        </svg>
+      </div>
+
+    </div>
+
+    <p class="tap-hint">tap to open</p>
+  </div>
+
+
+  <!-- ==========================================
+       MAIN CONTENT
+       ========================================== -->
+  <div id="main-content">
+
+    <!-- HERO -->
+    <section id="hero">
+      <div class="hero-bg" role="img" aria-label="Couple photo"></div>
+      <div class="hero-overlay"></div>
+      <div class="hero-petal-bg" aria-hidden="true"></div>
+
+      <div class="hero-content">
+        <p class="hero-eyebrow">You are cordially invited</p>
+
+        <!-- TODO: Replace names -->
+        <h1 class="hero-names">
+          [Partner 1]
+          <span class="amp">—&nbsp;&amp;&nbsp;—</span>
+          [Partner 2]
+        </h1>
+
+        <div class="hero-divider"></div>
+
+        <!-- TODO: Replace date and location -->
+        <p class="hero-date">14th April 2027</p>
+        <p class="hero-location">[Venue Name] &middot; [City]</p>
+
+        <div class="countdown" role="timer" aria-label="Countdown to the wedding">
+          <div class="countdown-unit">
+            <span class="countdown-number" id="count-days">—</span>
+            <span class="countdown-label">Days</span>
+          </div>
+          <span class="countdown-sep" aria-hidden="true">:</span>
+          <div class="countdown-unit">
+            <span class="countdown-number" id="count-hours">—</span>
+            <span class="countdown-label">Hours</span>
+          </div>
+          <span class="countdown-sep" aria-hidden="true">:</span>
+          <div class="countdown-unit">
+            <span class="countdown-number" id="count-minutes">—</span>
+            <span class="countdown-label">Min</span>
+          </div>
+          <span class="countdown-sep" aria-hidden="true">:</span>
+          <div class="countdown-unit">
+            <span class="countdown-number" id="count-seconds">—</span>
+            <span class="countdown-label">Sec</span>
+          </div>
+        </div>
+
+        <a href="#rsvp" class="btn-primary hero-cta">RSVP Now</a>
+      </div>
+    </section>
+
+
+    <!-- OUR STORY -->
+    <section id="story" class="section section--wave">
+      <div class="section-inner">
+        <p class="section-eyebrow reveal">Our Story</p>
+        <h2 class="section-title reveal reveal-delay-1">Two hearts, one journey</h2>
+        <p class="section-lead reveal reveal-delay-2">Two people, one dance floor — and the love that grew from every step.</p>
+
+        <div class="ornament reveal reveal-delay-3">✦</div>
+
+        <div class="story-timeline">
+
+          <!-- TODO: Replace with your real story -->
+          <div class="story-entry reveal">
+            <span class="story-chip">Spring 2021</span>
+            <h3>First Steps</h3>
+            <p>It all started at a dance class — two people who came as partners and didn't yet know how much more they were meant for each other.</p>
+          </div>
+
+          <div class="story-entry reveal">
+            <span class="story-chip">Summer 2021</span>
+            <h3>The First Date</h3>
+            <p>A walk along the river, a shared ice cream, and a conversation that lasted until midnight. By the end of the evening, everything was clear.</p>
+          </div>
+
+          <div class="story-entry reveal">
+            <span class="story-chip">Winter 2023</span>
+            <h3>The Proposal</h3>
+            <p>On a quiet evening by candlelight, with a heart full of love, the question was asked. The answer was never in doubt — it was always yes.</p>
+          </div>
+
+          <div class="story-entry reveal">
+            <span class="story-chip">April 2027</span>
+            <h3>Our Wedding Day</h3>
+            <p>And now we invite you — our family and dearest friends — to celebrate this next chapter with us.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- LOCATION -->
+    <section id="location" class="section">
+      <div class="section-inner">
+        <p class="section-eyebrow reveal">Where &amp; When</p>
+        <h2 class="section-title reveal reveal-delay-1">Location &amp; Directions</h2>
+        <p class="section-lead reveal reveal-delay-2">We look forward to welcoming you to a place as special as this occasion.</p>
+
+        <div class="ornament reveal reveal-delay-3">✦</div>
+
+        <div class="location-card reveal">
+          <div class="location-img-wrap">
+            <img src="images/placeholder/venue.jpg" alt="Venue exterior">
+          </div>
+          <div class="location-body">
+            <span class="location-badge">Ceremony &amp; Reception</span>
+            <!-- TODO: Replace venue details -->
+            <h3>[Venue Name]</h3>
+            <address>
+              [Street &amp; Number]<br>
+              [ZIP] [City]
+            </address>
+            <div class="location-meta">
+              <span>📅 14th April 2027</span>
+              <span>🕑 2:00 PM</span>
+              <span>👗 Festive / Semi-formal</span>
+            </div>
+            <!-- TODO: Replace [VENUE_ADDRESS] with real address -->
+            <a href="https://www.google.com/maps/search/?api=1&query=[VENUE_ADDRESS]"
+               target="_blank" rel="noopener" class="btn-outline">
+              Get Directions →
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- SCHEDULE -->
+    <section id="schedule" class="section section--wave">
+      <div class="section-inner">
+        <p class="section-eyebrow reveal">The Day</p>
+        <h2 class="section-title reveal reveal-delay-1">What to expect</h2>
+        <p class="section-lead reveal reveal-delay-2">Every moment of our day, planned with love and care.</p>
+
+        <div class="ornament reveal reveal-delay-3">✦</div>
+
+        <!-- TODO: Replace times and descriptions -->
+        <div class="schedule-list">
+
+          <div class="schedule-item reveal">
+            <span class="schedule-time">13:30</span>
+            <div class="schedule-dot"></div>
+            <div class="schedule-info">
+              <h4>Arrival &amp; Welcome</h4>
+              <p>Doors open — welcome drinks and warm smiles await.</p>
+            </div>
+          </div>
+
+          <div class="schedule-item reveal reveal-delay-1">
+            <span class="schedule-time">14:00</span>
+            <div class="schedule-dot"></div>
+            <div class="schedule-info">
+              <h4>Wedding Ceremony</h4>
+              <p>The moment we've been waiting for — vows, rings, and the yes.</p>
+            </div>
+          </div>
+
+          <div class="schedule-item reveal reveal-delay-2">
+            <span class="schedule-time">15:00</span>
+            <div class="schedule-dot"></div>
+            <div class="schedule-info">
+              <h4>Champagne Reception</h4>
+              <p>Bubbles, laughter, and the first photos as a married couple.</p>
+            </div>
+          </div>
+
+          <div class="schedule-item reveal reveal-delay-3">
+            <span class="schedule-time">17:00</span>
+            <div class="schedule-dot"></div>
+            <div class="schedule-info">
+              <h4>Dinner</h4>
+              <p>A festive dinner with heartfelt speeches and great company.</p>
+            </div>
+          </div>
+
+          <div class="schedule-item reveal reveal-delay-4">
+            <span class="schedule-time">20:00</span>
+            <div class="schedule-dot"></div>
+            <div class="schedule-info">
+              <h4>Dancing &amp; Celebration</h4>
+              <p>The dance floor is open — let's celebrate until the early hours!</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- RSVP -->
+    <section id="rsvp" class="section">
+      <div class="section-inner">
+        <p class="section-eyebrow reveal">RSVP</p>
+        <h2 class="section-title reveal reveal-delay-1">Will you be there?</h2>
+        <p class="section-lead reveal reveal-delay-2">
+          Please let us know by <strong>1st February 2027</strong> so we can make this day perfect for everyone.
+        </p>
+
+        <div class="ornament reveal reveal-delay-3">✦</div>
+
+        <div class="rsvp-card reveal">
+
+          <div id="rsvp-success" class="rsvp-success" role="status" aria-live="polite">
+            <div class="success-icon">💌</div>
+            <h3>Thank you!</h3>
+            <p>We can't wait to celebrate with you. See you on the dance floor!</p>
+          </div>
+
+          <div id="rsvp-form-wrap">
+            <p class="rsvp-deadline">Please respond by <strong>1st February 2027</strong></p>
+
+            <form id="rsvp-form" novalidate>
+
+              <div class="form-group">
+                <label>Are you joining us? *</label>
+                <div class="attendance-group" role="group" aria-label="Attendance choice">
+                  <button type="button" class="attendance-btn" data-value="Yes">✓ Yes</button>
+                  <button type="button" class="attendance-btn" data-value="No">✗ No</button>
+                  <button type="button" class="attendance-btn" data-value="Maybe">? Maybe</button>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="fullname">Full Name *</label>
+                <input type="text" id="fullname" name="fullname"
+                       placeholder="Your full name" required autocomplete="name" />
+              </div>
+
+              <div class="form-group">
+                <label for="email">Email Address *</label>
+                <input type="email" id="email" name="email"
+                       placeholder="your@email.com" required autocomplete="email" />
+              </div>
+
+              <div class="form-group">
+                <label for="guest-count">Number of Guests (including you)</label>
+                <div class="stepper">
+                  <button type="button" id="guest-minus" aria-label="Fewer guests">−</button>
+                  <input type="number" id="guest-count" name="guests"
+                         value="1" min="1" max="10" readonly aria-label="Guest count" />
+                  <button type="button" id="guest-plus" aria-label="More guests">+</button>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="dietary">Dietary Restrictions / Allergies</label>
+                <input type="text" id="dietary" name="dietary"
+                       placeholder="e.g. vegetarian, gluten-free, nut allergy…" />
+              </div>
+
+              <div class="form-group">
+                <label for="song">Song Request 🎵</label>
+                <input type="text" id="song" name="song"
+                       placeholder="A song that gets you on the dance floor!" />
+              </div>
+
+              <div class="form-group">
+                <label for="message">Message to the Couple 💌</label>
+                <textarea id="message" name="message"
+                          placeholder="Share your wishes, a memory, or a kind word…"></textarea>
+              </div>
+
+              <button type="submit" id="rsvp-submit" class="btn-submit">
+                Send RSVP
+              </button>
+
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer>
+      <!-- TODO: Replace names and date -->
+      <p class="footer-names">[Partner 1] &amp; [Partner 2]</p>
+      <p class="footer-date">14th April 2027 &middot; [City]</p>
+      <p class="footer-ornament">✦ &nbsp; ❦ &nbsp; ✦</p>
+      <p class="footer-credit">Made with love</p>
+    </footer>
+
+  </div><!-- /main-content -->
+
+  <script src="js/countdown.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
