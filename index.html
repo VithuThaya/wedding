@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>[Partner 1] &amp; [Partner 2] — Wir heiraten</title>
+  <title>Vithu &amp; Saru — Wir heiraten</title>
   <meta name="description" content="Feiert mit uns unseren besonderen Tag. Jetzt online zusagen." />
   <meta name="robots" content="noindex" />
 
-  <!-- Fonts: Cormorant Garamond (display) + DM Sans (body) -->
+  <!-- Fonts: Cormorant Garamond (display) + DM Sans (body) + Great Vibes (names) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&family=DM+Sans:wght@300;400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/animations.css" />
@@ -62,6 +62,28 @@
 
 
   <!-- ==========================================
+       STICKY NAVIGATION
+       ========================================== -->
+  <header id="site-nav" class="site-nav" aria-label="Hauptnavigation">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-monogram" aria-label="Zum Anfang" data-nav-link>
+        <span class="mono-letters">V&nbsp;&amp;&nbsp;S</span>
+      </a>
+      <nav class="nav-links">
+        <a href="#story"    data-nav-link>Geschichte</a>
+        <a href="#location" data-nav-link>Location</a>
+        <a href="#gallery"  data-nav-link>Galerie</a>
+        <a href="#schedule" data-nav-link>Ablauf</a>
+      </nav>
+      <a href="#rsvp" class="nav-cta" data-nav-link>Zusagen</a>
+      <button class="nav-toggle" aria-label="Menü öffnen" aria-expanded="false">
+        <span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+
+  <!-- ==========================================
        MAIN CONTENT
        ========================================== -->
   <div id="main-content">
@@ -74,18 +96,18 @@
       </video>
       <div class="hero-bg" role="img" aria-label="Foto des Paares"></div>
       <div class="hero-overlay"></div>
+      <div class="hero-vignette" aria-hidden="true"></div>
 
       <div class="hero-content">
-        <p class="hero-eyebrow">Wir heiraten!</p>
+        <p class="hero-eyebrow"><span class="eyebrow-line"></span>Wir heiraten<span class="eyebrow-line"></span></p>
 
-        <!-- TODO: Replace names -->
         <h1 class="hero-names">
-          [Partner 1]
+          <span class="hero-name">Vithu</span>
           <span class="amp">&amp;</span>
-          [Partner 2]
+          <span class="hero-name">Saru</span>
         </h1>
 
-        <p class="hero-intro">Wir freuen uns, diesen besonderen Tag mit euch zu feiern.</p>
+        <p class="hero-intro">Wir freuen uns, diesen besonderen Tag mit dir zu feiern.</p>
 
         <div class="countdown" role="timer" aria-label="Countdown bis zur Hochzeit">
           <div class="countdown-unit">
@@ -100,13 +122,16 @@
             <span class="countdown-number" id="count-minutes">—</span>
             <span class="countdown-label">Minuten</span>
           </div>
+          <div class="countdown-unit">
+            <span class="countdown-number" id="count-seconds">—</span>
+            <span class="countdown-label">Sekunden</span>
+          </div>
         </div>
 
-        <!-- TODO: Replace date and location -->
-        <p class="hero-date">24. April 2027</p>
-        <p class="hero-location">[Venue Name] &middot; [City]</p>
+        <p class="hero-date">29. Mai 2027</p>
+        <p class="hero-location">Saalbau &middot; Kirchberg</p>
 
-        <a href="#rsvp" class="btn-primary hero-cta">Jetzt zusagen</a>
+        <a href="#rsvp" class="btn-primary hero-cta" data-nav-link>Jetzt zusagen</a>
       </div>
 
       <div class="scroll-cue" aria-hidden="true"><span></span></div>
@@ -149,7 +174,7 @@
           <div class="story-entry reveal">
             <span class="story-chip">April 2027</span>
             <h3>Unser großer Tag</h3>
-            <p>Und nun laden wir euch ein — unsere Familie und liebsten Freunde — dieses nächste Kapitel mit uns zu feiern.</p>
+            <p>Und nun laden wir dich ein — unsere Familie und liebsten Freunde — dieses nächste Kapitel mit uns zu feiern.</p>
           </div>
 
         </div>
@@ -162,32 +187,100 @@
       <div class="section-inner">
         <p class="section-eyebrow reveal">Wo &amp; Wann</p>
         <h2 class="section-title reveal reveal-delay-1">Location &amp; Anfahrt</h2>
-        <p class="section-lead reveal reveal-delay-2">Wir feiern unseren großen Tag an einem Ort, der so besonders ist wie dieser Anlass. Wir freuen uns darauf, ihn mit euch zu teilen!</p>
+        <p class="section-lead reveal reveal-delay-2">Wir feiern unseren großen Tag an einem Ort, der so besonders ist wie dieser Anlass. Wir freuen uns darauf, ihn mit dir zu teilen!</p>
 
         <div class="location-card reveal">
           <div class="location-img-wrap">
             <img src="images/placeholder/venue.jpg" alt="Außenansicht der Location" loading="lazy">
           </div>
           <div class="location-body">
-            <span class="location-badge">Trauung &amp; Feier</span>
-            <!-- TODO: Replace venue details -->
-            <h3>[Venue Name]</h3>
+            <span class="location-badge">Empfang &amp; Feier</span>
+            <h3>Saalbau Kirchberg</h3>
             <address>
-              [Street &amp; Number]<br>
-              [ZIP] [City]
+              Neuhofstrasse 33<br>
+              3422 Kirchberg
             </address>
-            <div class="location-meta">
-              <span>📅 24. April 2027</span>
-              <span>🕑 14:00 Uhr</span>
-              <span>👗 Festlich / Semi-formal</span>
-            </div>
-            <!-- TODO: Replace [VENUE_ADDRESS] with real address -->
-            <a href="https://www.google.com/maps/search/?api=1&query=[VENUE_ADDRESS]"
+            <ul class="location-meta">
+              <li>
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="4.5" width="18" height="16" rx="2.5"/><path d="M3 9h18M8 2.5v4M16 2.5v4"/></svg>
+                29. Mai 2027
+              </li>
+              <li>
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
+                Reception ab 16:00 Uhr
+              </li>
+              <li>
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 3.5l2.2 4.4 4.8.7-3.5 3.4.8 4.8L12 18.9l-4.3 2.3.8-4.8-3.5-3.4 4.8-.7z"/></svg>
+                Festlich / Semi-formal
+              </li>
+            </ul>
+            <a href="https://www.google.com/maps/search/?api=1&query=Neuhofstrasse+33,+3422+Kirchberg"
                target="_blank" rel="noopener" class="btn-outline">
-              Route anzeigen →
+              Route anzeigen
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
             </a>
           </div>
         </div>
+      </div>
+    </section>
+
+
+    <!-- GALLERY -->
+    <section id="gallery" class="section">
+      <div class="section-inner section-inner--wide">
+        <p class="section-eyebrow reveal">Augenblicke</p>
+        <h2 class="section-title reveal reveal-delay-1">Unsere Galerie</h2>
+        <p class="section-lead reveal reveal-delay-2">Ein paar Momente, die uns hierher gebracht haben — bald gefüllt mit deinen liebsten Erinnerungen an unseren Tag.</p>
+      </div>
+
+      <!--
+        FOTOS EINFÜGEN: Lege deine Bilder unter  images/gallery/1.jpg … 8.jpg  ab.
+        Solange diese fehlen, zeigt jede Kachel automatisch ein Platzhalterfoto.
+        Reihenfolge / Anzahl: einfach <figure>-Blöcke unten ergänzen oder entfernen.
+      -->
+      <div class="gallery-grid reveal">
+        <figure class="gallery-item gallery-item--tall" data-index="0">
+          <img src="images/gallery/1.jpg" alt="Momentaufnahme des Paares" loading="lazy"
+               onerror="this.onerror=null;this.src='images/placeholder/couple.jpg';this.closest('figure').classList.add('is-placeholder')">
+          <span class="gallery-zoom" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>
+          </span>
+        </figure>
+        <figure class="gallery-item" data-index="1">
+          <img src="images/gallery/2.jpg" alt="Gemeinsamer Moment" loading="lazy"
+               onerror="this.onerror=null;this.src='images/placeholder/venue.jpg';this.closest('figure').classList.add('is-placeholder')">
+          <span class="gallery-zoom" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>
+          </span>
+        </figure>
+        <figure class="gallery-item" data-index="2">
+          <img src="images/gallery/3.jpg" alt="Erinnerung an einen besonderen Tag" loading="lazy"
+               onerror="this.onerror=null;this.src='images/placeholder/couple.jpg';this.closest('figure').classList.add('is-placeholder')">
+          <span class="gallery-zoom" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>
+          </span>
+        </figure>
+        <figure class="gallery-item gallery-item--wide" data-index="3">
+          <img src="images/gallery/4.jpg" alt="Gemeinsame Reise" loading="lazy"
+               onerror="this.onerror=null;this.src='images/placeholder/venue.jpg';this.closest('figure').classList.add('is-placeholder')">
+          <span class="gallery-zoom" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>
+          </span>
+        </figure>
+        <figure class="gallery-item" data-index="4">
+          <img src="images/gallery/5.jpg" alt="Ein Lächeln zu zweit" loading="lazy"
+               onerror="this.onerror=null;this.src='images/placeholder/couple.jpg';this.closest('figure').classList.add('is-placeholder')">
+          <span class="gallery-zoom" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>
+          </span>
+        </figure>
+        <figure class="gallery-item gallery-item--tall" data-index="5">
+          <img src="images/gallery/6.jpg" alt="Ein Versprechen" loading="lazy"
+               onerror="this.onerror=null;this.src='images/placeholder/venue.jpg';this.closest('figure').classList.add('is-placeholder')">
+          <span class="gallery-zoom" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>
+          </span>
+        </figure>
       </div>
     </section>
 
@@ -197,7 +290,7 @@
       <div class="section-inner">
         <p class="section-eyebrow reveal">Der Tag</p>
         <h2 class="section-title reveal reveal-delay-1">Tagesablauf</h2>
-        <p class="section-lead reveal reveal-delay-2">Was euch an unserem großen Tag erwartet.</p>
+        <p class="section-lead reveal reveal-delay-2">Was dich an unserem großen Tag erwartet.</p>
 
         <!-- TODO: Replace times and descriptions -->
         <div class="schedule-list">
@@ -256,17 +349,19 @@
     <section id="rsvp" class="section">
       <div class="section-inner">
         <p class="section-eyebrow reveal">Rückmeldung</p>
-        <h2 class="section-title reveal reveal-delay-1">Seid ihr dabei?</h2>
+        <h2 class="section-title reveal reveal-delay-1">Bist du dabei?</h2>
         <p class="section-lead reveal reveal-delay-2">
-          Bitte gebt uns bis zum <strong>1. Februar 2027</strong> Bescheid, ob ihr dabei sein könnt. Wir planen unseren großen Tag und möchten sicherstellen, dass für jeden gesorgt ist.
+          Bitte gib uns bis <strong>Ende 2026</strong> Bescheid, ob du dabei sein kannst. Wir planen unseren großen Tag und möchten sicherstellen, dass für jeden gesorgt ist.
         </p>
 
         <div class="rsvp-card reveal">
 
           <div id="rsvp-success" class="rsvp-success" role="status" aria-live="polite">
-            <div class="success-icon">💌</div>
+            <div class="success-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="M3 7l9 6 9-6"/></svg>
+            </div>
             <h3>Vielen Dank!</h3>
-            <p>Wir können es kaum erwarten, mit euch zu feiern. Bis bald auf der Tanzfläche!</p>
+            <p>Wir können es kaum erwarten, mit dir zu feiern. Bis bald auf der Tanzfläche!</p>
           </div>
 
           <div id="rsvp-form-wrap">
@@ -277,13 +372,19 @@
                 <label>Nimmst du teil? *</label>
                 <div class="attendance-group" role="group" aria-label="Teilnahme auswählen">
                   <button type="button" class="attendance-btn" data-value="Ja">
-                    <span class="att-icon att-yes">✓</span> Ja
+                    <span class="att-icon att-yes" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12.5l4.5 4.5L19 7"/></svg>
+                    </span> Ja
                   </button>
                   <button type="button" class="attendance-btn" data-value="Nein">
-                    <span class="att-icon att-no">✕</span> Nein
+                    <span class="att-icon att-no" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 6l12 12M18 6L6 18"/></svg>
+                    </span> Nein
                   </button>
                   <button type="button" class="attendance-btn" data-value="Vielleicht">
-                    <span class="att-icon att-maybe">◷</span> Vielleicht
+                    <span class="att-icon att-maybe" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+                    </span> Vielleicht
                   </button>
                 </div>
               </div>
@@ -317,15 +418,15 @@
               </div>
 
               <div class="form-group">
-                <label for="song">Musikwunsch 🎵</label>
+                <label for="song">Musikwunsch</label>
                 <input type="text" id="song" name="song"
-                       placeholder="Ein Song, der euch auf die Tanzfläche bringt!" />
+                       placeholder="Ein Song, der dich auf die Tanzfläche bringt!" />
               </div>
 
               <div class="form-group">
-                <label for="message">Nachricht an das Brautpaar 💌</label>
+                <label for="message">Nachricht an das Brautpaar</label>
                 <textarea id="message" name="message"
-                          placeholder="Teilt eure Wünsche, eine Erinnerung oder ein paar liebe Worte…"></textarea>
+                          placeholder="Teile deine Wünsche, eine Erinnerung oder ein paar liebe Worte…"></textarea>
               </div>
 
               <button type="submit" id="rsvp-submit" class="btn-submit">
@@ -342,14 +443,45 @@
 
     <!-- FOOTER -->
     <footer>
-      <!-- TODO: Replace names and date -->
-      <p class="footer-names">[Partner 1] &amp; [Partner 2]</p>
-      <p class="footer-date">24. April 2027 &middot; [City]</p>
-      <p class="footer-ornament">✦ &nbsp; ❦ &nbsp; ✦</p>
+      <p class="footer-names">Vithu &amp; Saru</p>
+      <p class="footer-date">29. Mai 2027 &middot; Kirchberg</p>
+      <p class="footer-ornament" aria-hidden="true">
+        <svg viewBox="0 0 120 16" fill="none" stroke="currentColor" stroke-width="1">
+          <path d="M2 8h40M118 8H78"/>
+          <path d="M60 3.5c-2.5-3-7-1.5-7 1.8 0 2.6 4 4.7 7 6.7 3-2 7-4.1 7-6.7 0-3.3-4.5-4.8-7-1.8z" fill="currentColor" stroke="none"/>
+          <circle cx="48" cy="8" r="1.2" fill="currentColor" stroke="none"/>
+          <circle cx="72" cy="8" r="1.2" fill="currentColor" stroke="none"/>
+        </svg>
+      </p>
       <p class="footer-credit">Mit Liebe gemacht</p>
     </footer>
 
   </div><!-- /main-content -->
+
+
+  <!-- ==========================================
+       LIGHTBOX
+       ========================================== -->
+  <div id="lightbox" class="lightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Galerie-Ansicht">
+    <button class="lightbox-close" aria-label="Schließen">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <button class="lightbox-nav lightbox-prev" aria-label="Vorheriges Foto">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M15 5l-7 7 7 7"/></svg>
+    </button>
+    <figure class="lightbox-stage">
+      <img id="lightbox-img" src="" alt="" />
+    </figure>
+    <button class="lightbox-nav lightbox-next" aria-label="Nächstes Foto">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 5l7 7-7 7"/></svg>
+    </button>
+  </div>
+
+
+  <!-- Smooth scroll + scroll animations (CDN) -->
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 
   <script src="js/countdown.js"></script>
   <script src="js/main.js"></script>
