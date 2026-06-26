@@ -869,6 +869,13 @@ a   { color: inherit; text-decoration: none; }
 
 .form-group textarea { min-height: 100px; resize: vertical; }
 
+/* Required-field error highlight */
+.form-group input.input-error {
+  border-color: #E8857F;
+  box-shadow: 0 0 0 3px rgba(232, 133, 127, 0.18);
+}
+.attendance-group.input-error .attendance-btn { border-color: #E8857F; }
+
 /* Guest stepper */
 .stepper {
   display: flex;

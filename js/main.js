@@ -523,14 +523,28 @@ document.addEventListener('DOMContentLoaded', () => {
     successMsg.classList.add('visible');
   }
 
+  const nameInput = form.querySelector('[name="fullname"]');
+  const attendanceGroup = form.querySelector('.attendance-group');
+  // Clear error highlight as soon as the user fixes the field
+  nameInput.addEventListener('input', () => nameInput.classList.remove('input-error'));
+  attendanceBtns.forEach((b) =>
+    b.addEventListener('click', () => attendanceGroup.classList.remove('input-error'))
+  );
+
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
+    // Required: Status (Ja/Nein)
     if (!selectedAttendance) {
-      const firstBtn = document.querySelector('.attendance-btn');
-      firstBtn.focus();
-      firstBtn.style.borderColor = '#DE93A4';
-      setTimeout(() => firstBtn.style.borderColor = '', 1500);
+      attendanceGroup.classList.add('input-error');
+      document.querySelector('.attendance-btn').focus();
+      return;
+    }
+
+    // Required: Name (non-empty)
+    if (!nameInput.value.trim()) {
+      nameInput.classList.add('input-error');
+      nameInput.focus();
       return;
     }
 
@@ -539,7 +553,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const payload = {
       attendance:  selectedAttendance, // "Ja" | "Nein"
-      name:        form.querySelector('[name="fullname"]').value,
+      name:        nameInput.value.trim(),
       guests:      guestInput.value,
       dietary:     form.querySelector('[name="dietary"]').value,
       songRequest: form.querySelector('[name="song"]').value,
