@@ -115,29 +115,36 @@ function spawnPetals(layer) {
 // =============================================
 const RSVP_FLAG = 'vs_rsvp_done';
 
-function icsStamp(d) {
-  return d.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+// Apple devices (incl. iPadOS, which reports as "Macintosh") open a real
+// .ics directly in Apple Calendar. Everyone else gets a Google Calendar
+// link that opens the calendar app/site with the event pre-filled — no
+// file download on either path.
+function isAppleDevice() {
+  return /iPhone|iPad|iPod|Macintosh/.test(navigator.userAgent);
 }
 
-// Build a downloadable .ics for the reception and return a blob URL
-function buildCalendarICS() {
-  const ics = [
-    'BEGIN:VCALENDAR',
-    'VERSION:2.0',
-    'PRODID:-//Vithu & Saru//Hochzeit//DE',
-    'CALSCALE:GREGORIAN',
-    'BEGIN:VEVENT',
-    'UID:' + Date.now() + '@vithu-saru-wedding',
-    'DTSTAMP:' + icsStamp(new Date()),
-    'DTSTART:20270529T160000',
-    'DTEND:20270529T230000',
-    'SUMMARY:Hochzeit von Vithu & Saru',
-    'LOCATION:Saalbau Kirchberg\\, Neuhofstrasse 33\\, 3422 Kirchberg',
-    'DESCRIPTION:Wir feiern! Empfang ab 16:00 Uhr.',
-    'END:VEVENT',
-    'END:VCALENDAR',
-  ].join('\r\n');
-  return URL.createObjectURL(new Blob([ics], { type: 'text/calendar;charset=utf-8' }));
+function googleCalendarUrl() {
+  const p = new URLSearchParams({
+    action: 'TEMPLATE',
+    text: 'Hochzeit von Vithu & Saru',
+    dates: '20270529T140000Z/20270529T210000Z', // 16:00–23:00 Europe/Zurich
+    details: 'Wir feiern! Empfang ab 16:00 Uhr.',
+    location: 'Saalbau Kirchberg, Neuhofstrasse 33, 3422 Kirchberg',
+  });
+  return 'https://calendar.google.com/calendar/render?' + p.toString();
+}
+
+// Point the calendar button at the best target for this device
+function setupCalendarButton(btn) {
+  if (!btn) return;
+  if (isAppleDevice()) {
+    btn.href = 'wedding.ics';           // opens Apple Calendar directly
+    btn.removeAttribute('target');
+  } else {
+    btn.href = googleCalendarUrl();     // opens Google Calendar app/site
+    btn.target = '_blank';
+    btn.rel = 'noopener';
+  }
 }
 
 function showFarewell(attendance) {
@@ -156,7 +163,7 @@ function showFarewell(attendance) {
       : 'Schade, dass du nicht dabei sein kannst — danke, dass du uns Bescheid gegeben hast. Du wirst uns fehlen.';
   }
   if (calBtn) {
-    if (isYes) { calBtn.href = buildCalendarICS(); calBtn.hidden = false; }
+    if (isYes) { setupCalendarButton(calBtn); calBtn.hidden = false; }
     else { calBtn.hidden = true; }
   }
 
