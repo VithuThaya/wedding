@@ -195,3 +195,16 @@ Notes:
 ## `prefers-reduced-motion`
 
 All animations and transitions are disabled via `@media (prefers-reduced-motion: reduce)` in `animations.css`. Petals are also hidden (`display: none`). Music does not autoplay if reduced-motion is set.
+
+## Known Issues / Next Session
+
+> Updated 2026-06-27 (end of session). RSVP → Google Sheets is wired & verified live (`WEB_APP_URL` set in `js/main.js`). Music file is committed. Pick up here next time.
+
+1. **Mobile animations bug (investigate first).** Animations run on laptop/desktop but **not on the user's phone** (cover seal breath, hero motion, scroll reveals, petals). **Leading hypothesis:** the phone has OS **"Reduce Motion" / „Bewegung reduzieren"** enabled → the `prefers-reduced-motion` block above kills all motion. First step: have the user toggle that OFF and retest. Also note GSAP hero motion is gated to `min-width: 768px` (desktop only) by design — if that's the "missing" animation, decide whether to add a lighter mobile variant. Verify `.reveal` elements get `.visible` on the phone.
+2. **Background music polish (deferred by user).** `audio/wedding-music.mp3` is committed but **~10.8 MB** — slow on mobile. Compress to ~2–4 MB (128 kbps, maybe trim to 2–3 min). Optionally tweak fade-in volume (`0.55` in `startMusic()`).
+3. **Story content** (`#story`) — replace placeholder text + 4 timeline entries.
+4. **Schedule** (`#schedule`) — generic program; still says "Trauungszeremonie" though the event is a **reception** — fix with real times.
+5. **Gallery photos** — drop real `images/gallery/1.jpg…6.jpg`.
+6. **Real-device test** the Farewell page + "Zum Kalender hinzufügen" on actual iOS & Android.
+
+**Reminder:** local CSS/JS in `index.html` are cache-busted with a `?v=YYYYMMDD` query — **bump it whenever CSS/JS changes** so phones don't serve stale files (mobile Chrome bit us before).
