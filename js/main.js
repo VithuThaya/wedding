@@ -16,7 +16,7 @@
 // success optimistically — the row is still written.
 // =============================================
 
-const WEB_APP_URL = 'PASTE_YOUR_WEB_APP_URL_HERE'; // TODO: https://script.google.com/macros/s/.../exec
+const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyWroKr8O5B4-KSIdanQfs-jDgV_J4nh6NvcBaH6ci3OwP-9EcE6vyHz2CaYUGGbutj/exec';
 
 // =============================================
 // MUSIC — file: audio/wedding-music.mp3
