@@ -384,7 +384,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setupAnchorLinks();
 
   function openEnvelope() {
-    if (envelopeWrap.classList.contains('opening')) return;
+    if (!envelopeWrap || envelopeWrap.classList.contains('opening')) return;
     envelopeWrap.classList.add('opening');
 
     // Music starts with the click (counts as user interaction → autoplay allowed)
@@ -405,10 +405,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 1700);
   }
 
-  envelopeWrap.addEventListener('click', openEnvelope);
-  envelopeWrap.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openEnvelope(); }
-  });
+  // Open on tap/click. Listen on the whole screen via pointerup (covers
+  // mouse + touch + pen reliably; some mobile setups + smooth-scroll libs
+  // swallow the synthetic `click`, so don't depend on it alone).
+  if (envelopeScreen && envelopeWrap) {
+    envelopeScreen.addEventListener('pointerup', openEnvelope);
+    envelopeScreen.addEventListener('click', openEnvelope); // fallback for no-pointer browsers
+    envelopeWrap.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openEnvelope(); }
+    });
+  }
 
   // =============================================
   // ATTENDANCE TOGGLE

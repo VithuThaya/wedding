@@ -115,7 +115,11 @@ a   { color: inherit; text-decoration: none; }
   cursor: pointer;
   outline: none;
   z-index: 1;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
+/* Whole opening screen reacts to a tap (handler is delegated here) */
+#envelope-screen { touch-action: manipulation; cursor: pointer; }
 
 /* Embossed tone-on-tone seal */
 .cover-seal {
