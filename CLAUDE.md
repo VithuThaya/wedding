@@ -60,37 +60,44 @@ Wedding-1/
 ## Design Direction
 
 Reference style: [unsereeinladung.de TikTok](https://www.tiktok.com/@unsereeinladung/video/7650917755788545313)
-Style keywords: **Editorial luxury, soft blush, cinematic, elegant, lots of whitespace, feminine, flowing motion** (the "Soft UI Evolution" direction — see the ui-ux-pro-max design system).
+Style keywords: **Editorial luxury, dramatic dark wine, cinematic, elegant, champagne accents, flowing motion**. The site flipped from the original soft-blush light theme to a **dramatic dark wine-red** palette (deep wine-black backgrounds, warm off-white text, champagne-gold hairlines, luminous-rose accents). Inspired by the "Red Wine / Dark Fire" palette.
 
 ### What this means in practice
-- Consistent soft blush background throughout — no alternating ivory/cream sections
-- Gold only as a subtle accent — fine champagne hairlines (`--gold-grad`) for dividers & eyebrow underlines, never heavy ornaments
-- Diagonal section dividers removed — flat, clean transitions instead
-- Glassmorphism only where intentional — frosted countdown pills, frosted sticky nav, lightbox backdrop
+- Deep wine-black background site-wide (`--blush-bg` = `#2E0D08`), alternating slightly-lifted wine tints for `#location` / `#rsvp`
+- Cards are dark lifted panels (`--blush-card`), **not** white — warm off-white text inside
+- Champagne gold (`--gold`) for fine hairlines (`--gold-grad`), dividers & eyebrow underlines, never heavy ornaments
+- Luminous rose (`--rose`) for accent text, eyebrows, chips, outlines, timeline dots; deep wine (`--wine`) for **filled** buttons / time-chips with off-white labels
+- Glassmorphism only where intentional — frosted countdown pills, dark frosted sticky nav, lightbox backdrop
 - Pill-shaped buttons and timeline chips (fully rounded)
-- Generous whitespace — sections breathe, nothing feels cramped
-- Couple names set in the **Great Vibes** script (hero + footer) for the classic, high-end invitation feel
+- Couple names set in the **Great Vibes** script (hero + footer); cover line also uses Great Vibes
+- **Cover** (opening screen): a light greige→off-white gradient with an embossed tone-on-tone wax seal, a fine hanging thread, and a Great Vibes line — a calm light cover that opens into the dramatic dark site
+
+> **Note on token names:** the `--blush-*` variable names are legacy (from the original light theme) but now hold **dark** wine values. Don't be misled by the names.
 
 ## Design Tokens (CSS variables in `style.css`)
 
+> Token **names** are legacy (`--blush-*`) but hold **dark wine** values now.
+
 | Variable | Value | Use |
 |---|---|---|
-| `--blush-bg` | `#FDF1F1` | Main page background |
-| `--blush-soft` | `#FAE6E7` | Alternating section tint (`#location`, `#rsvp`) |
-| `--blush-card` | `#F8E1E2` | Card / chip backgrounds |
-| `--blush` | `#F0D2D6` | Borders, envelope body |
-| `--blush-line` | `#ECCFD3` | Hairline dividers |
-| `--rose` | `#BC5874` | Buttons, time-chips, active states |
-| `--rose-dark` | `#973652` | Hover states |
-| `--rose-muted` | `#D193A4` | Timeline lines, soft accents |
-| `--sage` | `#6B7F6B` | Wax seal color |
-| `--gold` | `#A67C36` | Richer gold accent |
-| `--gold-soft` | `#C9A86A` | Champagne accent |
-| `--gold-light` | `#E2CFA6` | Thin divider lines |
+| `--blush-bg` | `#2E0D08` | Main page background — deep wine-black |
+| `--blush-soft` | `#3D120C` | Alternating section tint (`#location`, `#rsvp`) |
+| `--blush-card` | `#4A1610` | Card / chip / input backgrounds (dark panels) |
+| `--blush` | `#5E231C` | Subtle borders on dark panels |
+| `--blush-line` | `rgba(231,210,162,.16)` | Hairline dividers (champagne, translucent) |
+| `--wine` | `#7E1A18` | **Filled** buttons, time-chips, active fills |
+| `--wine-bright` | `#9C2A24` | Fill hover |
+| `--rose` | `#DE93A4` | Luminous rose accent — text, eyebrows, chips, outlines, dots |
+| `--rose-dark` | `#C97184` | Deeper rose |
+| `--rose-muted` | `#9F6171` | Timeline lines |
+| `--sage` | `#6B7F6B` | (legacy, unused) |
+| `--gold` | `#C9A86A` | Champagne accent |
+| `--gold-soft` | `#D8BD86` | Champagne accent |
+| `--gold-light` | `#E7D2A2` | Thin divider lines |
 | `--gold-grad` | gradient | Fine champagne hairline for dividers / eyebrow underlines |
-| `--text` | `#34232A` | Body text (deep plum) |
-| `--text-soft` | `#574048` | Paragraph text |
-| `--text-muted` | `#8C7178` | Secondary / placeholder text |
+| `--text` | `#F4E7E2` | Body text (warm off-white) |
+| `--text-soft` | `#DBC3BD` | Paragraph text |
+| `--text-muted` | `#B6938C` | Secondary / placeholder text |
 | `--nav-h` | `68px` | Sticky nav height (used for scroll offset in JS) |
 | `--maxw` | `1180px` | Wide container (nav, gallery) |
 | `--radius` / `--radius-lg` | `22px` / `28px` | Card / large radii |
@@ -99,11 +106,11 @@ Style keywords: **Editorial luxury, soft blush, cinematic, elegant, lots of whit
 **Fonts (Google Fonts CDN):**
 - Display: `Cormorant Garamond` — weights 500/600/700, upright + italic
 - Body: `DM Sans` — 300, 400, 500, 600, 700
-- Script: `Great Vibes` — couple names only (`.hero-names`, `.footer-names`)
+- Script: `Great Vibes` — couple names + cover line (`.hero-names`, `.footer-names`, `.cover-script`)
 
 ## Key Animation Details
 
-- **Envelope:** 3D flap rotates `rotateX(-172deg)` over 1.5s. Sage-green wax seal (two interlocking hearts + "UNSERE EINLADUNG" text path). A `::after` shimmer sweep (`envShimmer`) draws the eye before opening. Music fades in on open.
+- **Cover (`.cover`, was `.envelope-wrap`):** Flat opening screen — light greige→off-white gradient (`#envelope-screen`), a centered **embossed tone-on-tone wax seal** (`.cover-seal`, CSS radial gradient + inset shadows; SVG `.seal-svg` = two interlocking hearts + "UNSERE EINLADUNG" text path, engraved via drop-shadow filter), a **fine hanging thread** (`.cover-seal::before`, ~46vh), and a Great Vibes line „Diese Einladung ist exklusiv für dich" (`.cover-script`) + tap hint (`.cover-hint`). Seal breathes (`sealBreath`) to invite the tap. On tap → `.cover.opening` fades/presses the seal, `#envelope-screen.closing` runs `screenFadeOut`, content reveals, music fades in. (No 3D flap anymore.)
 - **Falling petals:** On envelope open AND on RSVP success. 18 petals, 6 keyframe paths. Self-remove via `animationend`.
 - **Smooth scroll:** Lenis drives the whole page. `lenis.stop()` keeps it locked behind the envelope; `lenis.start()` is called when the envelope finishes opening (and while the lightbox is open). All `a[href^="#"]` links use offset-aware `lenis.scrollTo()` (accounts for `--nav-h`).
 - **Hero entrance:** Text elements stagger in via `riseIn` (1s, `--ease`) after `#main-content` gets `.visible` (CSS only).
@@ -119,7 +126,7 @@ Style keywords: **Editorial luxury, soft blush, cinematic, elegant, lots of whit
 
 Plus a **sticky nav** (`#site-nav`, outside `#main-content`) and a **lightbox** (`#lightbox`, after the footer) that overlay all sections.
 
-1. **Envelope intro** — Blush envelope, sage wax seal, shimmer sweep, "tippen zum Öffnen". Music starts + petals fall on open
+1. **Cover intro** — Light greige→off-white gradient, embossed tone-on-tone wax seal, fine hanging thread, Great Vibes line „Diese Einladung ist exklusiv für dich", "tippen zum Öffnen". Music starts + petals fall on open
 2. **Hero** — Full-bleed couple photo + optional video BG, vignette, `Wir heiraten` eyebrow with hairlines, names in Great Vibes script, intro line, frosted countdown (Tage/Stunden/Minuten/**Sekunden**), italic date, location, `Jetzt zusagen` CTA (with shimmer), scroll cue
 3. **Unsere Geschichte** — Nicholas Sparks quote, single-column vertical timeline with rose dots + blush date chips
 4. **Location & Anfahrt** — Venue photo in rounded white card, address, meta (SVG icons: date/time/dress code), `Route anzeigen` Maps link

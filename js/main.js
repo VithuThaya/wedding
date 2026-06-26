@@ -372,7 +372,7 @@ function initLightbox() {
 // =============================================
 document.addEventListener('DOMContentLoaded', () => {
   const envelopeScreen = document.getElementById('envelope-screen');
-  const envelopeWrap   = document.querySelector('.envelope-wrap');
+  const envelopeWrap   = document.querySelector('.cover');
   const mainContent    = document.getElementById('main-content');
 
   setupMusicToggle();
@@ -451,7 +451,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!selectedAttendance) {
       const firstBtn = document.querySelector('.attendance-btn');
       firstBtn.focus();
-      firstBtn.style.borderColor = '#973652';
+      firstBtn.style.borderColor = '#DE93A4';
       setTimeout(() => firstBtn.style.borderColor = '', 1500);
       return;
     }

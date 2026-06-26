@@ -46,39 +46,21 @@
 .petal-anim-6 { animation: petalFall-6 var(--dur, 4s) var(--delay, 0s) ease-in forwards; }
 
 /* =============================================
-   ENVELOPE
+   COVER
    ============================================= */
-@keyframes sealGlow {
-  0%, 100% { filter: drop-shadow(0 0 8px rgba(107, 127, 107, 0.35)); }
-  50%      { filter: drop-shadow(0 0 18px rgba(107, 127, 107, 0.6)); }
+/* Seal breathes very gently to invite the tap */
+@keyframes sealBreath {
+  0%, 100% { transform: translateY(0)    scale(1); }
+  50%      { transform: translateY(-3px) scale(1.012); }
 }
-.wax-seal { animation: sealGlow 2.8s ease-in-out infinite; }
-.envelope-wrap.opening .wax-seal { animation: none; }
-
-/* Subtle shimmer sweep across envelope to draw the eye */
-@keyframes envShimmer {
-  0%   { transform: translateX(-120%) skewX(-18deg); opacity: 0; }
-  40%  { opacity: 0.55; }
-  100% { transform: translateX(220%) skewX(-18deg); opacity: 0; }
-}
-.envelope-wrap::after {
-  content: '';
-  position: absolute;
-  top: 0; left: 0;
-  width: 45%;
-  height: 100%;
-  z-index: 6;
-  pointer-events: none;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.55), transparent);
-  animation: envShimmer 4.5s ease-in-out 1.5s infinite;
-}
-.envelope-wrap.opening::after { animation: none; opacity: 0; }
+.cover-seal { animation: sealBreath 4.5s ease-in-out infinite; }
+.cover.opening .cover-seal { animation: none; }
 
 @keyframes tapFloat {
-  0%, 100% { transform: translateY(0);   opacity: 0.7; }
-  50%      { transform: translateY(5px); opacity: 0.35; }
+  0%, 100% { transform: translateY(0);   opacity: 0.85; }
+  50%      { transform: translateY(5px); opacity: 0.45; }
 }
-.tap-hint { animation: tapFloat 2s ease-in-out infinite; }
+.cover-hint { animation: tapFloat 2.2s ease-in-out infinite; }
 
 /* Envelope screen exit */
 @keyframes screenFadeOut {
@@ -182,6 +164,6 @@
   }
   .reveal { opacity: 1; transform: none; }
   .petal  { display: none; }
-  .envelope-wrap::after { display: none; }
+  .cover-seal { animation: none; }
   #main-content.visible .hero-bg { animation: none; transform: scale(1.05); }
 }
