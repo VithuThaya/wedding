@@ -1,26 +1,22 @@
 // =============================================
-// GOOGLE FORMS RSVP INTEGRATION
+// GOOGLE SHEETS RSVP INTEGRATION (Apps Script Web App)
 // =============================================
-// TODO: Replace these values after creating your Google Form.
-// Steps:
-//  1. Go to forms.google.com → create a new form
-//  2. Add fields: Attendance, Name, Email, Number of Guests,
-//     Dietary Restrictions, Song Request, Message to the Couple
-//  3. Click ⋮ menu → "Get pre-filled link" → fill dummy values → "Get link"
-//  4. The URL contains entry.XXXXXXXXX IDs — copy each one below
-//  5. The form's action URL ends with /formResponse
+// The form POSTs a JSON body to a Google Apps Script Web App, which writes
+// a row to your Sheet (see the doPost() code shared in the repo / README).
+//
+// SETUP:
+//  1. In your Sheet → Erweiterungen → Apps Script, paste the doPost() code.
+//  2. Bereitstellen → Neue Bereitstellung → Typ: Web-App
+//     • Ausführen als: Ich
+//     • Zugriff: Jeder (anonym)  ← wichtig, sonst wird die Anfrage blockiert
+//  3. Copy the Web-App URL (ends with /exec) and paste it below.
+//
+// Note: cross-origin requests to Apps Script can't read the response
+// (no CORS headers), so we POST as text/plain in no-cors mode and show
+// success optimistically — the row is still written.
 // =============================================
 
-const GOOGLE_FORM_ACTION_URL = 'https://docs.google.com/forms/u/0/d/YOUR_FORM_ID/formResponse'; // TODO
-const ENTRY = {
-  attendance: 'entry.000000001', // TODO
-  name:       'entry.000000002', // TODO
-  email:      'entry.000000003', // TODO
-  guests:     'entry.000000004', // TODO
-  dietary:    'entry.000000005', // TODO
-  song:       'entry.000000006', // TODO
-  message:    'entry.000000007', // TODO
-};
+const WEB_APP_URL = 'PASTE_YOUR_WEB_APP_URL_HERE'; // TODO: https://script.google.com/macros/s/.../exec
 
 // =============================================
 // MUSIC — file: audio/wedding-music.mp3
@@ -465,18 +461,24 @@ document.addEventListener('DOMContentLoaded', () => {
     submitBtn.disabled = true;
     submitBtn.textContent = 'Wird gesendet…';
 
-    const fd = new FormData();
-    fd.append(ENTRY.attendance, selectedAttendance);
-    fd.append(ENTRY.name,       form.querySelector('[name="fullname"]').value);
-    fd.append(ENTRY.email,      form.querySelector('[name="email"]').value);
-    fd.append(ENTRY.guests,     guestInput.value);
-    fd.append(ENTRY.dietary,    form.querySelector('[name="dietary"]').value);
-    fd.append(ENTRY.song,       form.querySelector('[name="song"]').value);
-    fd.append(ENTRY.message,    form.querySelector('[name="message"]').value);
+    const payload = {
+      attendance:  selectedAttendance, // "Ja" | "Nein"
+      name:        form.querySelector('[name="fullname"]').value,
+      guests:      guestInput.value,
+      dietary:     form.querySelector('[name="dietary"]').value,
+      songRequest: form.querySelector('[name="song"]').value,
+      message:     form.querySelector('[name="message"]').value,
+    };
 
     try {
-      await fetch(GOOGLE_FORM_ACTION_URL, { method: 'POST', mode: 'no-cors', body: fd });
-    } catch (_) { /* no-cors always throws, response is still sent */ }
+      // text/plain avoids a CORS preflight; Apps Script reads e.postData.contents
+      await fetch(WEB_APP_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(payload),
+      });
+    } catch (_) { /* no-cors hides the response; the row is still written */ }
 
     formWrap.style.display = 'none';
     successMsg.classList.add('visible');

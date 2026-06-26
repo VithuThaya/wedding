@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project
 
-Digital wedding RSVP invitation website — single-page, mobile-first, static HTML/CSS/JS (no framework, no build step, no backend). Guests open an animated envelope, read the invitation, browse a photo gallery, and RSVP via a form that posts to Google Sheets through a hidden Google Form submission.
+Digital wedding RSVP invitation website — single-page, mobile-first, static HTML/CSS/JS (no framework, no build step, no backend). Guests open an animated envelope, read the invitation, browse a photo gallery, and RSVP via a form that posts JSON to Google Sheets through a Google Apps Script Web App.
 
 Two lightweight motion libraries are loaded via CDN (still no build, page stays static):
 - **Lenis** (`lenis@1.1.13`) — smooth scrolling
@@ -161,22 +161,25 @@ Each `.gallery-item` `<img>` uses an inline `onerror` handler that swaps to a pl
 
 ## RSVP → Google Sheets Integration
 
-The form posts to a hidden Google Form. Constants to replace in `js/main.js`:
+The form POSTs a **JSON body** to a **Google Apps Script Web App** (`doPost`), which appends a row to the Sheet. The script lives in `apps-script/Code.gs` (copy into the Sheet's Apps Script editor). Set one constant in `js/main.js`:
 
 ```js
-const GOOGLE_FORM_ACTION_URL = '...'; // your Google Form /formResponse URL
-const ENTRY = {
-  attendance: 'entry.XXXXXXXXX',
-  name:       'entry.XXXXXXXXX',
-  email:      'entry.XXXXXXXXX',
-  guests:     'entry.XXXXXXXXX',
-  dietary:    'entry.XXXXXXXXX',
-  song:       'entry.XXXXXXXXX',
-  message:    'entry.XXXXXXXXX',
-};
+const WEB_APP_URL = '...'; // the Web-App /exec URL from Bereitstellen → Web-App
 ```
 
-Step-by-step instructions are in the `// TODO` comment block at the top of `main.js`.
+JSON payload sent on submit:
+
+```js
+{ attendance: "Ja"|"Nein", name, guests, dietary, songRequest, message }
+```
+
+Sheet columns (written by `doPost` when the sheet is empty): `Zeitstempel, Name, Status (Zusage/Absage), Anzahl Gäste, Unverträglichkeiten / Allergien, Musikwunsch, Nachricht`. `attendance === "Ja"` → "Zusage", else "Absage".
+
+Notes:
+- Deploy the Web App with **Ausführen als: Ich** and **Zugriff: Jeder (anonym)**, else the request is blocked.
+- The fetch uses `mode: 'no-cors'` + `Content-Type: text/plain` (Apps Script returns no CORS headers; text/plain avoids a preflight). We can't read the response, so success is shown optimistically — the row is still written.
+- If the Sheet already has an older header row, clear it once so the new headers get created.
+- The form has **no email field** and only **Ja/Nein** (no "Vielleicht").
 
 ## Content Placeholders
 
@@ -186,7 +189,7 @@ Step-by-step instructions are in the `// TODO` comment block at the top of `main
 - Story quote + 4 timeline entries (`#story`) — currently placeholder text (kept on purpose)
 - Schedule times + descriptions (`#schedule`) — still the generic program; note it references a "Trauungszeremonie" though the event is a reception, so revisit when finalizing
 - Gallery photos — drop `images/gallery/1.jpg…6.jpg`
-- Google Form wiring (`GOOGLE_FORM_ACTION_URL` + `ENTRY` IDs in `js/main.js`) — still placeholder; not yet set up
+- `WEB_APP_URL` in `js/main.js` — paste the deployed Apps Script Web-App `/exec` URL (code is in `apps-script/Code.gs`)
 
 ## `prefers-reduced-motion`
 
