@@ -942,7 +942,125 @@ a   { color: inherit; text-decoration: none; }
 }
 .success-icon svg { width: 30px; height: 30px; stroke-linecap: round; stroke-linejoin: round; }
 .rsvp-success h3 { font-size: 2.2rem; font-weight: 600; color: var(--rose); margin-bottom: 0.5rem; }
-.rsvp-success p { color: var(--text-soft); font-weight: 300; }
+.rsvp-success p { color: var(--text-soft); font-weight: 300; line-height: 1.7; }
+.rsvp-success a { color: var(--rose); border-bottom: 1px solid rgba(222,147,164,0.4); }
+
+/* =============================================
+   FAREWELL — full-screen closing page
+   ============================================= */
+.farewell {
+  position: fixed;
+  inset: 0;
+  z-index: 1050;
+  display: flex;
+  overflow-y: auto;
+  text-align: center;
+  background: radial-gradient(ellipse at 50% 28%, #4C140C 0%, #2E0D08 56%, #1E0805 100%);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.8s var(--ease), visibility 0.8s var(--ease);
+}
+.farewell.open { opacity: 1; visibility: visible; }
+
+.farewell-petals {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.farewell-inner {
+  position: relative;
+  z-index: 2;
+  margin: auto;
+  max-width: 540px;
+  padding: 3.5rem 1.6rem;
+  transform: translateY(22px);
+  opacity: 0;
+  transition: transform 1s var(--ease) 0.25s, opacity 1s var(--ease) 0.25s;
+}
+.farewell.open .farewell-inner { transform: translateY(0); opacity: 1; }
+
+.farewell-ornament { color: var(--gold-soft); display: inline-block; }
+.farewell-ornament svg { width: 46px; height: auto; opacity: 0.9; }
+
+.farewell-names {
+  font-family: 'Great Vibes', 'Cormorant Garamond', cursive;
+  font-size: clamp(2.6rem, 11vw, 4rem);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--gold-light);
+  margin: 1rem 0 0.4rem;
+}
+
+.farewell-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.6rem, 9vw, 3.8rem);
+  font-weight: 600;
+  color: var(--rose);
+  margin-bottom: 1rem;
+}
+
+.farewell-text {
+  font-size: 1.05rem;
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--text-soft);
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.farewell-divider {
+  width: 120px;
+  height: 1px;
+  background: var(--gold-grad);
+  margin: 2.2rem auto;
+}
+
+.farewell-meta {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold-soft);
+  margin-bottom: 2rem;
+}
+
+.farewell-cal {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  border: 1.5px solid var(--gold-soft);
+  color: var(--gold-light);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 0.85rem 1.9rem;
+  border-radius: var(--pill);
+  cursor: pointer;
+  transition: background 0.3s var(--ease), color 0.3s var(--ease), transform 0.3s var(--ease);
+}
+.farewell-cal svg { width: 17px; height: 17px; stroke-linecap: round; stroke-linejoin: round; }
+.farewell-cal:hover { background: var(--gold-soft); color: #2E0D08; transform: translateY(-2px); }
+.farewell-cal[hidden] { display: none; }
+
+.farewell-contact {
+  font-size: 0.82rem;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  margin-top: 2.4rem;
+}
+.farewell-contact a {
+  color: var(--rose);
+  border-bottom: 1px solid rgba(222,147,164,0.4);
+  transition: color 0.2s ease;
+}
+.farewell-contact a:hover { color: var(--rose-dark); }
 
 /* =============================================
    FOOTER

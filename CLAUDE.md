@@ -132,8 +132,9 @@ Plus a **sticky nav** (`#site-nav`, outside `#main-content`) and a **lightbox** 
 4. **Location & Anfahrt** — Venue photo in rounded white card, address, meta (SVG icons: date/time/dress code), `Route anzeigen` Maps link
 5. **Galerie** — Asymmetric photo grid (`.gallery-item`, tall/wide variants) with hover zoom → opens lightbox. Images from `images/gallery/`, auto-fallback to placeholders
 6. **Tagesablauf** — Rose pill time-chips (e.g. `13:30`) + vertical line, clean left-aligned layout
-7. **RSVP** — `Bist du dabei?` heading, attendance toggles (SVG icons: Ja / Nein / Vielleicht) with colored icon chips, name/email/guest-stepper/dietary/song/message, frosted success state
-8. **Footer** — Names (Great Vibes), date, SVG ornament, "Mit Liebe gemacht"
+7. **RSVP** — `Bist du dabei?` heading, attendance toggles (SVG icons: Ja / Nein) with colored icon chips, name/guest-stepper/dietary/song/message. On submit → full-screen **Farewell** closing page (`#farewell-screen`). On reload, if this browser already submitted, the form is replaced by an inline „Schon erledigt!" notice (double-submit guard via `localStorage`)
+8. **Farewell** (`#farewell-screen`, outside `#main-content`) — full-screen dark-wine closing takeover after a successful RSVP: gold heart ornament, names in Great Vibes, attendance-aware title/text (Zusage vs Absage), date & venue, „Zum Kalender hinzufügen" (.ics blob, only on Zusage), contact email for changes, falling petals (own `.farewell-petals` layer). Scroll-locked, stays until reload
+9. **Footer** — Names (Great Vibes), date, SVG ornament, "Mit Liebe gemacht"
 
 All icons are inline **SVG** (no emojis) — meta, attendance toggles, success state, footer ornament, gallery zoom, lightbox & nav controls.
 

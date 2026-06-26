@@ -77,8 +77,8 @@ function setupMusicToggle() {
 const PETAL_COLORS = ['#F5B8C8', '#F2C4CE', '#E8A8BC', '#FAD4DC', '#F0C0CC', '#EDB0C0'];
 const PETAL_COUNT  = 18;
 
-function spawnPetals() {
-  const layer = document.getElementById('petal-layer');
+function spawnPetals(layer) {
+  layer = layer || document.getElementById('petal-layer');
   if (!layer || prefersReducedMotion) return;
 
   for (let i = 0; i < PETAL_COUNT; i++) {
@@ -108,6 +108,66 @@ function spawnPetals() {
     layer.appendChild(petal);
     petal.addEventListener('animationend', () => petal.remove(), { once: true });
   }
+}
+
+// =============================================
+// FAREWELL — full-screen closing page after RSVP submit
+// =============================================
+const RSVP_FLAG = 'vs_rsvp_done';
+
+function icsStamp(d) {
+  return d.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+}
+
+// Build a downloadable .ics for the reception and return a blob URL
+function buildCalendarICS() {
+  const ics = [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'PRODID:-//Vithu & Saru//Hochzeit//DE',
+    'CALSCALE:GREGORIAN',
+    'BEGIN:VEVENT',
+    'UID:' + Date.now() + '@vithu-saru-wedding',
+    'DTSTAMP:' + icsStamp(new Date()),
+    'DTSTART:20270529T160000',
+    'DTEND:20270529T230000',
+    'SUMMARY:Hochzeit von Vithu & Saru',
+    'LOCATION:Saalbau Kirchberg\\, Neuhofstrasse 33\\, 3422 Kirchberg',
+    'DESCRIPTION:Wir feiern! Empfang ab 16:00 Uhr.',
+    'END:VEVENT',
+    'END:VCALENDAR',
+  ].join('\r\n');
+  return URL.createObjectURL(new Blob([ics], { type: 'text/calendar;charset=utf-8' }));
+}
+
+function showFarewell(attendance) {
+  const screen = document.getElementById('farewell-screen');
+  if (!screen) return;
+  const isYes = attendance === 'Ja';
+
+  const titleEl = document.getElementById('farewell-title');
+  const textEl  = document.getElementById('farewell-text');
+  const calBtn  = document.getElementById('farewell-cal');
+
+  if (titleEl) titleEl.textContent = isYes ? 'Vielen Dank!' : 'Danke für deine Rückmeldung';
+  if (textEl) {
+    textEl.textContent = isYes
+      ? 'Wir können es kaum erwarten, mit dir zu feiern. Bis bald auf der Tanzfläche!'
+      : 'Schade, dass du nicht dabei sein kannst — danke, dass du uns Bescheid gegeben hast. Du wirst uns fehlen.';
+  }
+  if (calBtn) {
+    if (isYes) { calBtn.href = buildCalendarICS(); calBtn.hidden = false; }
+    else { calBtn.hidden = true; }
+  }
+
+  screen.classList.add('open');
+  screen.setAttribute('aria-hidden', 'false');
+  if (lenis) lenis.stop();
+  document.body.style.overflow = 'hidden';
+
+  const petalLayer = screen.querySelector('.farewell-petals');
+  spawnPetals(petalLayer);
+  setTimeout(() => spawnPetals(petalLayer), 1500);
 }
 
 // =============================================
@@ -447,6 +507,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const formWrap   = document.getElementById('rsvp-form-wrap');
   const successMsg = document.getElementById('rsvp-success');
 
+  // Already answered in this browser? Replace the form with a calm notice
+  // so the same person can't submit twice (avoids duplicate sheet rows).
+  let alreadyDone = false;
+  try { alreadyDone = !!localStorage.getItem(RSVP_FLAG); } catch (_) {}
+  if (alreadyDone) {
+    formWrap.style.display = 'none';
+    successMsg.classList.add('visible');
+  }
+
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
@@ -480,9 +549,9 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     } catch (_) { /* no-cors hides the response; the row is still written */ }
 
+    try { localStorage.setItem(RSVP_FLAG, selectedAttendance); } catch (_) {}
+
     formWrap.style.display = 'none';
-    successMsg.classList.add('visible');
-    if (hasGSAP) ScrollTrigger.refresh();
-    spawnPetals();
+    showFarewell(selectedAttendance);
   });
 });
