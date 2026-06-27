@@ -110,27 +110,28 @@ Style keywords: **Editorial luxury, dramatic dark wine, cinematic, elegant, cham
 
 ## Key Animation Details
 
-- **Cover (`.cover`, was `.envelope-wrap`):** Flat opening screen — light greige→off-white gradient (`#envelope-screen`), a centered **embossed tone-on-tone wax seal** (`.cover-seal`, CSS radial gradient + inset shadows; SVG `.seal-svg` = two interlocking hearts + "UNSERE EINLADUNG" text path, engraved via drop-shadow filter), a **fine hanging thread** (`.cover-seal::before`, ~46vh), and a Great Vibes line „Diese Einladung ist exklusiv für dich" (`.cover-script`) + tap hint (`.cover-hint`). Seal breathes (`sealBreath`) to invite the tap. On tap → `.cover.opening` fades/presses the seal, `#envelope-screen.closing` runs `screenFadeOut`, content reveals, music fades in. (No 3D flap anymore.)
+- **Cover (`.cover`, was `.envelope-wrap`):** Flat opening screen — light greige→off-white gradient (`#envelope-screen`), a centered **embossed tone-on-tone wax seal** (`.cover-seal`, CSS radial gradient + inset shadows; SVG `.seal-svg` = two interlocking hearts + "UNSERE EINLADUNG" text path, engraved via drop-shadow filter), a **fine hanging thread** (`.cover-seal::before`, ~46vh), and a Great Vibes line „Diese Einladung ist exklusiv für dich" (`.cover-script`) + tap hint (`.cover-hint`). Seal breathes (`sealBreath`) to invite the tap. On tap (`openEnvelope()`) → `.cover.opening` fades/presses the seal, `#envelope-screen.closing` runs `screenFadeOut`, content reveals, music fades in, **and the hero video starts playing**. (No 3D flap anymore.)
 - **Falling petals:** On envelope open AND on RSVP success. 18 petals, 6 keyframe paths. Self-remove via `animationend`.
 - **Smooth scroll:** Lenis drives the whole page. `lenis.stop()` keeps it locked behind the envelope; `lenis.start()` is called when the envelope finishes opening (and while the lightbox is open). All `a[href^="#"]` links use offset-aware `lenis.scrollTo()` (accounts for `--nav-h`).
 - **Hero entrance:** Text elements stagger in via `riseIn` (1s, `--ease`) after `#main-content` gets `.visible` (CSS only).
 - **Ken Burns + parallax (GSAP):** When GSAP is present (desktop, motion allowed), `js/main.js` adds `.gsap-hero` to `<html>` — this **disables** the CSS `kenBurns` so GSAP solely owns the `.hero-bg` transform (avoids a CSS-animation vs inline-transform conflict). GSAP then does the slow zoom (`scale 1.08→1.2`, 22s) **and** scroll parallax (`yPercent 18`, scrubbed) on hero photo + video, plus a fade of `.hero-content` on scroll-away. Fallback without GSAP: lightweight rAF parallax (0.4x), CSS Ken Burns stays on.
 - **Scroll reveal:** `.reveal` elements via `IntersectionObserver` → class `.visible` → opacity + translateY (0.9s, `--ease`). Delay helpers `.reveal-delay-1..4`. (Kept on `IntersectionObserver` even with GSAP — only smooth-scroll & parallax use GSAP.)
 - **Sticky nav:** `#site-nav` is hidden until scrolled past ~62% of the hero, then `.nav-visible` + frosted `.nav-scrolled`. Active section highlighted via a second `IntersectionObserver`. Mobile: `.nav-toggle` burger opens `.nav-links.mobile-open` dropdown.
-- **Gallery + lightbox:** `.gallery-item` tiles (asymmetric grid, hover zoom). Click/Enter opens `#lightbox`; supports prev/next buttons, ←/→ keys, Esc, backdrop click. Reads the tile `<img>` `currentSrc` (so the onerror placeholder fallback carries through).
+- **Gallery + lightbox:** `.gallery-item` tiles (CSS-columns masonry, see Gallery Integration), hover zoom. Click/Enter opens `#lightbox`; supports prev/next buttons, ←/→ keys, Esc, backdrop click. Reads the tile `<img>` `currentSrc` (so the onerror placeholder fallback carries through).
 - **Music player:** Floating round button bottom-right with animated equalizer bars (`musicBar`). Toggles play/pause; `.paused` freezes bars. Hidden until music starts.
-- **Scroll cue:** Animated `.scroll-cue` pill at bottom of hero (`scrollCue` keyframe).
 - **Section transitions:** No diagonal clip-path dividers — flat sections with alternating `--blush-bg` / `--blush-soft` backgrounds.
+
+> The old animated scroll-cue pill at the bottom of the hero was removed (didn't look good) — `.scroll-cue` markup, CSS and the `scrollCue` keyframe are all gone.
 
 ## Sections
 
 Plus a **sticky nav** (`#site-nav`, outside `#main-content`) and a **lightbox** (`#lightbox`, after the footer) that overlay all sections.
 
-1. **Cover intro** — Light greige→off-white gradient, embossed tone-on-tone wax seal, fine hanging thread, Great Vibes line „Diese Einladung ist exklusiv für dich", "tippen zum Öffnen". Music starts + petals fall on open
-2. **Hero** — Full-bleed couple photo + optional video BG, vignette, `Wir heiraten` eyebrow with hairlines, names in Great Vibes script, intro line, frosted countdown (Tage/Stunden/Minuten/**Sekunden**), italic date, location, `Jetzt zusagen` CTA (with shimmer), scroll cue
+1. **Cover intro** — Light greige→off-white gradient, embossed tone-on-tone wax seal, fine hanging thread, Great Vibes line „Diese Einladung ist exklusiv für dich", "tippen zum Öffnen". On open: music starts + petals fall + hero video begins playing
+2. **Hero** — Full-bleed couple photo + optional video BG (starts on cover open, not autoplay), vignette, `Wir heiraten` eyebrow with hairlines, names in Great Vibes script, intro line, frosted countdown (Tage/Stunden/Minuten/**Sekunden**), italic date, location, `Jetzt zusagen` CTA (with shimmer)
 3. **Unsere Geschichte** — Nicholas Sparks quote, single-column vertical timeline with rose dots + blush date chips
 4. **Location & Anfahrt** — Venue photo in rounded white card, address, meta (SVG icons: date/time/dress code), `Route anzeigen` Maps link
-5. **Galerie** — Asymmetric photo grid (`.gallery-item`, tall/wide variants) with hover zoom → opens lightbox. Images from `images/gallery/`, auto-fallback to placeholders
+5. **Galerie** — CSS-columns masonry (`.gallery-item` tiles size to each photo's aspect ratio) with hover zoom → opens lightbox. Images from `images/gallery/`, auto-fallback to placeholders
 6. **Tagesablauf** — Rose pill time-chips (e.g. `13:30`) + vertical line, clean left-aligned layout
 7. **RSVP** — `Bist du dabei?` heading, attendance toggles (SVG icons: Ja / Nein) with colored icon chips, name/guest-stepper/dietary/song/message. On submit → full-screen **Farewell** closing page (`#farewell-screen`). On reload, if this browser already submitted, the form is replaced by an inline „Schon erledigt!" notice (double-submit guard via `localStorage`)
 8. **Farewell** (`#farewell-screen`, outside `#main-content`) — full-screen dark-wine closing takeover after a successful RSVP: gold heart ornament, names in Great Vibes, attendance-aware title/text (Zusage vs Absage), date & venue, „Zum Kalender hinzufügen" (.ics blob, only on Zusage), contact email for changes, falling petals (own `.farewell-petals` layer). Scroll-locked, stays until reload
@@ -148,17 +149,22 @@ Browser autoplay policy: music only starts after user interaction (the envelope 
 
 ## Video Integration
 
-File: `video/wedding-highlight.mp4`
+File: `video/wedding-highlight.mp4` (committed, H.264/AAC ~7.6 MB)
 
-- Placed behind hero photo as `<video autoplay muted loop playsinline>`
-- On mobile: video hidden, `couple.jpg` shown instead (performance)
-- Overlay gradient ensures text remains readable
+- `<video muted loop playsinline preload="auto">` — **no `autoplay`**. It would otherwise start playing while the cover is still closed. Instead `openEnvelope()` in `main.js` calls `heroVid.play().catch(()=>{})` on the seal tap, so the video starts together with the music + petals.
+- **Layering (z-index):** `.hero-video` is `z-index: 1`, sitting **above** the photo fallback `.hero-bg` (`z-index: 0`) but **below** `.hero-overlay`/`.hero-vignette` (`z-index: 1`, later in DOM). The photo `div` comes *after* the video in the DOM, so without this the photo painted on top and the video was invisible. If the video is missing/blocked, its `poster="couple.jpg"` covers the same area, so the fallback still looks right.
+- The GSAP Ken Burns zoom rides on `.hero-bg` (photo); the video sits on top statically (plus scroll parallax). Overlay gradient + vignette keep text readable.
 
 ## Gallery Integration
 
-Files: `images/gallery/1.jpg … 6.jpg` (see `images/gallery/README.txt`).
+Files: `images/gallery/1.jpg … 6.jpg` (see `images/gallery/README.txt`). Real photos are in & compressed (see note below).
 
-Each `.gallery-item` `<img>` uses an inline `onerror` handler that swaps to a placeholder (`couple.jpg` / `venue.jpg`) and adds `.is-placeholder` when the real file is missing — so the grid always looks populated and auto-upgrades when you drop real photos in. Add/remove `<figure class="gallery-item">` blocks (with `--tall` / `--wide` modifiers) to change count/layout. The lightbox auto-discovers all `.gallery-item` images at load.
+**Layout = CSS-columns masonry.** `.gallery-grid` uses `column-count` (3 desktop → 2 ≤768px → 1 ≤440px) + `column-gap`; each `.gallery-item` is `break-inside: avoid` with `margin-bottom`. Images are `width:100%; height:auto` (no `object-fit: cover`), so **each tile takes the photo's natural aspect ratio** — portrait → tall, landscape → wide, nothing cropped. (The old fixed-height grid with `--tall`/`--wide` modifiers and `grid-auto-rows` is gone — don't reintroduce those classes.)
+
+Each `.gallery-item` `<img>` uses an inline `onerror` handler that swaps to a placeholder (`couple.jpg` / `venue.jpg`) and adds `.is-placeholder` when the real file is missing — so the grid always looks populated and auto-upgrades when you drop real photos in. Add/remove `<figure class="gallery-item">` blocks to change count. The lightbox auto-discovers all `.gallery-item` images at load.
+
+> **Image filenames must be lowercase `.jpg`** — the `<img src>` references are lowercase, and GitHub Pages (Linux) is **case-sensitive**, so `3.JPG` would 404 on the live site even though it works locally on macOS (case-insensitive). Always normalize extensions to lowercase before committing.
+> **Compression:** source photos were huge (up to 7000×8000, ~34 MB total). Compressed in place with macOS `sips -Z 1600 -s formatOptions 80 *.jpg` → ~2.5 MB total, max 1600px long edge. Originals remain in git history. Re-run this for any new drops.
 
 ## RSVP → Google Sheets Integration
 
@@ -189,8 +195,8 @@ Notes:
 **Still to replace:**
 - Story quote + 4 timeline entries (`#story`) — currently placeholder text (kept on purpose)
 - Schedule times + descriptions (`#schedule`) — still the generic program; note it references a "Trauungszeremonie" though the event is a reception, so revisit when finalizing
-- Gallery photos — drop `images/gallery/1.jpg…6.jpg`
-- `WEB_APP_URL` in `js/main.js` — paste the deployed Apps Script Web-App `/exec` URL (code is in `apps-script/Code.gs`)
+
+**Done since:** Gallery photos (1–6) added & compressed; `WEB_APP_URL` set & verified live; hero video + music wired.
 
 ## `prefers-reduced-motion`
 
@@ -198,13 +204,13 @@ All animations and transitions are disabled via `@media (prefers-reduced-motion:
 
 ## Known Issues / Next Session
 
-> Updated 2026-06-27 (end of session). RSVP → Google Sheets is wired & verified live (`WEB_APP_URL` set in `js/main.js`). Music file is committed. Pick up here next time.
+> Updated 2026-06-27 (session 2, end). Live on **GitHub Pages → `vithuthaya.github.io`** (tested on real iPhone this session). This session: fixed hero video not showing (z-index), removed scroll-cue, added + compressed gallery photos, switched gallery to masonry, made hero video start on seal click. Current cache-bust: `?v=20260704`.
 
-1. **Mobile animations bug (investigate first).** Animations run on laptop/desktop but **not on the user's phone** (cover seal breath, hero motion, scroll reveals, petals). **Leading hypothesis:** the phone has OS **"Reduce Motion" / „Bewegung reduzieren"** enabled → the `prefers-reduced-motion` block above kills all motion. First step: have the user toggle that OFF and retest. Also note GSAP hero motion is gated to `min-width: 768px` (desktop only) by design — if that's the "missing" animation, decide whether to add a lighter mobile variant. Verify `.reveal` elements get `.visible` on the phone.
-2. **Background music polish (deferred by user).** `audio/wedding-music.mp3` is committed but **~10.8 MB** — slow on mobile. Compress to ~2–4 MB (128 kbps, maybe trim to 2–3 min). Optionally tweak fade-in volume (`0.55` in `startMusic()`).
-3. **Story content** (`#story`) — replace placeholder text + 4 timeline entries.
-4. **Schedule** (`#schedule`) — generic program; still says "Trauungszeremonie" though the event is a **reception** — fix with real times.
-5. **Gallery photos** — drop real `images/gallery/1.jpg…6.jpg`.
-6. **Real-device test** the Farewell page + "Zum Kalender hinzufügen" on actual iOS & Android.
+1. **Background music polish (deferred by user).** `audio/wedding-music.mp3` is committed but **~10.8 MB** — slow on mobile. Compress to ~2–4 MB (128 kbps, maybe trim to 2–3 min). Optionally tweak fade-in volume (`0.55` in `startMusic()`).
+2. **Story content** (`#story`) — replace placeholder text + 4 timeline entries.
+3. **Schedule** (`#schedule`) — generic program; still says "Trauungszeremonie" though the event is a **reception** — fix with real times.
+4. **Real-device test** the Farewell page + "Zum Kalender hinzufügen" on actual iOS & Android.
 
-**Reminder:** local CSS/JS in `index.html` are cache-busted with a `?v=YYYYMMDD` query — **bump it whenever CSS/JS changes** so phones don't serve stale files (mobile Chrome bit us before).
+**Resolved this session:** hero video display (z-index layering), scroll-cue removed, gallery photos in + compressed + masonry layout, video gated to seal click. Mobile animations bug from last session appears resolved (site rendered correctly on the user's iPhone, incl. gallery).
+
+**Reminder:** local CSS/JS in `index.html` are cache-busted with a `?v=YYYYMMDD` query — **bump it whenever CSS/JS changes** so phones don't serve stale files (mobile Chrome bit us before). Currently at `?v=20260704`.
