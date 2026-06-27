@@ -453,6 +453,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Music starts with the click (counts as user interaction → autoplay allowed)
     startMusic();
 
+    // Hero video starts with the click too (no autoplay on load)
+    const heroVid = document.querySelector('.hero-video');
+    if (heroVid) { heroVid.play().catch(() => {}); }
+
     // Petals burst out as the flap lifts
     setTimeout(spawnPetals, 600);
 
