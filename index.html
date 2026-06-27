@@ -1,507 +1,901 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vithu &amp; Saru — Wir heiraten</title>
-  <meta name="description" content="Feiert mit uns unseren besonderen Tag. Jetzt online zusagen." />
-  <meta name="robots" content="noindex" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vithu &amp; Saru — Wir heiraten</title>
+    <meta
+      name="description"
+      content="Feiert mit uns unseren besonderen Tag. Jetzt online zusagen."
+    />
+    <meta name="robots" content="noindex" />
 
-  <!-- Fonts: Cormorant Garamond (display) + DM Sans (body) + Great Vibes (names) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&family=DM+Sans:wght@300;400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet" />
+    <!-- Fonts: Cormorant Garamond (display) + DM Sans (body) + Great Vibes (names) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&family=DM+Sans:wght@300;400;500;600;700&family=Great+Vibes&display=swap"
+      rel="stylesheet"
+    />
 
-  <link rel="stylesheet" href="css/style.css?v=20260631" />
-  <link rel="stylesheet" href="css/animations.css?v=20260631" />
-</head>
-<body>
+    <link rel="stylesheet" href="css/style.css?v=20260701" />
+    <link rel="stylesheet" href="css/animations.css?v=20260701" />
+  </head>
+  <body>
+    <!-- Petal layer — petals fall here on envelope open & RSVP success -->
+    <div id="petal-layer" aria-hidden="true"></div>
 
-  <!-- Petal layer — petals fall here on envelope open & RSVP success -->
-  <div id="petal-layer" aria-hidden="true"></div>
-
-
-  <!-- ==========================================
+    <!-- ==========================================
        ENVELOPE INTRO
        ========================================== -->
-  <div id="envelope-screen">
-    <div class="cover" role="button" tabindex="0" aria-label="Einladung öffnen">
+    <div id="envelope-screen">
+      <div
+        class="cover"
+        role="button"
+        tabindex="0"
+        aria-label="Einladung öffnen"
+      >
+        <!-- Embossed, tone-on-tone wax seal with a fine hanging thread -->
+        <div class="cover-seal">
+          <svg
+            class="seal-svg"
+            viewBox="0 0 120 120"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+          >
+            <circle
+              cx="60"
+              cy="60"
+              r="55"
+              fill="none"
+              stroke="rgba(120,103,90,0.45)"
+              stroke-width="1.4"
+            />
+            <circle
+              cx="60"
+              cy="60"
+              r="49"
+              fill="none"
+              stroke="rgba(120,103,90,0.30)"
+              stroke-width="0.9"
+            />
+            <!-- Two interlocking hearts -->
+            <path
+              d="M51 75C51 75 33 63 33 51c0-6.8 5.3-10.5 10.2-10.5C46.5 40.5 50.3 42.5 51 45.8 51.8 42.5 55.5 40.5 58.8 40.5C63.8 40.5 69 44.3 69 51c0 12-18 24-18 24z"
+              fill="rgba(120,103,90,0.42)"
+            />
+            <path
+              d="M69 79.5C69 79.5 51 67.5 51 55.5c0-6.8 5.3-10.5 10.2-10.5C64.5 45 68.3 47 69 50.3 69.8 47 73.5 45 76.8 45C81.8 45 87 48.8 87 55.5c0 12-18 24-18 24z"
+              fill="none"
+              stroke="rgba(120,103,90,0.5)"
+              stroke-width="2"
+            />
+            <path id="tp" d="M60 14 A46 46 0 1 1 59.95 14" fill="none" />
+            <text
+              font-size="8.4"
+              fill="rgba(120,103,90,0.6)"
+              font-family="DM Sans, sans-serif"
+              letter-spacing="3.4"
+              font-weight="600"
+            >
+              <textPath href="#tp" startOffset="1%">
+                UNSERE EINLADUNG ✦ UNSERE EINLADUNG ✦
+              </textPath>
+            </text>
+          </svg>
+        </div>
 
-      <!-- Embossed, tone-on-tone wax seal with a fine hanging thread -->
-      <div class="cover-seal">
-        <svg class="seal-svg" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <circle cx="60" cy="60" r="55" fill="none" stroke="rgba(120,103,90,0.45)" stroke-width="1.4"/>
-          <circle cx="60" cy="60" r="49" fill="none" stroke="rgba(120,103,90,0.30)" stroke-width="0.9"/>
-          <!-- Two interlocking hearts -->
-          <path d="M51 75C51 75 33 63 33 51c0-6.8 5.3-10.5 10.2-10.5C46.5 40.5 50.3 42.5 51 45.8 51.8 42.5 55.5 40.5 58.8 40.5C63.8 40.5 69 44.3 69 51c0 12-18 24-18 24z" fill="rgba(120,103,90,0.42)"/>
-          <path d="M69 79.5C69 79.5 51 67.5 51 55.5c0-6.8 5.3-10.5 10.2-10.5C64.5 45 68.3 47 69 50.3 69.8 47 73.5 45 76.8 45C81.8 45 87 48.8 87 55.5c0 12-18 24-18 24z" fill="none" stroke="rgba(120,103,90,0.5)" stroke-width="2"/>
-          <path id="tp" d="M60 14 A46 46 0 1 1 59.95 14" fill="none"/>
-          <text font-size="8.4" fill="rgba(120,103,90,0.6)" font-family="DM Sans, sans-serif" letter-spacing="3.4" font-weight="600">
-            <textPath href="#tp" startOffset="1%">UNSERE EINLADUNG ✦ UNSERE EINLADUNG ✦</textPath>
-          </text>
-        </svg>
+        <p class="cover-script">Diese Einladung ist<br />exklusiv für dich</p>
+        <span class="cover-hint">tippen zum Öffnen</span>
       </div>
-
-      <p class="cover-script">Diese Einladung ist<br>exklusiv für dich</p>
-      <span class="cover-hint">tippen zum Öffnen</span>
-
     </div>
-  </div>
 
+    <!-- Floating music player -->
+    <button
+      id="music-toggle"
+      class="music-toggle"
+      aria-label="Musik pausieren oder fortsetzen"
+      hidden
+    >
+      <span class="music-bars" aria-hidden="true"
+        ><i></i><i></i><i></i><i></i
+      ></span>
+    </button>
 
-  <!-- Floating music player -->
-  <button id="music-toggle" class="music-toggle" aria-label="Musik pausieren oder fortsetzen" hidden>
-    <span class="music-bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
-  </button>
-
-
-  <!-- ==========================================
+    <!-- ==========================================
        STICKY NAVIGATION
        ========================================== -->
-  <header id="site-nav" class="site-nav" aria-label="Hauptnavigation">
-    <div class="nav-inner">
-      <a href="#hero" class="nav-monogram" aria-label="Zum Anfang" data-nav-link>
-        <span class="mono-letters">V&nbsp;&amp;&nbsp;S</span>
-      </a>
-      <nav class="nav-links">
-        <a href="#story"    data-nav-link>Geschichte</a>
-        <a href="#location" data-nav-link>Location</a>
-        <a href="#gallery"  data-nav-link>Galerie</a>
-        <a href="#schedule" data-nav-link>Ablauf</a>
-      </nav>
-      <a href="#rsvp" class="nav-cta" data-nav-link>Zusagen</a>
-      <button class="nav-toggle" aria-label="Menü öffnen" aria-expanded="false">
-        <span></span><span></span>
-      </button>
-    </div>
-  </header>
+    <header id="site-nav" class="site-nav" aria-label="Hauptnavigation">
+      <div class="nav-inner">
+        <a
+          href="#hero"
+          class="nav-monogram"
+          aria-label="Zum Anfang"
+          data-nav-link
+        >
+          <span class="mono-letters">V&nbsp;&amp;&nbsp;S</span>
+        </a>
+        <nav class="nav-links">
+          <a href="#story" data-nav-link>Geschichte</a>
+          <a href="#location" data-nav-link>Location</a>
+          <a href="#gallery" data-nav-link>Galerie</a>
+          <a href="#schedule" data-nav-link>Ablauf</a>
+        </nav>
+        <a href="#rsvp" class="nav-cta" data-nav-link>Zusagen</a>
+        <button
+          class="nav-toggle"
+          aria-label="Menü öffnen"
+          aria-expanded="false"
+        >
+          <span></span><span></span>
+        </button>
+      </div>
+    </header>
 
-
-  <!-- ==========================================
+    <!-- ==========================================
        MAIN CONTENT
        ========================================== -->
-  <div id="main-content">
+    <div id="main-content">
+      <!-- HERO -->
+      <section id="hero">
+        <!-- Optional background video — falls vorhanden, sonst Foto -->
+        <video
+          class="hero-video"
+          autoplay
+          muted
+          loop
+          playsinline
+          poster="images/placeholder/couple.jpg"
+        >
+          <source src="video/wedding-highlight.mp4" type="video/mp4" />
+        </video>
+        <div class="hero-bg" role="img" aria-label="Foto des Paares"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-vignette" aria-hidden="true"></div>
 
-    <!-- HERO -->
-    <section id="hero">
-      <!-- Optional background video — falls vorhanden, sonst Foto -->
-      <video class="hero-video" autoplay muted loop playsinline poster="images/placeholder/couple.jpg">
-        <source src="video/wedding-highlight.mp4" type="video/mp4" />
-      </video>
-      <div class="hero-bg" role="img" aria-label="Foto des Paares"></div>
-      <div class="hero-overlay"></div>
-      <div class="hero-vignette" aria-hidden="true"></div>
+        <div class="hero-content">
+          <p class="hero-eyebrow">
+            <span class="eyebrow-line"></span>Wir heiraten<span
+              class="eyebrow-line"
+            ></span>
+          </p>
 
-      <div class="hero-content">
-        <p class="hero-eyebrow"><span class="eyebrow-line"></span>Wir heiraten<span class="eyebrow-line"></span></p>
+          <h1 class="hero-names">
+            <span class="hero-name">Vithu</span>
+            <span class="amp">&amp;</span>
+            <span class="hero-name">Saru</span>
+          </h1>
 
-        <h1 class="hero-names">
-          <span class="hero-name">Vithu</span>
-          <span class="amp">&amp;</span>
-          <span class="hero-name">Saru</span>
-        </h1>
+          <p class="hero-intro">
+            Wir freuen uns, diesen besonderen Tag mit dir zu feiern.
+          </p>
 
-        <p class="hero-intro">Wir freuen uns, diesen besonderen Tag mit dir zu feiern.</p>
-
-        <div class="countdown" role="timer" aria-label="Countdown bis zur Hochzeit">
-          <div class="countdown-unit">
-            <span class="countdown-number" id="count-days">—</span>
-            <span class="countdown-label">Tage</span>
+          <div
+            class="countdown"
+            role="timer"
+            aria-label="Countdown bis zur Hochzeit"
+          >
+            <div class="countdown-unit">
+              <span class="countdown-number" id="count-days">—</span>
+              <span class="countdown-label">Tage</span>
+            </div>
+            <div class="countdown-unit">
+              <span class="countdown-number" id="count-hours">—</span>
+              <span class="countdown-label">Stunden</span>
+            </div>
+            <div class="countdown-unit">
+              <span class="countdown-number" id="count-minutes">—</span>
+              <span class="countdown-label">Minuten</span>
+            </div>
+            <div class="countdown-unit">
+              <span class="countdown-number" id="count-seconds">—</span>
+              <span class="countdown-label">Sekunden</span>
+            </div>
           </div>
-          <div class="countdown-unit">
-            <span class="countdown-number" id="count-hours">—</span>
-            <span class="countdown-label">Stunden</span>
-          </div>
-          <div class="countdown-unit">
-            <span class="countdown-number" id="count-minutes">—</span>
-            <span class="countdown-label">Minuten</span>
-          </div>
-          <div class="countdown-unit">
-            <span class="countdown-number" id="count-seconds">—</span>
-            <span class="countdown-label">Sekunden</span>
-          </div>
+
+          <p class="hero-date">29. Mai 2027</p>
+          <p class="hero-location">Saalbau &middot; Kirchberg</p>
+
+          <a href="#rsvp" class="btn-primary hero-cta" data-nav-link
+            >Jetzt zusagen</a
+          >
         </div>
 
-        <p class="hero-date">29. Mai 2027</p>
-        <p class="hero-location">Saalbau &middot; Kirchberg</p>
+        <div class="scroll-cue" aria-hidden="true"><span></span></div>
+      </section>
 
-        <a href="#rsvp" class="btn-primary hero-cta" data-nav-link>Jetzt zusagen</a>
-      </div>
+      <!-- OUR STORY -->
+      <section id="story" class="section">
+        <div class="section-inner">
+          <p class="story-quote reveal">
+            „Ich bin einfach ein Mädchen, das vor einem Jungen steht …"
+          </p>
+          <p class="story-quote-author reveal reveal-delay-1">
+            — Nicholas Sparks
+          </p>
 
-      <div class="scroll-cue" aria-hidden="true"><span></span></div>
-    </section>
+          <div class="divider-line reveal reveal-delay-1"></div>
 
+          <p class="section-eyebrow reveal">Unsere Geschichte</p>
+          <h2 class="section-title reveal reveal-delay-1">
+            Zwei Menschen, ein Takt
+          </h2>
+          <p class="section-lead reveal reveal-delay-2">
+            Zwei Menschen, ein Takt — und eine Liebe, die daraus entstand.
+          </p>
 
-    <!-- OUR STORY -->
-    <section id="story" class="section">
-      <div class="section-inner">
-        <p class="story-quote reveal">„Ich bin einfach ein Mädchen, das vor einem Jungen steht …"</p>
-        <p class="story-quote-author reveal reveal-delay-1">— Nicholas Sparks</p>
+          <div class="story-timeline">
+            <!-- TODO: Replace with your real story -->
+            <div class="story-entry reveal">
+              <span class="story-chip">Frühjahr 2021</span>
+              <h3>Erste Schritte</h3>
+              <p>
+                Alles begann in einem Tanzkurs — zwei Menschen, die als
+                Tanzpartner zusammenkamen und noch nicht wussten, dass sie viel
+                mehr füreinander bestimmt waren. Mit jedem gemeinsamen Schritt
+                auf der Tanzfläche wuchs etwas Besonderes.
+              </p>
+            </div>
 
-        <div class="divider-line reveal reveal-delay-1"></div>
+            <div class="story-entry reveal">
+              <span class="story-chip">Sommer 2021</span>
+              <h3>Das erste Date</h3>
+              <p>
+                Ein Spaziergang am Fluss, ein geteiltes Eis und ein Gespräch,
+                das bis Mitternacht dauerte. Am Ende des Abends war alles klar.
+              </p>
+            </div>
 
-        <p class="section-eyebrow reveal">Unsere Geschichte</p>
-        <h2 class="section-title reveal reveal-delay-1">Zwei Menschen, ein Takt</h2>
-        <p class="section-lead reveal reveal-delay-2">Zwei Menschen, ein Takt — und eine Liebe, die daraus entstand.</p>
+            <div class="story-entry reveal">
+              <span class="story-chip">Winter 2023</span>
+              <h3>Der Antrag</h3>
+              <p>
+                An einem ruhigen Abend bei Kerzenschein, mit einem Herzen voller
+                Liebe, wurde die Frage gestellt. Die Antwort stand nie infrage —
+                es war immer ein Ja.
+              </p>
+            </div>
 
-        <div class="story-timeline">
-
-          <!-- TODO: Replace with your real story -->
-          <div class="story-entry reveal">
-            <span class="story-chip">Frühjahr 2021</span>
-            <h3>Erste Schritte</h3>
-            <p>Alles begann in einem Tanzkurs — zwei Menschen, die als Tanzpartner zusammenkamen und noch nicht wussten, dass sie viel mehr füreinander bestimmt waren. Mit jedem gemeinsamen Schritt auf der Tanzfläche wuchs etwas Besonderes.</p>
-          </div>
-
-          <div class="story-entry reveal">
-            <span class="story-chip">Sommer 2021</span>
-            <h3>Das erste Date</h3>
-            <p>Ein Spaziergang am Fluss, ein geteiltes Eis und ein Gespräch, das bis Mitternacht dauerte. Am Ende des Abends war alles klar.</p>
-          </div>
-
-          <div class="story-entry reveal">
-            <span class="story-chip">Winter 2023</span>
-            <h3>Der Antrag</h3>
-            <p>An einem ruhigen Abend bei Kerzenschein, mit einem Herzen voller Liebe, wurde die Frage gestellt. Die Antwort stand nie infrage — es war immer ein Ja.</p>
-          </div>
-
-          <div class="story-entry reveal">
-            <span class="story-chip">April 2027</span>
-            <h3>Unser großer Tag</h3>
-            <p>Und nun laden wir dich ein — unsere Familie und liebsten Freunde — dieses nächste Kapitel mit uns zu feiern.</p>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-
-    <!-- LOCATION -->
-    <section id="location" class="section">
-      <div class="section-inner">
-        <p class="section-eyebrow reveal">Wo &amp; Wann</p>
-        <h2 class="section-title reveal reveal-delay-1">Location &amp; Anfahrt</h2>
-        <p class="section-lead reveal reveal-delay-2">Wir feiern unseren großen Tag an einem Ort, der so besonders ist wie dieser Anlass. Wir freuen uns darauf, ihn mit dir zu teilen!</p>
-
-        <div class="location-card reveal">
-          <div class="location-img-wrap">
-            <img src="images/placeholder/venue.jpg" alt="Außenansicht der Location" loading="lazy">
-          </div>
-          <div class="location-body">
-            <span class="location-badge">Empfang &amp; Feier</span>
-            <h3>Saalbau Kirchberg</h3>
-            <address>
-              Neuhofstrasse 33<br>
-              3422 Kirchberg
-            </address>
-            <ul class="location-meta">
-              <li>
-                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="4.5" width="18" height="16" rx="2.5"/><path d="M3 9h18M8 2.5v4M16 2.5v4"/></svg>
-                29. Mai 2027
-              </li>
-              <li>
-                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
-                Reception ab 16:00 Uhr
-              </li>
-              <li>
-                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 3.5l2.2 4.4 4.8.7-3.5 3.4.8 4.8L12 18.9l-4.3 2.3.8-4.8-3.5-3.4 4.8-.7z"/></svg>
-                Festlich / Semi-formal
-              </li>
-            </ul>
-            <a href="https://www.google.com/maps/search/?api=1&query=Neuhofstrasse+33,+3422+Kirchberg"
-               target="_blank" rel="noopener" class="btn-outline">
-              Route anzeigen
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-            </a>
+            <div class="story-entry reveal">
+              <span class="story-chip">April 2027</span>
+              <h3>Unser großer Tag</h3>
+              <p>
+                Und nun laden wir dich ein — unsere Familie und liebsten Freunde
+                — dieses nächste Kapitel mit uns zu feiern.
+              </p>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
+      <!-- LOCATION -->
+      <section id="location" class="section">
+        <div class="section-inner">
+          <p class="section-eyebrow reveal">Wo &amp; Wann</p>
+          <h2 class="section-title reveal reveal-delay-1">
+            Location &amp; Anfahrt
+          </h2>
+          <p class="section-lead reveal reveal-delay-2">
+            Wir feiern unseren großen Tag an einem Ort, der so besonders ist wie
+            dieser Anlass. Wir freuen uns darauf, ihn mit dir zu teilen!
+          </p>
 
-    <!-- GALLERY -->
-    <section id="gallery" class="section">
-      <div class="section-inner section-inner--wide">
-        <p class="section-eyebrow reveal">Augenblicke</p>
-        <h2 class="section-title reveal reveal-delay-1">Unsere Galerie</h2>
-        <p class="section-lead reveal reveal-delay-2">Ein paar Momente, die uns hierher gebracht haben — bald gefüllt mit deinen liebsten Erinnerungen an unseren Tag.</p>
-      </div>
+          <div class="location-card reveal">
+            <div class="location-img-wrap">
+              <img
+                src="images/placeholder/venue.jpg"
+                alt="Außenansicht der Location"
+                loading="lazy"
+              />
+            </div>
+            <div class="location-body">
+              <span class="location-badge">Empfang &amp; Feier</span>
+              <h3>Saalbau Kirchberg</h3>
+              <address>
+                Neuhofstrasse 33<br />
+                3422 Kirchberg
+              </address>
+              <ul class="location-meta">
+                <li>
+                  <svg
+                    class="meta-icon"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    aria-hidden="true"
+                  >
+                    <rect x="3" y="4.5" width="18" height="16" rx="2.5" />
+                    <path d="M3 9h18M8 2.5v4M16 2.5v4" />
+                  </svg>
+                  29. Mai 2027
+                </li>
+                <li>
+                  <svg
+                    class="meta-icon"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    aria-hidden="true"
+                  >
+                    <circle cx="12" cy="12" r="9" />
+                    <path d="M12 7v5l3.5 2" />
+                  </svg>
+                  Reception ab 16:00 Uhr
+                </li>
+                <li>
+                  <svg
+                    class="meta-icon"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M12 3.5l2.2 4.4 4.8.7-3.5 3.4.8 4.8L12 18.9l-4.3 2.3.8-4.8-3.5-3.4 4.8-.7z"
+                    />
+                  </svg>
+                  Festlich / Semi-formal
+                </li>
+              </ul>
+              <a
+                href="https://www.google.com/maps/search/?api=1&query=Neuhofstrasse+33,+3422+Kirchberg"
+                target="_blank"
+                rel="noopener"
+                class="btn-outline"
+              >
+                Route anzeigen
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  aria-hidden="true"
+                >
+                  <path d="M5 12h14M13 6l6 6-6 6" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
 
-      <!--
+      <!-- GALLERY -->
+      <section id="gallery" class="section">
+        <div class="section-inner section-inner--wide">
+          <p class="section-eyebrow reveal">Augenblicke</p>
+          <h2 class="section-title reveal reveal-delay-1">Unsere Galerie</h2>
+          <p class="section-lead reveal reveal-delay-2">
+            Ein paar Momente, die uns hierher gebracht haben — bald gefüllt mit
+            deinen liebsten Erinnerungen an unseren Tag.
+          </p>
+        </div>
+
+        <!--
         FOTOS EINFÜGEN: Lege deine Bilder unter  images/gallery/1.jpg … 8.jpg  ab.
         Solange diese fehlen, zeigt jede Kachel automatisch ein Platzhalterfoto.
         Reihenfolge / Anzahl: einfach <figure>-Blöcke unten ergänzen oder entfernen.
       -->
-      <div class="gallery-grid reveal">
-        <figure class="gallery-item gallery-item--tall" data-index="0">
-          <img src="images/gallery/1.jpg" alt="Momentaufnahme des Paares" loading="lazy"
-               onerror="this.onerror=null;this.src='images/placeholder/couple.jpg';this.closest('figure').classList.add('is-placeholder')">
-          <span class="gallery-zoom" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>
-          </span>
-        </figure>
-        <figure class="gallery-item" data-index="1">
-          <img src="images/gallery/2.jpg" alt="Gemeinsamer Moment" loading="lazy"
-               onerror="this.onerror=null;this.src='images/placeholder/venue.jpg';this.closest('figure').classList.add('is-placeholder')">
-          <span class="gallery-zoom" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>
-          </span>
-        </figure>
-        <figure class="gallery-item" data-index="2">
-          <img src="images/gallery/3.jpg" alt="Erinnerung an einen besonderen Tag" loading="lazy"
-               onerror="this.onerror=null;this.src='images/placeholder/couple.jpg';this.closest('figure').classList.add('is-placeholder')">
-          <span class="gallery-zoom" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>
-          </span>
-        </figure>
-        <figure class="gallery-item gallery-item--wide" data-index="3">
-          <img src="images/gallery/4.jpg" alt="Gemeinsame Reise" loading="lazy"
-               onerror="this.onerror=null;this.src='images/placeholder/venue.jpg';this.closest('figure').classList.add('is-placeholder')">
-          <span class="gallery-zoom" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>
-          </span>
-        </figure>
-        <figure class="gallery-item" data-index="4">
-          <img src="images/gallery/5.jpg" alt="Ein Lächeln zu zweit" loading="lazy"
-               onerror="this.onerror=null;this.src='images/placeholder/couple.jpg';this.closest('figure').classList.add('is-placeholder')">
-          <span class="gallery-zoom" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>
-          </span>
-        </figure>
-        <figure class="gallery-item gallery-item--tall" data-index="5">
-          <img src="images/gallery/6.jpg" alt="Ein Versprechen" loading="lazy"
-               onerror="this.onerror=null;this.src='images/placeholder/venue.jpg';this.closest('figure').classList.add('is-placeholder')">
-          <span class="gallery-zoom" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>
-          </span>
-        </figure>
-      </div>
-    </section>
-
-
-    <!-- SCHEDULE -->
-    <section id="schedule" class="section">
-      <div class="section-inner">
-        <p class="section-eyebrow reveal">Der Tag</p>
-        <h2 class="section-title reveal reveal-delay-1">Tagesablauf</h2>
-        <p class="section-lead reveal reveal-delay-2">Was dich an unserem großen Tag erwartet.</p>
-
-        <!-- TODO: Replace times and descriptions -->
-        <div class="schedule-list">
-
-          <div class="schedule-item reveal">
-            <span class="schedule-time">13:30</span>
-            <div class="schedule-dot"></div>
-            <div class="schedule-info">
-              <h4>Einlass &amp; Empfang</h4>
-              <p>Willkommen! Die Türen öffnen sich und wir empfangen unsere Gäste.</p>
-            </div>
-          </div>
-
-          <div class="schedule-item reveal">
-            <span class="schedule-time">14:00</span>
-            <div class="schedule-dot"></div>
-            <div class="schedule-info">
-              <h4>Trauungszeremonie</h4>
-              <p>Der feierliche Moment, auf den wir so lange gewartet haben — wir geben uns das Jawort.</p>
-            </div>
-          </div>
-
-          <div class="schedule-item reveal">
-            <span class="schedule-time">15:00</span>
-            <div class="schedule-dot"></div>
-            <div class="schedule-info">
-              <h4>Sektempfang</h4>
-              <p>Anstoßen, Lachen und die ersten Fotos als Ehepaar.</p>
-            </div>
-          </div>
-
-          <div class="schedule-item reveal">
-            <span class="schedule-time">17:00</span>
-            <div class="schedule-dot"></div>
-            <div class="schedule-info">
-              <h4>Abendessen</h4>
-              <p>Ein festliches Dinner mit herzlichen Reden und guter Gesellschaft.</p>
-            </div>
-          </div>
-
-          <div class="schedule-item reveal">
-            <span class="schedule-time">20:00</span>
-            <div class="schedule-dot"></div>
-            <div class="schedule-info">
-              <h4>Tanz &amp; Feier</h4>
-              <p>Die Tanzfläche ist eröffnet — lasst uns bis in die frühen Morgenstunden feiern!</p>
-            </div>
-          </div>
-
+        <div class="gallery-grid reveal">
+          <figure class="gallery-item gallery-item--tall" data-index="0">
+            <img
+              src="images/gallery/1.jpg"
+              alt="Momentaufnahme des Paares"
+              loading="lazy"
+              onerror="
+                this.onerror = null;
+                this.src = 'images/placeholder/couple.jpg';
+                this.closest('figure').classList.add('is-placeholder');
+              "
+            />
+            <span class="gallery-zoom" aria-hidden="true">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.6"
+              >
+                <circle cx="11" cy="11" r="7" />
+                <path d="M21 21l-4.3-4.3M11 8v6M8 11h6" />
+              </svg>
+            </span>
+          </figure>
+          <figure class="gallery-item" data-index="1">
+            <img
+              src="images/gallery/2.jpg"
+              alt="Gemeinsamer Moment"
+              loading="lazy"
+              onerror="
+                this.onerror = null;
+                this.src = 'images/placeholder/venue.jpg';
+                this.closest('figure').classList.add('is-placeholder');
+              "
+            />
+            <span class="gallery-zoom" aria-hidden="true">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.6"
+              >
+                <circle cx="11" cy="11" r="7" />
+                <path d="M21 21l-4.3-4.3M11 8v6M8 11h6" />
+              </svg>
+            </span>
+          </figure>
+          <figure class="gallery-item" data-index="2">
+            <img
+              src="images/gallery/3.jpg"
+              alt="Erinnerung an einen besonderen Tag"
+              loading="lazy"
+              onerror="
+                this.onerror = null;
+                this.src = 'images/placeholder/couple.jpg';
+                this.closest('figure').classList.add('is-placeholder');
+              "
+            />
+            <span class="gallery-zoom" aria-hidden="true">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.6"
+              >
+                <circle cx="11" cy="11" r="7" />
+                <path d="M21 21l-4.3-4.3M11 8v6M8 11h6" />
+              </svg>
+            </span>
+          </figure>
+          <figure class="gallery-item gallery-item--wide" data-index="3">
+            <img
+              src="images/gallery/4.jpg"
+              alt="Gemeinsame Reise"
+              loading="lazy"
+              onerror="
+                this.onerror = null;
+                this.src = 'images/placeholder/venue.jpg';
+                this.closest('figure').classList.add('is-placeholder');
+              "
+            />
+            <span class="gallery-zoom" aria-hidden="true">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.6"
+              >
+                <circle cx="11" cy="11" r="7" />
+                <path d="M21 21l-4.3-4.3M11 8v6M8 11h6" />
+              </svg>
+            </span>
+          </figure>
+          <figure class="gallery-item" data-index="4">
+            <img
+              src="images/gallery/5.jpg"
+              alt="Ein Lächeln zu zweit"
+              loading="lazy"
+              onerror="
+                this.onerror = null;
+                this.src = 'images/placeholder/couple.jpg';
+                this.closest('figure').classList.add('is-placeholder');
+              "
+            />
+            <span class="gallery-zoom" aria-hidden="true">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.6"
+              >
+                <circle cx="11" cy="11" r="7" />
+                <path d="M21 21l-4.3-4.3M11 8v6M8 11h6" />
+              </svg>
+            </span>
+          </figure>
+          <figure class="gallery-item gallery-item--tall" data-index="5">
+            <img
+              src="images/gallery/6.jpg"
+              alt="Ein Versprechen"
+              loading="lazy"
+              onerror="
+                this.onerror = null;
+                this.src = 'images/placeholder/venue.jpg';
+                this.closest('figure').classList.add('is-placeholder');
+              "
+            />
+            <span class="gallery-zoom" aria-hidden="true">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.6"
+              >
+                <circle cx="11" cy="11" r="7" />
+                <path d="M21 21l-4.3-4.3M11 8v6M8 11h6" />
+              </svg>
+            </span>
+          </figure>
         </div>
-      </div>
-    </section>
+      </section>
 
+      <!-- SCHEDULE -->
+      <section id="schedule" class="section">
+        <div class="section-inner">
+          <p class="section-eyebrow reveal">Der Tag</p>
+          <h2 class="section-title reveal reveal-delay-1">Tagesablauf</h2>
+          <p class="section-lead reveal reveal-delay-2">
+            Was dich an unserem großen Tag erwartet.
+          </p>
 
-    <!-- RSVP -->
-    <section id="rsvp" class="section">
-      <div class="section-inner">
-        <p class="section-eyebrow reveal">Rückmeldung</p>
-        <h2 class="section-title reveal reveal-delay-1">Bist du dabei?</h2>
-        <p class="section-lead reveal reveal-delay-2">
-          Bitte gib uns bis <strong>Ende 2026</strong> Bescheid, ob du dabei sein kannst. Wir planen unseren großen Tag und möchten sicherstellen, dass für jeden gesorgt ist.
+          <!-- TODO: Replace times and descriptions -->
+          <div class="schedule-list">
+            <div class="schedule-item reveal">
+              <span class="schedule-time">13:30</span>
+              <div class="schedule-dot"></div>
+              <div class="schedule-info">
+                <h4>Einlass &amp; Empfang</h4>
+                <p>
+                  Willkommen! Die Türen öffnen sich und wir empfangen unsere
+                  Gäste.
+                </p>
+              </div>
+            </div>
+
+            <div class="schedule-item reveal">
+              <span class="schedule-time">14:00</span>
+              <div class="schedule-dot"></div>
+              <div class="schedule-info">
+                <h4>Trauungszeremonie</h4>
+                <p>
+                  Der feierliche Moment, auf den wir so lange gewartet haben —
+                  wir geben uns das Jawort.
+                </p>
+              </div>
+            </div>
+
+            <div class="schedule-item reveal">
+              <span class="schedule-time">15:00</span>
+              <div class="schedule-dot"></div>
+              <div class="schedule-info">
+                <h4>Sektempfang</h4>
+                <p>Anstoßen, Lachen und die ersten Fotos als Ehepaar.</p>
+              </div>
+            </div>
+
+            <div class="schedule-item reveal">
+              <span class="schedule-time">17:00</span>
+              <div class="schedule-dot"></div>
+              <div class="schedule-info">
+                <h4>Abendessen</h4>
+                <p>
+                  Ein festliches Dinner mit herzlichen Reden und guter
+                  Gesellschaft.
+                </p>
+              </div>
+            </div>
+
+            <div class="schedule-item reveal">
+              <span class="schedule-time">20:00</span>
+              <div class="schedule-dot"></div>
+              <div class="schedule-info">
+                <h4>Tanz &amp; Feier</h4>
+                <p>
+                  Die Tanzfläche ist eröffnet — lasst uns bis in die frühen
+                  Morgenstunden feiern!
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- RSVP -->
+      <section id="rsvp" class="section">
+        <div class="section-inner">
+          <p class="section-eyebrow reveal">Rückmeldung</p>
+          <h2 class="section-title reveal reveal-delay-1">Bist du dabei?</h2>
+          <p class="section-lead reveal reveal-delay-2">
+            Bitte gib uns bis <strong>Ende 2026</strong> Bescheid, ob du dabei
+            sein kannst. Wir planen unseren großen Tag und möchten
+            sicherstellen, dass für jeden gesorgt ist.
+          </p>
+
+          <div class="rsvp-card reveal">
+            <!-- Shown on reload if this browser already submitted (prevents double entries) -->
+            <div
+              id="rsvp-success"
+              class="rsvp-success"
+              role="status"
+              aria-live="polite"
+            >
+              <div class="success-icon" aria-hidden="true">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                >
+                  <path d="M5 12.5l4.5 4.5L19 7" />
+                </svg>
+              </div>
+              <h3>Schon erledigt!</h3>
+              <p>
+                Du hast uns bereits Bescheid gegeben — vielen Dank.<br />
+                Möchtest du etwas ändern? Schreib uns an
+                <a href="mailto:vithursan.thayananthan@gmail.com"
+                  >vithursan.thayananthan@gmail.com</a
+                >.
+              </p>
+            </div>
+
+            <div id="rsvp-form-wrap">
+              <form id="rsvp-form" novalidate>
+                <div class="form-group">
+                  <label>Nimmst du teil? *</label>
+                  <div
+                    class="attendance-group"
+                    role="group"
+                    aria-label="Teilnahme auswählen"
+                  >
+                    <button
+                      type="button"
+                      class="attendance-btn"
+                      data-value="Ja"
+                    >
+                      <span class="att-icon att-yes" aria-hidden="true">
+                        <svg
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2.4"
+                        >
+                          <path d="M5 12.5l4.5 4.5L19 7" />
+                        </svg>
+                      </span>
+                      Ja
+                    </button>
+                    <button
+                      type="button"
+                      class="attendance-btn"
+                      data-value="Nein"
+                    >
+                      <span class="att-icon att-no" aria-hidden="true">
+                        <svg
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2.4"
+                        >
+                          <path d="M6 6l12 12M18 6L6 18" />
+                        </svg>
+                      </span>
+                      Nein
+                    </button>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="fullname">Name *</label>
+                  <input
+                    type="text"
+                    id="fullname"
+                    name="fullname"
+                    placeholder="Dein vollständiger Name"
+                    required
+                    autocomplete="name"
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="guest-count">Anzahl Gäste (inkl. dir)</label>
+                  <div class="stepper">
+                    <button
+                      type="button"
+                      id="guest-minus"
+                      aria-label="Weniger Gäste"
+                    >
+                      −
+                    </button>
+                    <input
+                      type="number"
+                      id="guest-count"
+                      name="guests"
+                      value="1"
+                      min="1"
+                      max="10"
+                      readonly
+                      aria-label="Anzahl Gäste"
+                    />
+                    <button
+                      type="button"
+                      id="guest-plus"
+                      aria-label="Mehr Gäste"
+                    >
+                      +
+                    </button>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="dietary">Unverträglichkeiten / Allergien</label>
+                  <input
+                    type="text"
+                    id="dietary"
+                    name="dietary"
+                    placeholder="z. B. vegetarisch, glutenfrei, Nussallergie…"
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="song">Musikwunsch</label>
+                  <input
+                    type="text"
+                    id="song"
+                    name="song"
+                    placeholder="Ein Song, der dich auf die Tanzfläche bringt!"
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="message">Nachricht an das Brautpaar</label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    placeholder="Teile deine Wünsche, eine Erinnerung oder ein paar liebe Worte…"
+                  ></textarea>
+                </div>
+
+                <button type="submit" id="rsvp-submit" class="btn-submit">
+                  Rückmeldung senden
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FOOTER -->
+      <footer>
+        <p class="footer-names">Vithu &amp; Saru</p>
+        <p class="footer-date">29. Mai 2027 &middot; Kirchberg</p>
+        <p class="footer-ornament" aria-hidden="true">
+          <svg
+            viewBox="0 0 120 16"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1"
+          >
+            <path d="M2 8h40M118 8H78" />
+            <path
+              d="M60 3.5c-2.5-3-7-1.5-7 1.8 0 2.6 4 4.7 7 6.7 3-2 7-4.1 7-6.7 0-3.3-4.5-4.8-7-1.8z"
+              fill="currentColor"
+              stroke="none"
+            />
+            <circle cx="48" cy="8" r="1.2" fill="currentColor" stroke="none" />
+            <circle cx="72" cy="8" r="1.2" fill="currentColor" stroke="none" />
+          </svg>
         </p>
+        <p class="footer-credit">Mit Liebe gemacht</p>
+      </footer>
+    </div>
+    <!-- /main-content -->
 
-        <div class="rsvp-card reveal">
-
-          <!-- Shown on reload if this browser already submitted (prevents double entries) -->
-          <div id="rsvp-success" class="rsvp-success" role="status" aria-live="polite">
-            <div class="success-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12.5l4.5 4.5L19 7"/></svg>
-            </div>
-            <h3>Schon erledigt!</h3>
-            <p>Du hast uns bereits Bescheid gegeben — vielen Dank.<br>
-            Möchtest du etwas ändern? Schreib uns an
-            <a href="mailto:vithursan.thayananthan@gmail.com">vithursan.thayananthan@gmail.com</a>.</p>
-          </div>
-
-          <div id="rsvp-form-wrap">
-
-            <form id="rsvp-form" novalidate>
-
-              <div class="form-group">
-                <label>Nimmst du teil? *</label>
-                <div class="attendance-group" role="group" aria-label="Teilnahme auswählen">
-                  <button type="button" class="attendance-btn" data-value="Ja">
-                    <span class="att-icon att-yes" aria-hidden="true">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12.5l4.5 4.5L19 7"/></svg>
-                    </span> Ja
-                  </button>
-                  <button type="button" class="attendance-btn" data-value="Nein">
-                    <span class="att-icon att-no" aria-hidden="true">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 6l12 12M18 6L6 18"/></svg>
-                    </span> Nein
-                  </button>
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label for="fullname">Name *</label>
-                <input type="text" id="fullname" name="fullname"
-                       placeholder="Dein vollständiger Name" required autocomplete="name" />
-              </div>
-
-              <div class="form-group">
-                <label for="guest-count">Anzahl Gäste (inkl. dir)</label>
-                <div class="stepper">
-                  <button type="button" id="guest-minus" aria-label="Weniger Gäste">−</button>
-                  <input type="number" id="guest-count" name="guests"
-                         value="1" min="1" max="10" readonly aria-label="Anzahl Gäste" />
-                  <button type="button" id="guest-plus" aria-label="Mehr Gäste">+</button>
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label for="dietary">Unverträglichkeiten / Allergien</label>
-                <input type="text" id="dietary" name="dietary"
-                       placeholder="z. B. vegetarisch, glutenfrei, Nussallergie…" />
-              </div>
-
-              <div class="form-group">
-                <label for="song">Musikwunsch</label>
-                <input type="text" id="song" name="song"
-                       placeholder="Ein Song, der dich auf die Tanzfläche bringt!" />
-              </div>
-
-              <div class="form-group">
-                <label for="message">Nachricht an das Brautpaar</label>
-                <textarea id="message" name="message"
-                          placeholder="Teile deine Wünsche, eine Erinnerung oder ein paar liebe Worte…"></textarea>
-              </div>
-
-              <button type="submit" id="rsvp-submit" class="btn-submit">
-                Rückmeldung senden
-              </button>
-
-            </form>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-
-    <!-- FOOTER -->
-    <footer>
-      <p class="footer-names">Vithu &amp; Saru</p>
-      <p class="footer-date">29. Mai 2027 &middot; Kirchberg</p>
-      <p class="footer-ornament" aria-hidden="true">
-        <svg viewBox="0 0 120 16" fill="none" stroke="currentColor" stroke-width="1">
-          <path d="M2 8h40M118 8H78"/>
-          <path d="M60 3.5c-2.5-3-7-1.5-7 1.8 0 2.6 4 4.7 7 6.7 3-2 7-4.1 7-6.7 0-3.3-4.5-4.8-7-1.8z" fill="currentColor" stroke="none"/>
-          <circle cx="48" cy="8" r="1.2" fill="currentColor" stroke="none"/>
-          <circle cx="72" cy="8" r="1.2" fill="currentColor" stroke="none"/>
-        </svg>
-      </p>
-      <p class="footer-credit">Mit Liebe gemacht</p>
-    </footer>
-
-  </div><!-- /main-content -->
-
-
-  <!-- ==========================================
+    <!-- ==========================================
        FAREWELL — full-screen closing page (after RSVP submit)
        ========================================== -->
-  <div id="farewell-screen" class="farewell" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Danke für deine Rückmeldung">
-    <div class="farewell-petals" aria-hidden="true"></div>
-    <div class="farewell-inner">
-      <span class="farewell-ornament" aria-hidden="true">
-        <svg viewBox="0 0 48 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M24 40C24 40 4 27 4 14.5 4 7.6 9.4 3 15.3 3 19.4 3 23 5.4 24 9.2 25 5.4 28.6 3 32.7 3 38.6 3 44 7.6 44 14.5 44 27 24 40 24 40z" stroke="currentColor" stroke-width="1.6" fill="none"/>
-        </svg>
-      </span>
-      <p class="farewell-names">Vithu &amp; Saru</p>
-      <h1 class="farewell-title" id="farewell-title">Vielen Dank!</h1>
-      <p class="farewell-text" id="farewell-text">Wir können es kaum erwarten, mit dir zu feiern. Bis bald auf der Tanzfläche!</p>
+    <div
+      id="farewell-screen"
+      class="farewell"
+      aria-hidden="true"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Danke für deine Rückmeldung"
+    >
+      <div class="farewell-petals" aria-hidden="true"></div>
+      <div class="farewell-inner">
+        <span class="farewell-ornament" aria-hidden="true">
+          <svg
+            viewBox="0 0 48 44"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M24 40C24 40 4 27 4 14.5 4 7.6 9.4 3 15.3 3 19.4 3 23 5.4 24 9.2 25 5.4 28.6 3 32.7 3 38.6 3 44 7.6 44 14.5 44 27 24 40 24 40z"
+              stroke="currentColor"
+              stroke-width="1.6"
+              fill="none"
+            />
+          </svg>
+        </span>
+        <p class="farewell-names">Vithu &amp; Saru</p>
+        <h1 class="farewell-title" id="farewell-title">Vielen Dank!</h1>
+        <p class="farewell-text" id="farewell-text">
+          Wir können es kaum erwarten, mit dir zu feiern. Bis bald auf der
+          Tanzfläche!
+        </p>
 
-      <div class="farewell-divider" aria-hidden="true"></div>
+        <div class="farewell-divider" aria-hidden="true"></div>
 
-      <p class="farewell-meta">29. Mai 2027 &middot; Saalbau Kirchberg</p>
+        <p class="farewell-meta">29. Mai 2027 &middot; Saalbau Kirchberg</p>
 
-      <a id="farewell-cal" class="farewell-cal" href="#" hidden>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3" y="4.5" width="18" height="16" rx="2.5"/><path d="M3 9h18M8 2.5v4M16 2.5v4M12 12.5v5M9.5 15h5"/></svg>
-        Zum Kalender hinzufügen
-      </a>
+        <a id="farewell-cal" class="farewell-cal" href="#" hidden>
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.7"
+            aria-hidden="true"
+          >
+            <rect x="3" y="4.5" width="18" height="16" rx="2.5" />
+            <path d="M3 9h18M8 2.5v4M16 2.5v4M12 12.5v5M9.5 15h5" />
+          </svg>
+          Zum Kalender hinzufügen
+        </a>
 
-      <p class="farewell-contact">
-        Möchtest du etwas ändern? Schreib uns an<br>
-        <a href="mailto:vithursan.thayananthan@gmail.com">vithursan.thayananthan@gmail.com</a>
-      </p>
+        <p class="farewell-contact">
+          Möchtest du etwas ändern? Schreib uns an<br />
+          <a href="mailto:vithursan.thayananthan@gmail.com"
+            >vithursan.thayananthan@gmail.com</a
+          >
+        </p>
+      </div>
     </div>
-  </div>
 
-
-  <!-- ==========================================
+    <!-- ==========================================
        LIGHTBOX
        ========================================== -->
-  <div id="lightbox" class="lightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Galerie-Ansicht">
-    <button class="lightbox-close" aria-label="Schließen">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6l12 12M18 6L6 18"/></svg>
-    </button>
-    <button class="lightbox-nav lightbox-prev" aria-label="Vorheriges Foto">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M15 5l-7 7 7 7"/></svg>
-    </button>
-    <figure class="lightbox-stage">
-      <img id="lightbox-img" src="" alt="" />
-    </figure>
-    <button class="lightbox-nav lightbox-next" aria-label="Nächstes Foto">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 5l7 7-7 7"/></svg>
-    </button>
-  </div>
+    <div
+      id="lightbox"
+      class="lightbox"
+      aria-hidden="true"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Galerie-Ansicht"
+    >
+      <button class="lightbox-close" aria-label="Schließen">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+        >
+          <path d="M6 6l12 12M18 6L6 18" />
+        </svg>
+      </button>
+      <button class="lightbox-nav lightbox-prev" aria-label="Vorheriges Foto">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+        >
+          <path d="M15 5l-7 7 7 7" />
+        </svg>
+      </button>
+      <figure class="lightbox-stage">
+        <img id="lightbox-img" src="" alt="" />
+      </figure>
+      <button class="lightbox-nav lightbox-next" aria-label="Nächstes Foto">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+        >
+          <path d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+    </div>
 
+    <!-- Smooth scroll + scroll animations (CDN) -->
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 
-  <!-- Smooth scroll + scroll animations (CDN) -->
-  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-
-  <script src="js/countdown.js?v=20260631"></script>
-  <script src="js/main.js?v=20260631"></script>
-</body>
+    <script src="js/countdown.js?v=20260701"></script>
+    <script src="js/main.js?v=20260701"></script>
+  </body>
 </html>

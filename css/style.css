@@ -267,11 +267,14 @@ a   { color: inherit; text-decoration: none; }
   width: 100%;
   height: 100%;
   object-fit: cover;
-  z-index: 0;
+  /* Above the photo fallback, below the overlay (z-index:1).
+     If the video is missing/blocked, its poster (couple.jpg) covers
+     the same area, so the fallback still looks right. */
+  z-index: 1;
 }
 
-/* Photo fallback sits above video poster gap; hidden if video plays.
-   Kept visible by default so it shows when no video file exists. */
+/* Photo fallback sits behind the video; shows through when no video
+   file exists. Also carries the GSAP Ken Burns zoom. */
 .hero-bg {
   position: absolute;
   inset: 0;
