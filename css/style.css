@@ -1221,31 +1221,46 @@ footer {
 
 #gallery { background: var(--blush-bg); }
 
-/* Masonry via CSS columns — each tile keeps the photo's natural aspect
-   ratio (portrait → tall, landscape → wide), no cropping. */
-.gallery-grid {
-  max-width: var(--maxw);
+/* Infinite auto-scrolling marquee (vanilla port of image-auto-slider).
+   Pauses on hover/focus so tiles stay clickable → lightbox. Edge fade via
+   CSS mask (fades to whatever is behind = the wine section bg). */
+.gallery-marquee {
   margin: 3.25rem auto 0;
-  padding: 0 clamp(0px, 2vw, 1rem);
-  column-count: 3;
-  column-gap: 14px;
+  width: 100%;
+  overflow: hidden;
+  -webkit-mask: linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%);
+  mask: linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%);
+}
+.gallery-track {
+  display: flex;
+  width: max-content;
+  animation: galleryScroll 42s linear infinite;
+}
+.gallery-marquee:hover .gallery-track,
+.gallery-marquee:focus-within .gallery-track { animation-play-state: paused; }
+@keyframes galleryScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
 }
 .gallery-item {
   position: relative;
-  display: block;
+  flex: 0 0 auto;
+  width: clamp(200px, 24vw, 300px);
+  height: clamp(260px, 32vw, 400px);
+  /* each slide owns its trailing gap → translateX(-50%) loops seamlessly */
+  margin-right: 1.25rem;
   overflow: hidden;
   border-radius: var(--radius);
   cursor: pointer;
   background: linear-gradient(135deg, var(--blush-card), var(--blush));
   box-shadow: var(--shadow-sm);
-  break-inside: avoid;
-  margin-bottom: 14px;
 }
 .gallery-item img {
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
   display: block;
-  transition: transform 0.7s var(--ease), filter 0.5s ease;
+  transition: transform 0.5s var(--ease), filter 0.4s ease;
 }
 .gallery-item::after {
   content: '';
@@ -1255,9 +1270,8 @@ footer {
   opacity: 0;
   transition: opacity 0.4s ease;
 }
-.gallery-item:hover img { transform: scale(1.07); }
+.gallery-item:hover img { transform: scale(1.05); filter: brightness(1.08); }
 .gallery-item:hover::after { opacity: 1; }
-.gallery-item.is-placeholder img { filter: saturate(0.85) brightness(0.98); }
 
 .gallery-zoom {
   position: absolute;

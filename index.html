@@ -18,8 +18,8 @@
       rel="stylesheet"
     />
 
-    <link rel="stylesheet" href="css/style.css?v=20270119" />
-    <link rel="stylesheet" href="css/animations.css?v=20270119" />
+    <link rel="stylesheet" href="css/style.css?v=20270120" />
+    <link rel="stylesheet" href="css/animations.css?v=20270120" />
   </head>
   <body>
     <!-- Petal layer — petals fall here on envelope open & RSVP success -->
@@ -147,7 +147,7 @@
           playsinline
           preload="auto"
         >
-          <source src="video/wedding-highlight.mp4?v=20270119" type="video/mp4" />
+          <source src="video/wedding-highlight.mp4?v=20270120" type="video/mp4" />
         </video>
         <div class="hero-bg" role="img" aria-label="Foto des Paares"></div>
         <div class="hero-overlay"></div>
@@ -592,11 +592,13 @@
         </div>
 
         <!--
-        FOTOS EINFÜGEN: Lege deine Bilder unter  images/gallery/1.jpg … 8.jpg  ab.
-        Solange diese fehlen, zeigt jede Kachel automatisch ein Platzhalterfoto.
-        Reihenfolge / Anzahl: einfach <figure>-Blöcke unten ergänzen oder entfernen.
+        FOTOS EINFÜGEN: Lege deine Bilder unter  images/gallery/1.jpg … ab.
+        Infinite-Marquee: die ersten 6 <figure> sind die Originale (Lightbox),
+        danach folgen 6 aria-hidden Klone (data-clone) für den nahtlosen Loop.
+        Beim Ändern der Anzahl BEIDE Hälften gleich halten.
       -->
-        <div class="gallery-grid reveal">
+        <div class="gallery-marquee reveal">
+          <div class="gallery-track">
           <figure class="gallery-item" data-index="0">
             <img
               src="images/gallery/1.jpg"
@@ -705,6 +707,27 @@
               </svg>
             </span>
           </figure>
+
+          <!-- Seamless-loop clones (aria-hidden, not in lightbox) -->
+          <figure class="gallery-item" data-clone aria-hidden="true">
+            <img src="images/gallery/1.jpg" alt="" loading="lazy" />
+          </figure>
+          <figure class="gallery-item" data-clone aria-hidden="true">
+            <img src="images/gallery/2.jpg" alt="" loading="lazy" />
+          </figure>
+          <figure class="gallery-item" data-clone aria-hidden="true">
+            <img src="images/gallery/3.jpg" alt="" loading="lazy" />
+          </figure>
+          <figure class="gallery-item" data-clone aria-hidden="true">
+            <img src="images/gallery/4.jpg" alt="" loading="lazy" />
+          </figure>
+          <figure class="gallery-item" data-clone aria-hidden="true">
+            <img src="images/gallery/5.jpg" alt="" loading="lazy" />
+          </figure>
+          <figure class="gallery-item" data-clone aria-hidden="true">
+            <img src="images/gallery/6.jpg" alt="" loading="lazy" />
+          </figure>
+          </div>
         </div>
       </section>
 
@@ -1087,7 +1110,7 @@
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 
-    <script src="js/countdown.js?v=20270119"></script>
-    <script src="js/main.js?v=20270119"></script>
+    <script src="js/countdown.js?v=20270120"></script>
+    <script src="js/main.js?v=20270120"></script>
   </body>
 </html>

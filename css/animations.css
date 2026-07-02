@@ -168,4 +168,7 @@
   .petal  { display: none; }
   .cover-seal { animation: none; }
   #main-content.visible .hero-bg { animation: none; transform: scale(1.05); }
+  /* Gallery: no auto-scroll — let it be swiped/scrolled manually instead */
+  .gallery-track { animation: none !important; transform: none !important; }
+  .gallery-marquee { overflow-x: auto; -webkit-mask: none; mask: none; }
 }

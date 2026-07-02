@@ -379,7 +379,7 @@ function initLightbox() {
   const imgEl = document.getElementById('lightbox-img');
   if (!box || !imgEl) return;
 
-  const items = Array.from(document.querySelectorAll('.gallery-item'));
+  const items = Array.from(document.querySelectorAll('.gallery-item:not([data-clone])'));
   const sources = items.map((fig) => {
     const img = fig.querySelector('img');
     return { src: img.currentSrc || img.src, alt: img.alt || '' };
