@@ -18,8 +18,8 @@
       rel="stylesheet"
     />
 
-    <link rel="stylesheet" href="css/style.css?v=20270118" />
-    <link rel="stylesheet" href="css/animations.css?v=20270118" />
+    <link rel="stylesheet" href="css/style.css?v=20270119" />
+    <link rel="stylesheet" href="css/animations.css?v=20270119" />
   </head>
   <body>
     <!-- Petal layer — petals fall here on envelope open & RSVP success -->
@@ -147,7 +147,7 @@
           playsinline
           preload="auto"
         >
-          <source src="video/wedding-highlight.mp4?v=20270118" type="video/mp4" />
+          <source src="video/wedding-highlight.mp4?v=20270119" type="video/mp4" />
         </video>
         <div class="hero-bg" role="img" aria-label="Foto des Paares"></div>
         <div class="hero-overlay"></div>
@@ -452,8 +452,90 @@
             unten gelten nur f&uuml;r die Reception.
           </p>
 
-          <div class="location-card location-card--compact reveal">
-            <div class="location-body">
+          <div class="location-card location-card--compact location-card--interactive reveal">
+            <div class="location-map-stage">
+              <div
+                class="expand-map"
+                id="expand-map-ceremony"
+                role="button"
+                tabindex="0"
+                aria-expanded="false"
+                aria-controls="ceremony-details"
+                aria-label="Karte &amp; Details aufklappen"
+              >
+                <div class="expand-map-card">
+                  <div class="expand-map-gradient"></div>
+
+                  <!-- Illustrated streets & buildings (revealed on expand) -->
+                  <div class="expand-map-scene" aria-hidden="true">
+                    <div class="expand-map-scene-bg"></div>
+                    <svg class="expand-map-roads" preserveAspectRatio="none">
+                      <line class="road road-main" pathLength="1" x1="0%" y1="35%" x2="100%" y2="35%" />
+                      <line class="road road-main" pathLength="1" x1="0%" y1="65%" x2="100%" y2="65%" />
+                      <line class="road road-sub" pathLength="1" x1="30%" y1="0%" x2="30%" y2="100%" />
+                      <line class="road road-sub" pathLength="1" x1="70%" y1="0%" x2="70%" y2="100%" />
+                      <line class="road road-thin" pathLength="1" x1="0%" y1="20%" x2="100%" y2="20%" />
+                      <line class="road road-thin" pathLength="1" x1="0%" y1="50%" x2="100%" y2="50%" />
+                      <line class="road road-thin" pathLength="1" x1="0%" y1="80%" x2="100%" y2="80%" />
+                      <line class="road road-thin" pathLength="1" x1="15%" y1="0%" x2="15%" y2="100%" />
+                      <line class="road road-thin" pathLength="1" x1="45%" y1="0%" x2="45%" y2="100%" />
+                      <line class="road road-thin" pathLength="1" x1="55%" y1="0%" x2="55%" y2="100%" />
+                      <line class="road road-thin" pathLength="1" x1="85%" y1="0%" x2="85%" y2="100%" />
+                    </svg>
+                    <span class="building" style="top:40%;left:10%;width:15%;height:20%"></span>
+                    <span class="building" style="top:15%;left:35%;width:12%;height:15%"></span>
+                    <span class="building" style="top:70%;left:75%;width:18%;height:18%"></span>
+                    <span class="building" style="top:20%;right:10%;width:10%;height:25%"></span>
+                    <span class="building" style="top:55%;left:5%;width:8%;height:12%"></span>
+                    <span class="building" style="top:8%;left:75%;width:14%;height:10%"></span>
+                    <span class="expand-map-pin">
+                      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path
+                          d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"
+                          fill="var(--rose)"
+                        />
+                        <circle cx="12" cy="9" r="2.5" fill="var(--blush-card)" />
+                      </svg>
+                    </span>
+                    <div class="expand-map-scene-fade"></div>
+                  </div>
+
+                  <!-- Grid pattern (collapsed only) -->
+                  <div class="expand-map-grid" aria-hidden="true"></div>
+
+                  <!-- Content -->
+                  <div class="expand-map-content">
+                    <div class="expand-map-top">
+                      <svg
+                        class="expand-map-icon"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                      >
+                        <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21" />
+                        <line x1="9" y1="3" x2="9" y2="18" />
+                        <line x1="15" y1="6" x2="15" y2="21" />
+                      </svg>
+                      <span class="expand-map-badge">
+                        <span class="expand-map-dot"></span>
+                        Live
+                      </span>
+                    </div>
+                    <div class="expand-map-bottom">
+                      <h3 class="expand-map-name">Kulturverein Murugan Bern</h3>
+                      <p class="expand-map-coords">46.8620° N, 7.4699° O</p>
+                      <div class="expand-map-underline"></div>
+                    </div>
+                  </div>
+                </div>
+                <p class="expand-map-hint">F&uuml;r Karte &amp; Details tippen</p>
+              </div>
+            </div>
+            <div class="location-body" id="ceremony-details">
               <span class="location-badge">Traditionelle Zeremonie</span>
               <h3>Kulturverein Murugan Bern</h3>
               <address>
@@ -1005,7 +1087,7 @@
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 
-    <script src="js/countdown.js?v=20270118"></script>
-    <script src="js/main.js?v=20270118"></script>
+    <script src="js/countdown.js?v=20270119"></script>
+    <script src="js/main.js?v=20270119"></script>
   </body>
 </html>

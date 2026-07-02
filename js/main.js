@@ -433,49 +433,51 @@ function initLightbox() {
 // =============================================
 // DECORATIVE EXPAND-MAP (3D tilt + click-to-expand)
 // =============================================
-function initExpandMap() {
-  const map = document.getElementById('expand-map');
-  if (!map) return;
+function initExpandMaps() {
+  const maps = document.querySelectorAll('.expand-map');
+  if (!maps.length) return;
 
-  const card = map.querySelector('.expand-map-card');
-
-  const locationCard = map.closest('.location-card');
-
-  function toggle() {
-    const expanded = map.classList.toggle('expanded');
-    map.setAttribute('aria-expanded', expanded ? 'true' : 'false');
-    map.setAttribute('aria-label', expanded ? 'Karte & Details einklappen' : 'Karte & Details aufklappen');
-    // Reveal / hide the reception details of the interactive location card together
-    if (locationCard) locationCard.classList.toggle('expanded', expanded);
-    if (!expanded) resetTilt();
-  }
-
-  function resetTilt() {
-    if (card) card.style.transform = 'rotateX(0deg) rotateY(0deg)';
-  }
-
-  // Tap / keyboard toggles expand
-  map.addEventListener('click', toggle);
-  map.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      toggle();
-    }
-  });
-
-  // 3D tilt on hover — skipped for reduced-motion or touch (no fine pointer)
+  // 3D tilt only on desktop with a fine pointer & motion allowed
   const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-  if (prefersReducedMotion || !finePointer || !card) return;
+  const tiltOK = !prefersReducedMotion && finePointer;
 
-  map.addEventListener('mousemove', (e) => {
-    const rect = map.getBoundingClientRect();
-    const dx = e.clientX - (rect.left + rect.width / 2);
-    const dy = e.clientY - (rect.top + rect.height / 2);
-    const rotateY = Math.max(-8, Math.min(8, (dx / 50) * 8));
-    const rotateX = Math.max(-8, Math.min(8, (-dy / 50) * 8));
-    card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+  maps.forEach((map) => {
+    const card = map.querySelector('.expand-map-card');
+    const locationCard = map.closest('.location-card');
+
+    function resetTilt() {
+      if (card) card.style.transform = 'rotateX(0deg) rotateY(0deg)';
+    }
+
+    function toggle() {
+      const expanded = map.classList.toggle('expanded');
+      map.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+      map.setAttribute('aria-label', expanded ? 'Karte & Details einklappen' : 'Karte & Details aufklappen');
+      // Reveal / hide the details of this interactive location card together
+      if (locationCard) locationCard.classList.toggle('expanded', expanded);
+      if (!expanded) resetTilt();
+    }
+
+    // Tap / keyboard toggles expand
+    map.addEventListener('click', toggle);
+    map.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggle();
+      }
+    });
+
+    if (!tiltOK || !card) return;
+    map.addEventListener('mousemove', (e) => {
+      const rect = map.getBoundingClientRect();
+      const dx = e.clientX - (rect.left + rect.width / 2);
+      const dy = e.clientY - (rect.top + rect.height / 2);
+      const rotateY = Math.max(-8, Math.min(8, (dx / 50) * 8));
+      const rotateX = Math.max(-8, Math.min(8, (-dy / 50) * 8));
+      card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+    });
+    map.addEventListener('mouseleave', resetTilt);
   });
-  map.addEventListener('mouseleave', resetTilt);
 }
 
 // =============================================
@@ -492,7 +494,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initReveals();
   initNav();
   initLightbox();
-  initExpandMap();
+  initExpandMaps();
   setupAnchorLinks();
 
   function openEnvelope() {
