@@ -21,7 +21,11 @@ Open `index.html` directly in any browser — no build step, no server required.
 
 ## Git Workflow
 
-**After every change, commit and push to GitHub.** Once a task is complete and verified, stage all changes, write a concise descriptive commit message, and push to `origin/main` — no need to ask each time (standing authorization from the repo owner).
+**After every change, do all three of these — every time, without being asked (standing authorization from the repo owner):**
+
+1. **Commit & push to GitHub** — stage all changes, write a concise descriptive commit message, push to `origin/main`.
+2. **Update this `CLAUDE.md`** — reflect what changed (relevant section + the "Known Issues / Next Session" note + cache-bust version) so the docs never go stale.
+3. **Update the memory** at `~/.claude/projects/-Users-vithuthaya-Project-wedding/memory/` — so the next session doesn't have to redo or rediscover anything.
 
 ```bash
 git add -A && git commit -m "<what changed>" && git push
@@ -149,7 +153,7 @@ Browser autoplay policy: music only starts after user interaction (the envelope 
 
 ## Video Integration
 
-File: `video/wedding-highlight.mp4` (committed, H.264/AAC ~7.6 MB)
+File: `video/wedding-highlight.mp4` (committed, **~68 MB** — new clip swapped in 2026-07-02, uncompressed). GitHub warns above 50 MB but accepts it (hard limit 100 MB). **Tested on real mobile: loads instantly and plays smoothly**, so it was left uncompressed. The `<source>` in `index.html` carries a `?v=YYYYMMDD` cache-bust so phones don't serve a stale clip when the file is swapped (same name). If a future clip is heavier or laggy, compress with ffmpeg (H.264, ~1080p, `-crf 23`, strip audio `-an`, `+faststart`).
 
 - `<video muted loop playsinline preload="auto">` — **no `autoplay`**. It would otherwise start playing while the cover is still closed. Instead `openEnvelope()` in `main.js` calls `heroVid.play().catch(()=>{})` on the seal tap, so the video starts together with the music + petals.
 - **Layering (z-index):** `.hero-video` is `z-index: 1`, sitting **above** the photo fallback `.hero-bg` (`z-index: 0`) but **below** `.hero-overlay`/`.hero-vignette` (`z-index: 1`, later in DOM). The photo `div` comes *after* the video in the DOM, so without this the photo painted on top and the video was invisible. If the video is missing/blocked, its `poster="couple.jpg"` covers the same area, so the fallback still looks right.
@@ -204,7 +208,7 @@ All animations and transitions are disabled via `@media (prefers-reduced-motion:
 
 ## Known Issues / Next Session
 
-> Updated 2026-06-27 (session 2, end). Live on **GitHub Pages → `vithuthaya.github.io`** (tested on real iPhone this session). This session: fixed hero video not showing (z-index), removed scroll-cue, added + compressed gallery photos, switched gallery to masonry, made hero video start on seal click. Current cache-bust: `?v=20260704`.
+> Updated 2026-07-02 (session 3, end). Live on **GitHub Pages → `vithuthaya.github.io`**. This session: swapped in a new hero video (~68 MB, uncompressed) — tested on real mobile, loads instantly + plays smoothly, so left uncompressed; added a `?v=` cache-bust on the video `<source>` too. CSS/JS cache-bust still `?v=20260704`; video cache-bust `?v=20260702`.
 
 1. **Background music polish (deferred by user).** `audio/wedding-music.mp3` is committed but **~10.8 MB** — slow on mobile. Compress to ~2–4 MB (128 kbps, maybe trim to 2–3 min). Optionally tweak fade-in volume (`0.55` in `startMusic()`).
 2. **Story content** (`#story`) — replace placeholder text + 4 timeline entries.
