@@ -431,6 +431,50 @@ function initLightbox() {
 }
 
 // =============================================
+// DECORATIVE EXPAND-MAP (3D tilt + click-to-expand)
+// =============================================
+function initExpandMap() {
+  const map = document.getElementById('expand-map');
+  if (!map) return;
+
+  const card = map.querySelector('.expand-map-card');
+
+  function toggle() {
+    const expanded = map.classList.toggle('expanded');
+    map.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+    map.setAttribute('aria-label', expanded ? 'Karte einklappen' : 'Karte aufklappen');
+    if (!expanded) resetTilt();
+  }
+
+  function resetTilt() {
+    if (card) card.style.transform = 'rotateX(0deg) rotateY(0deg)';
+  }
+
+  // Tap / keyboard toggles expand
+  map.addEventListener('click', toggle);
+  map.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      toggle();
+    }
+  });
+
+  // 3D tilt on hover — skipped for reduced-motion or touch (no fine pointer)
+  const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  if (prefersReducedMotion || !finePointer || !card) return;
+
+  map.addEventListener('mousemove', (e) => {
+    const rect = map.getBoundingClientRect();
+    const dx = e.clientX - (rect.left + rect.width / 2);
+    const dy = e.clientY - (rect.top + rect.height / 2);
+    const rotateY = Math.max(-8, Math.min(8, (dx / 50) * 8));
+    const rotateX = Math.max(-8, Math.min(8, (-dy / 50) * 8));
+    card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+  });
+  map.addEventListener('mouseleave', resetTilt);
+}
+
+// =============================================
 // MAIN
 // =============================================
 document.addEventListener('DOMContentLoaded', () => {
@@ -444,6 +488,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initReveals();
   initNav();
   initLightbox();
+  initExpandMap();
   setupAnchorLinks();
 
   function openEnvelope() {

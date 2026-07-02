@@ -159,7 +159,7 @@ File: `video/wedding-highlight.mp4` (committed, **~15.8 MB**, H.264, vertical 10
 
 - **⚠️ Deploy lesson (2026-07-02):** an uncompressed **68 MB** clip made the **GitHub Pages deploy time out** (`##[error]Timeout reached, aborting!` — the publish step hangs in `deployment_queued` past the ~10-min limit), so the site silently stayed on the previous commit and the video didn't load. **Keep the video small** (single-digit / low-double-digit MB). Recompress any new clip before committing:
   `ffmpeg -i in.mp4 -vf "scale=-2:1440" -c:v libx264 -profile:v high -pix_fmt yuv420p -crf 24 -preset slow -an -movflags +faststart out.mp4` (strip audio `-an` — the hero video is silent; `+faststart` lets it start before fully downloaded).
-- The `<source>` in `index.html` carries a `?v=YYYYMMDD` cache-bust so phones don't serve a stale clip when the file is swapped (same name). Currently `?v=20270116`.
+- The `<source>` in `index.html` carries a `?v=YYYYMMDD` cache-bust so phones don't serve a stale clip when the file is swapped (same name). Currently `?v=20270117`.
 
 - `<video muted loop playsinline preload="auto">` — **no `autoplay`**. It would otherwise start playing while the cover is still closed. Instead `openEnvelope()` in `main.js` calls `heroVid.play().catch(()=>{})` on the seal tap, so the video starts together with the music + petals.
 - **Layering (z-index):** `.hero-video` is `z-index: 1`, sitting **above** the photo fallback `.hero-bg` (`z-index: 0`) but **below** `.hero-overlay`/`.hero-vignette` (`z-index: 1`, later in DOM). The photo `div` comes *after* the video in the DOM, so without this the photo painted on top and the video was invisible. If the video is missing/blocked, its `poster="couple.jpg"` covers the same area, so the fallback still looks right.
@@ -175,6 +175,16 @@ The gallery `<img>`s previously had inline `onerror` placeholder fallbacks — *
 
 > **Image filenames must be lowercase `.jpg`** — the `<img src>` references are lowercase, and GitHub Pages (Linux) is **case-sensitive**, so `3.JPG` would 404 on the live site even though it works locally on macOS (case-insensitive). Always normalize extensions to lowercase before committing.
 > **Compression:** source photos were huge (up to 7000×8000, ~34 MB total). Compressed in place with macOS `sips -Z 1600 -s formatOptions 80 *.jpg` → ~2.5 MB total, max 1600px long edge. Originals remain in git history. Re-run this for any new drops.
+
+## Decorative Expand-Map (`#location`)
+
+Below the real Google-Map card in `#location` there is a **decorative animated map card** (`.expand-map-wrap` → `#expand-map`) — a **vanilla CSS/JS port** of a React/framer-motion component the user found (`expand-map.tsx`). It does **not** replace the real map; it's a purely decorative "Unser Ort" flourish (chosen: *add as extra element*).
+
+- **Behaviour:** starts collapsed (240×140), **tap/click or Enter/Space toggles** to expanded (360×280; 300×250 ≤440px), revealing an illustrated street scene — champagne-hairline roads (SVG `<line pathLength="1">` drawn via `stroke-dashoffset` `@keyframes roadDraw`), wine-tinted `.building` blocks (`buildingPop`), a **rose `.expand-map-pin`** (`pinDrop`), plus the venue name + coordinates (`47.0918° N, 7.5290° O`) and a pulsing "Live" dot.
+- **3D tilt:** on `mousemove` (desktop only — gated by `(hover:hover) and (pointer:fine)` + not reduced-motion), `initExpandMap()` in `js/main.js` sets `rotateX/rotateY` (±8°) on `.expand-map-card`; reset on `mouseleave`/collapse. **No JS library** — the React version's framer-motion springs are replaced by CSS transitions/keyframes.
+- **Theme mapping:** the original emerald palette → **rose `--rose` pin/accents + champagne roads**; `bg-background`/`muted` → `--blush-card`/`--blush-soft`. Grid pattern shows only when collapsed; fades out on expand.
+- **Reduced motion:** the global `@media (prefers-reduced-motion)` rule zeroes animation durations, so the `forwards` scene animations just **snap to their final visible state** — the expanded map still shows fully (no empty card). Tilt is skipped.
+- Styles live at the **end of `css/style.css`** (`/* Decorative animated expand-map */`); markup is inside `#location` after `.location-card`.
 
 ## RSVP → Google Sheets Integration
 
@@ -223,4 +233,4 @@ All animations and transitions are disabled via `@media (prefers-reduced-motion:
 
 **Resolved this session:** hero video display (z-index layering), scroll-cue removed, gallery photos in + compressed + masonry layout, video gated to seal click. Mobile animations bug from last session appears resolved (site rendered correctly on the user's iPhone, incl. gallery).
 
-**Reminder:** local CSS/JS in `index.html` are cache-busted with a `?v=YYYYMMDD` query — **bump it whenever CSS/JS changes** so phones don't serve stale files (mobile Chrome bit us before). Currently at `?v=20270116`.
+**Reminder:** local CSS/JS in `index.html` are cache-busted with a `?v=YYYYMMDD` query — **bump it whenever CSS/JS changes** so phones don't serve stale files (mobile Chrome bit us before). Currently at `?v=20270117`.
