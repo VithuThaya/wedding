@@ -12,7 +12,8 @@ Two lightweight motion libraries are loaded via CDN (still no build, page stays 
 
 Both degrade gracefully: if the CDN is unavailable or `prefers-reduced-motion` is set, the site falls back to CSS `IntersectionObserver` reveals + native scrolling.
 
-**Couple:** Vithu & Saru · **Reception:** 29. Mai 2027, ab 16:00 · **Venue:** Saalbau Kirchberg.
+**Couple:** Vithu & Saru · **Reception (this site + RSVP):** 29. Mai 2027, ab 16:00 · **Venue:** Saalbau Kirchberg.
+**Traditional Hindu wedding** (separate physical invitation, *not* this site's RSVP): 16. Mai 2027 · Kulturverein Murugan Bern, Gürbestrasse 9, 3125 Toffen — shown as an info-only `#ceremony` block.
 **Language:** All guest-facing content is in **German** (`<html lang="de">`), informal **„Du"** address throughout.
 
 ## How to Run
@@ -132,14 +133,15 @@ Style keywords: **Editorial luxury, dramatic dark wine, cinematic, elegant, cham
 Plus a **sticky nav** (`#site-nav`, outside `#main-content`) and a **lightbox** (`#lightbox`, after the footer) that overlay all sections.
 
 1. **Cover intro** — Light greige→off-white gradient, embossed tone-on-tone wax seal, fine hanging thread, Great Vibes line „Diese Einladung ist exklusiv für dich", "tippen zum Öffnen". On open: music starts + petals fall + hero video begins playing
-2. **Hero** — Full-bleed couple photo + optional video BG (starts on cover open, not autoplay), vignette, `Wir heiraten` eyebrow with hairlines, names in Great Vibes script, intro line, frosted countdown (Tage/Stunden/Minuten/**Sekunden**), italic date, location, `Jetzt zusagen` CTA (with shimmer)
+2. **Hero** — Full-bleed couple photo + optional video BG (starts on cover open, not autoplay), vignette, `Wir heiraten` eyebrow with hairlines, names in Great Vibes script, intro line, frosted countdown (Tage/Stunden/Minuten/**Sekunden**, counts to the **Reception** 29.05.2027), italic date, location, a `.hero-note` clarifying **„Diese Einladung gilt für die Reception (Afterparty)"**, `Jetzt zusagen` CTA (with shimmer)
 3. **Unsere Geschichte** — Nicholas Sparks quote, single-column vertical timeline with rose dots + blush date chips
-4. **Location & Anfahrt** — Venue photo in rounded white card, address, meta (SVG icons: date/time/dress code), `Route anzeigen` Maps link
-5. **Galerie** — CSS-columns masonry (`.gallery-item` tiles size to each photo's aspect ratio) with hover zoom → opens lightbox. Images from `images/gallery/`, auto-fallback to placeholders
-6. **Tagesablauf** — Rose pill time-chips (e.g. `13:30`) + vertical line, clean left-aligned layout
-7. **RSVP** — `Bist du dabei?` heading, attendance toggles (SVG icons: Ja / Nein) with colored icon chips, name/guest-stepper/dietary/song/message. On submit → full-screen **Farewell** closing page (`#farewell-screen`). On reload, if this browser already submitted, the form is replaced by an inline „Schon erledigt!" notice (double-submit guard via `localStorage`)
-8. **Farewell** (`#farewell-screen`, outside `#main-content`) — full-screen dark-wine closing takeover after a successful RSVP: gold heart ornament, names in Great Vibes, attendance-aware title/text (Zusage vs Absage), date & venue, „Zum Kalender hinzufügen" (.ics blob, only on Zusage), contact email for changes, falling petals (own `.farewell-petals` layer). Scroll-locked, stays until reload
-9. **Footer** — Names (Great Vibes), date, SVG ornament, "Mit Liebe gemacht"
+4. **Location & Anfahrt** (`#location`) — Reception venue (Saalbau Kirchberg) photo in rounded card, badge „Reception · Afterparty", address, meta (SVG icons: date/time/dress code), `Route anzeigen` Maps link
+5. **Traditionelle Hochzeit** (`#ceremony`) — dedicated compact block for the traditional Hindu ceremony (**16.05.2027**, Kulturverein Murugan Bern, Gürbestrasse 9, 3125 Toffen). Reuses `.location-card` styles as a photo-less compact variant (`.location-card--compact`); badge „Traditionelle Zeremonie", `Route anzeigen` Maps link, no time shown. Note: a **separate physical invitation** is sent by post; the digital RSVP is **only** for the Reception
+6. **Galerie** — CSS-columns masonry (`.gallery-item` tiles size to each photo's aspect ratio) with hover zoom → opens lightbox. Images from `images/gallery/`, auto-fallback to placeholders
+7. **Tagesablauf** — Rose pill time-chips (e.g. `13:30`) + vertical line, clean left-aligned layout
+8. **RSVP** — `Bist du dabei?` heading + a `.rsvp-note` clarifying the reply is **only for the Reception (29.05.2027)**, attendance toggles (SVG icons: Ja / Nein) with colored icon chips, name/guest-stepper/dietary/song/message. On submit → full-screen **Farewell** closing page (`#farewell-screen`). On reload, if this browser already submitted, the form is replaced by an inline „Schon erledigt!" notice (double-submit guard via `localStorage`)
+9. **Farewell** (`#farewell-screen`, outside `#main-content`) — full-screen dark-wine closing takeover after a successful RSVP: gold heart ornament, names in Great Vibes, attendance-aware title/text (Zusage vs Absage), date & venue, „Zum Kalender hinzufügen" (.ics blob, only on Zusage), contact email for changes, falling petals (own `.farewell-petals` layer). Scroll-locked, stays until reload
+10. **Footer** — Names (Great Vibes), date, SVG ornament, "Mit Liebe gemacht"
 
 All icons are inline **SVG** (no emojis) — meta, attendance toggles, success state, footer ornament, gallery zoom, lightbox & nav controls.
 
@@ -208,7 +210,7 @@ All animations and transitions are disabled via `@media (prefers-reduced-motion:
 
 ## Known Issues / Next Session
 
-> Updated 2026-07-02 (session 3, end). Live on **GitHub Pages → `vithuthaya.github.io`**. This session: swapped in a new hero video (~68 MB, uncompressed) — tested on real mobile, loads instantly + plays smoothly, so left uncompressed; added a `?v=` cache-bust on the video `<source>` too. CSS/JS cache-bust still `?v=20260704`; video cache-bust `?v=20260702`.
+> Updated 2026-07-02 (session 4, end). Live on **GitHub Pages → `vithuthaya.github.io`**. This session: (a) swapped in a new hero video (~68 MB, uncompressed) — mobile-tested, loads instantly, left uncompressed; (b) **separated Reception from the traditional Hindu wedding** — added `#ceremony` section (16.05.2027, Kulturverein Murugan Bern), a hero `.hero-note` + RSVP `.rsvp-note` making clear the site/RSVP is only for the Reception, relabelled the Reception location badge. CSS/JS cache-bust now `?v=20270116`; video cache-bust `?v=20260702`.
 
 1. **Background music polish (deferred by user).** `audio/wedding-music.mp3` is committed but **~10.8 MB** — slow on mobile. Compress to ~2–4 MB (128 kbps, maybe trim to 2–3 min). Optionally tweak fade-in volume (`0.55` in `startMusic()`).
 2. **Story content** (`#story`) — replace placeholder text + 4 timeline entries.
@@ -217,4 +219,4 @@ All animations and transitions are disabled via `@media (prefers-reduced-motion:
 
 **Resolved this session:** hero video display (z-index layering), scroll-cue removed, gallery photos in + compressed + masonry layout, video gated to seal click. Mobile animations bug from last session appears resolved (site rendered correctly on the user's iPhone, incl. gallery).
 
-**Reminder:** local CSS/JS in `index.html` are cache-busted with a `?v=YYYYMMDD` query — **bump it whenever CSS/JS changes** so phones don't serve stale files (mobile Chrome bit us before). Currently at `?v=20260704`.
+**Reminder:** local CSS/JS in `index.html` are cache-busted with a `?v=YYYYMMDD` query — **bump it whenever CSS/JS changes** so phones don't serve stale files (mobile Chrome bit us before). Currently at `?v=20270116`.

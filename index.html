@@ -18,8 +18,8 @@
       rel="stylesheet"
     />
 
-    <link rel="stylesheet" href="css/style.css?v=20260704" />
-    <link rel="stylesheet" href="css/animations.css?v=20260704" />
+    <link rel="stylesheet" href="css/style.css?v=20270116" />
+    <link rel="stylesheet" href="css/animations.css?v=20270116" />
   </head>
   <body>
     <!-- Petal layer — petals fall here on envelope open & RSVP success -->
@@ -174,7 +174,7 @@
           <div
             class="countdown"
             role="timer"
-            aria-label="Countdown bis zur Hochzeit"
+            aria-label="Countdown bis zur Reception"
           >
             <div class="countdown-unit">
               <span class="countdown-number" id="count-days">—</span>
@@ -196,6 +196,9 @@
 
           <p class="hero-date">29. Mai 2027</p>
           <p class="hero-location">Saalbau &middot; Kirchberg</p>
+          <p class="hero-note">
+            Diese Einladung gilt f&uuml;r die Reception (Afterparty).
+          </p>
 
           <a href="#rsvp" class="btn-primary hero-cta" data-nav-link
             >Jetzt zusagen</a
@@ -288,7 +291,7 @@
               />
             </div>
             <div class="location-body">
-              <span class="location-badge">Empfang &amp; Feier</span>
+              <span class="location-badge">Reception &middot; Afterparty</span>
               <h3>Saalbau Kirchberg</h3>
               <address>
                 Neuhofstrasse 33<br />
@@ -341,6 +344,66 @@
               </ul>
               <a
                 href="https://www.google.com/maps/search/?api=1&query=Neuhofstrasse+33,+3422+Kirchberg"
+                target="_blank"
+                rel="noopener"
+                class="btn-outline"
+              >
+                Route anzeigen
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  aria-hidden="true"
+                >
+                  <path d="M5 12h14M13 6l6 6-6 6" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TRADITIONAL CEREMONY (separate physical invitation) -->
+      <section id="ceremony" class="section">
+        <div class="section-inner">
+          <p class="section-eyebrow reveal">Vorab</p>
+          <h2 class="section-title reveal reveal-delay-1">
+            Traditionelle Hochzeit
+          </h2>
+          <p class="section-lead reveal reveal-delay-2">
+            Unsere traditionelle hinduistische Zeremonie findet an einem eigenen
+            Tag statt. Daf&uuml;r erh&auml;ltst du eine separate, pers&ouml;nliche
+            Einladungskarte per Post &mdash; diese Website und die R&uuml;ckmeldung
+            unten gelten nur f&uuml;r die Reception.
+          </p>
+
+          <div class="location-card location-card--compact reveal">
+            <div class="location-body">
+              <span class="location-badge">Traditionelle Zeremonie</span>
+              <h3>Kulturverein Murugan Bern</h3>
+              <address>
+                G&uuml;rbestrasse 9<br />
+                3125 Toffen
+              </address>
+              <ul class="location-meta">
+                <li>
+                  <svg
+                    class="meta-icon"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    aria-hidden="true"
+                  >
+                    <rect x="3" y="4.5" width="18" height="16" rx="2.5" />
+                    <path d="M3 9h18M8 2.5v4M16 2.5v4" />
+                  </svg>
+                  16. Mai 2027
+                </li>
+              </ul>
+              <a
+                href="https://www.google.com/maps/search/?api=1&query=Kulturverein+Murugan+Bern,+G%C3%BCrbestrasse+9,+3125+Toffen"
                 target="_blank"
                 rel="noopener"
                 class="btn-outline"
@@ -599,6 +662,11 @@
             Bitte gib uns bis <strong>Ende 2026</strong> Bescheid, ob du dabei
             sein kannst. Wir planen unseren großen Tag und möchten
             sicherstellen, dass für jeden gesorgt ist.
+          </p>
+          <p class="rsvp-note reveal reveal-delay-2">
+            Deine Rückmeldung bezieht sich nur auf die
+            <strong>Reception am 29. Mai 2027</strong> — für die traditionelle
+            Hochzeit gilt die separate physische Einladungskarte.
           </p>
 
           <div class="rsvp-card reveal">
@@ -893,7 +961,7 @@
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 
-    <script src="js/countdown.js?v=20260704"></script>
-    <script src="js/main.js?v=20260704"></script>
+    <script src="js/countdown.js?v=20270116"></script>
+    <script src="js/main.js?v=20270116"></script>
   </body>
 </html>
