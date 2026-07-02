@@ -273,12 +273,12 @@ a   { color: inherit; text-decoration: none; }
   z-index: 1;
 }
 
-/* Photo fallback sits behind the video; shows through when no video
-   file exists. Also carries the GSAP Ken Burns zoom. */
+/* Themed fallback behind the video; shows through before the video starts
+   or if no video file exists. Also carries the GSAP Ken Burns zoom. */
 .hero-bg {
   position: absolute;
   inset: 0;
-  background-image: url('../images/placeholder/couple.jpg');
+  background: radial-gradient(120% 120% at 50% 30%, #4a1610 0%, #2e0d08 70%);
   background-size: cover;
   background-position: center 30%;
   z-index: 0;
@@ -629,6 +629,12 @@ a   { color: inherit; text-decoration: none; }
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+.location-map {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
 }
 
 .location-body { padding: 2.25rem; }

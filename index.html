@@ -146,9 +146,8 @@
           loop
           playsinline
           preload="auto"
-          poster="images/placeholder/couple.jpg"
         >
-          <source src="video/wedding-highlight.mp4?v=20260702" type="video/mp4" />
+          <source src="video/wedding-highlight.mp4?v=20270116" type="video/mp4" />
         </video>
         <div class="hero-bg" role="img" aria-label="Foto des Paares"></div>
         <div class="hero-overlay"></div>
@@ -284,11 +283,14 @@
 
           <div class="location-card reveal">
             <div class="location-img-wrap">
-              <img
-                src="images/placeholder/venue.jpg"
-                alt="Außenansicht der Location"
+              <iframe
+                class="location-map"
+                src="https://www.google.com/maps?q=Saalbau+Kirchberg,+Neuhofstrasse+33,+3422+Kirchberg&output=embed"
+                title="Karte: Saalbau Kirchberg"
                 loading="lazy"
-              />
+                referrerpolicy="no-referrer-when-downgrade"
+                allowfullscreen
+              ></iframe>
             </div>
             <div class="location-body">
               <span class="location-badge">Reception &middot; Afterparty</span>
@@ -446,11 +448,6 @@
               src="images/gallery/1.jpg"
               alt="Momentaufnahme des Paares"
               loading="lazy"
-              onerror="
-                this.onerror = null;
-                this.src = 'images/placeholder/couple.jpg';
-                this.closest('figure').classList.add('is-placeholder');
-              "
             />
             <span class="gallery-zoom" aria-hidden="true">
               <svg
@@ -469,11 +466,6 @@
               src="images/gallery/2.jpg"
               alt="Gemeinsamer Moment"
               loading="lazy"
-              onerror="
-                this.onerror = null;
-                this.src = 'images/placeholder/venue.jpg';
-                this.closest('figure').classList.add('is-placeholder');
-              "
             />
             <span class="gallery-zoom" aria-hidden="true">
               <svg
@@ -492,11 +484,6 @@
               src="images/gallery/3.jpg"
               alt="Erinnerung an einen besonderen Tag"
               loading="lazy"
-              onerror="
-                this.onerror = null;
-                this.src = 'images/placeholder/couple.jpg';
-                this.closest('figure').classList.add('is-placeholder');
-              "
             />
             <span class="gallery-zoom" aria-hidden="true">
               <svg
@@ -515,11 +502,6 @@
               src="images/gallery/4.jpg"
               alt="Gemeinsame Reise"
               loading="lazy"
-              onerror="
-                this.onerror = null;
-                this.src = 'images/placeholder/venue.jpg';
-                this.closest('figure').classList.add('is-placeholder');
-              "
             />
             <span class="gallery-zoom" aria-hidden="true">
               <svg
@@ -538,11 +520,6 @@
               src="images/gallery/5.jpg"
               alt="Ein Lächeln zu zweit"
               loading="lazy"
-              onerror="
-                this.onerror = null;
-                this.src = 'images/placeholder/couple.jpg';
-                this.closest('figure').classList.add('is-placeholder');
-              "
             />
             <span class="gallery-zoom" aria-hidden="true">
               <svg
@@ -561,11 +538,6 @@
               src="images/gallery/6.jpg"
               alt="Ein Versprechen"
               loading="lazy"
-              onerror="
-                this.onerror = null;
-                this.src = 'images/placeholder/venue.jpg';
-                this.closest('figure').classList.add('is-placeholder');
-              "
             />
             <span class="gallery-zoom" aria-hidden="true">
               <svg
