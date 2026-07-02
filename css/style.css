@@ -1697,21 +1697,47 @@ footer {
   position: absolute;
   bottom: -1.5rem;
   left: 50%;
-  transform: translateX(-50%) translateY(4px);
+  transform: translateX(-50%) translateY(0);
   font-family: 'DM Sans', sans-serif;
   font-size: 0.66rem;
   color: var(--text-muted);
   white-space: nowrap;
-  opacity: 0;
+  opacity: 0.7;
   transition: opacity 0.2s ease, transform 0.2s ease;
   margin: 0;
 }
-.expand-map:hover .expand-map-hint {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
-}
+.expand-map:hover .expand-map-hint { opacity: 1; }
 .expand-map.expanded .expand-map-hint { opacity: 0; }
+
+/* ---- interactive location card: map replaces the embed,
+   click reveals the reception details below ---- */
+.location-map-stage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2.9rem 1.5rem 2.4rem;
+  background: linear-gradient(135deg, var(--blush-card) 0%, var(--blush) 100%);
+}
+
+.location-card--interactive .location-body {
+  max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition:
+    max-height 0.55s var(--ease),
+    padding 0.55s var(--ease),
+    opacity 0.4s ease;
+}
+.location-card--interactive.expanded .location-body {
+  max-height: 640px;
+  padding-top: 2.25rem;
+  padding-bottom: 2.25rem;
+  opacity: 1;
+}
 
 @media (max-width: 440px) {
   .expand-map.expanded .expand-map-card { width: 300px; height: 250px; }
+  .location-map-stage { padding: 2.25rem 1rem 2rem; }
 }

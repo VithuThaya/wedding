@@ -439,10 +439,14 @@ function initExpandMap() {
 
   const card = map.querySelector('.expand-map-card');
 
+  const locationCard = map.closest('.location-card');
+
   function toggle() {
     const expanded = map.classList.toggle('expanded');
     map.setAttribute('aria-expanded', expanded ? 'true' : 'false');
-    map.setAttribute('aria-label', expanded ? 'Karte einklappen' : 'Karte aufklappen');
+    map.setAttribute('aria-label', expanded ? 'Karte & Details einklappen' : 'Karte & Details aufklappen');
+    // Reveal / hide the reception details of the interactive location card together
+    if (locationCard) locationCard.classList.toggle('expanded', expanded);
     if (!expanded) resetTilt();
   }
 
