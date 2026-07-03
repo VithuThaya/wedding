@@ -48,12 +48,12 @@
 /* =============================================
    COVER
    ============================================= */
-/* Seal sways very gently on its thread to invite the tap */
-@keyframes sealSway {
-  0%, 100% { transform: rotate(-1.7deg); }
-  50%      { transform: rotate(1.7deg); }
+/* Seal breathes very gently to invite the tap (kept centred) */
+@keyframes sealBreath {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); }
+  50%      { transform: translate(-50%, -50%) scale(1.035); }
 }
-.cover-seal { transform-origin: top center; animation: sealSway 4.8s ease-in-out infinite; }
+.cover-seal { animation: sealBreath 4.5s ease-in-out infinite; }
 .cover.opening .cover-seal { animation: none; }
 
 @keyframes tapFloat {
@@ -68,7 +68,7 @@
   to   { transform: scale(1.08) translateY(-30px); opacity: 0; }
 }
 #envelope-screen.closing {
-  animation: screenFadeOut 0.9s var(--ease) 0.55s forwards;
+  animation: screenFadeOut 0.85s var(--ease) forwards;
   pointer-events: none;
 }
 

@@ -113,7 +113,7 @@ a   { color: inherit; text-decoration: none; }
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0 1.5rem;
+  padding: 0 1.2rem;
   cursor: pointer;
   outline: none;
   z-index: 1;
@@ -123,31 +123,106 @@ a   { color: inherit; text-decoration: none; }
 /* Whole opening screen reacts to a tap (handler is delegated here) */
 #envelope-screen { touch-action: manipulation; cursor: pointer; }
 
-/* Wax seal image (V & S) hanging from its own fine gold thread */
-.cover-seal {
+/* ---- Wax-sealed envelope ---------------------------------------
+   A centred creme paper envelope (near full-bleed on phones, capped
+   on desktop). Layers, back → front:
+     .env-interior  dark wine inside, revealed when the flap lifts
+     .env-front     lower pocket face (stays put)
+     .env-flap      top triangular flap — 3D-flips up on open
+     .cover-seal    wax seal at the flap tip — lifts away on open
+     .cover-script  „…exklusiv für dich" printed on the front
+   ---------------------------------------------------------------- */
+.envelope {
   position: relative;
-  width: min(232px, 62vw);
-  transform-origin: top center;
-  transition: transform 0.85s var(--ease), opacity 0.7s ease;
+  width: min(92vw, 440px);
+  height: min(82vh, 620px);
+  border-radius: 12px;
+  perspective: 1300px;
+  filter: drop-shadow(0 34px 60px rgba(70, 26, 20, 0.32));
 }
-.cover-seal-img {
-  width: 100%;
-  height: calc(min(232px, 62vw) * 1.16); /* crop the image's transparent lower half */
-  object-fit: cover;
-  object-position: center top;
-  display: block;
-  filter: drop-shadow(0 16px 28px rgba(60, 20, 15, 0.30));
+
+/* delicate tone-on-tone botanical print shared by flap + front */
+.env-front,
+.env-flap {
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150' viewBox='0 0 150 150'%3E%3Cg fill='none' stroke='%23A98B7C' stroke-width='1' opacity='0.32'%3E%3Cpath d='M-10 150 C 35 110 55 90 75 75 C 95 60 115 40 160 0'/%3E%3Cellipse cx='38' cy='112' rx='12' ry='5' transform='rotate(-45 38 112)'/%3E%3Cellipse cx='68' cy='82' rx='12' ry='5' transform='rotate(-45 68 82)'/%3E%3Cellipse cx='98' cy='52' rx='12' ry='5' transform='rotate(-45 98 52)'/%3E%3Cellipse cx='53' cy='97' rx='12' ry='5' transform='rotate(45 53 97)'/%3E%3Cellipse cx='83' cy='67' rx='12' ry='5' transform='rotate(45 83 67)'/%3E%3Ccircle cx='113' cy='37' r='3'/%3E%3Ccircle cx='23' cy='127' r='3'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 150px 150px;
+}
+
+.env-interior {
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  background: linear-gradient(165deg, #521C15 0%, #360F0A 55%, #260A06 100%);
+  box-shadow: inset 0 2px 26px rgba(0, 0, 0, 0.55);
+}
+
+.env-front {
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  background-color: #E7DDD3;
+  background-blend-mode: multiply;
+  /* covers everything EXCEPT the top-centre triangle the flap fills,
+     so the dark interior only shows once the flap lifts away */
+  clip-path: polygon(0 0, 0 100%, 100% 100%, 100% 0, 50% 52%);
+  box-shadow: inset 0 -30px 50px rgba(120, 80, 62, 0.12);
+  z-index: 2;
+}
+
+.env-flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 52%;
+  background-color: #EFE7DE;
+  background-blend-mode: multiply;
+  /* downward triangle — apex meets the seal at centre */
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  transform-origin: center top;
+  transform: rotateX(0deg);
+  transition: transform 0.95s cubic-bezier(0.62, 0.02, 0.30, 1);
+  box-shadow: 0 8px 14px rgba(80, 40, 30, 0.14);
+  z-index: 4;
+  backface-visibility: hidden;
+}
+/* soft shading toward the fold so the flap reads as a 3D crease */
+.env-flap::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  background: linear-gradient(180deg, rgba(255,255,255,0.35), transparent 34%),
+              linear-gradient(180deg, transparent 60%, rgba(110, 70, 52, 0.22));
+}
+
+.cover-seal {
+  position: absolute;
+  top: 52%;
+  left: 50%;
+  width: min(40%, 168px);
+  height: auto;
+  transform: translate(-50%, -50%);
+  transform-origin: center;
+  z-index: 5;
+  filter: drop-shadow(0 12px 20px rgba(50, 16, 12, 0.42));
+  pointer-events: none;
 }
 
 .cover-script {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 68%;
   font-family: 'Great Vibes', 'Cormorant Garamond', cursive;
-  font-size: clamp(1.7rem, 6.5vw, 2.5rem);
+  font-size: clamp(1.7rem, 6.2vw, 2.4rem);
   font-weight: 400;
-  line-height: 1.2;
+  line-height: 1.22;
   text-align: center;
-  color: #897A6F;
-  margin-top: 2.6rem;
-  letter-spacing: 0.01em;
+  color: #7C1F1B;
+  z-index: 3;
+  padding: 0 1rem;
 }
 
 .cover-hint {
@@ -155,17 +230,22 @@ a   { color: inherit; text-decoration: none; }
   font-size: 0.7rem;
   letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: #A2978C;
-  margin-top: 1.7rem;
+  color: #8A7A6E;
+  margin-top: 1.9rem;
 }
 
-/* Open state — seal lifts up along the thread & fades */
+/* Open state — flap flips up & back, seal lifts away, text fades */
+.cover.opening .env-flap {
+  transform: rotateX(-168deg);
+  box-shadow: 0 -8px 18px rgba(80, 40, 30, 0.18);
+}
 .cover.opening .cover-seal {
-  transform: translateY(-42vh) rotate(-7deg) scale(0.96);
+  transform: translate(-50%, -50%) translateY(-46vh) rotate(-8deg) scale(0.86);
   opacity: 0;
+  transition: transform 0.9s var(--ease), opacity 0.7s ease 0.15s;
 }
 .cover.opening .cover-script,
-.cover.opening .cover-hint { opacity: 0; transition: opacity 0.4s ease; }
+.cover.opening .cover-hint { opacity: 0; transition: opacity 0.45s ease; }
 
 /* =============================================
    MUSIC TOGGLE — floating

@@ -508,11 +508,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const heroVid = document.querySelector('.hero-video');
     if (heroVid) { heroVid.play().catch(() => {}); }
 
-    // Petals burst out as the flap lifts
-    setTimeout(spawnPetals, 600);
+    // Petals burst out as the flap lifts open
+    setTimeout(spawnPetals, 500);
 
-    // Screen exit
-    setTimeout(() => envelopeScreen.classList.add('closing'), 700);
+    // Screen exit — after the flap has opened & the seal lifted away
+    setTimeout(() => envelopeScreen.classList.add('closing'), 1150);
 
     // Reveal main content + unlock scrolling
     setTimeout(() => {
@@ -520,7 +520,7 @@ document.addEventListener('DOMContentLoaded', () => {
       mainContent.classList.add('visible');
       if (lenis) lenis.start();
       if (hasGSAP) ScrollTrigger.refresh();
-    }, 1700);
+    }, 2000);
   }
 
   // Open on tap/click. Listen on the whole screen via pointerup (covers
