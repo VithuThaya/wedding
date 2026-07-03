@@ -835,80 +835,101 @@ a   { color: inherit; text-decoration: none; }
 /* =============================================
    SCHEDULE
    ============================================= */
-.schedule-list {
-  max-width: 620px;
-  margin: 3.5rem auto 0;
-  text-align: left;
+/* Minimal centred timeline — thin gold line, small dots, entries alternate L/R */
+.schedule-timeline {
+  position: relative;
+  max-width: 860px;
+  margin: 3.75rem auto 0;
+}
+/* central vertical gold line */
+.schedule-timeline::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 6px;
+  bottom: 6px;
+  width: 1px;
+  transform: translateX(-50%);
+  background: linear-gradient(180deg, transparent, var(--gold) 6%, var(--gold-soft) 50%, var(--gold) 94%, transparent);
+  opacity: 0.5;
 }
 
 .schedule-item {
-  display: flex;
-  gap: 1rem;
-  align-items: stretch;
-  margin-bottom: 1.4rem;
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: clamp(1.75rem, 5vw, 3.5rem);
+  align-items: center;
+  margin-bottom: 2.9rem;
 }
 .schedule-item:last-child { margin-bottom: 0; }
 
-/* Gold-ring time circle */
-.schedule-time {
-  flex-shrink: 0;
-  align-self: center;
-  width: 74px;
-  height: 74px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 0.9rem;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  color: var(--gold-soft);
-  background: radial-gradient(circle at 50% 38%, rgba(74, 22, 16, 0.9), rgba(46, 13, 8, 0.92));
-  border: 2px solid var(--gold);
+/* small gold dot sitting on the centre line */
+.schedule-item::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 9px;
+  height: 9px;
   border-radius: 50%;
-  box-shadow: 0 0 18px rgba(201, 168, 106, 0.22), inset 0 0 12px rgba(201, 168, 106, 0.12);
+  transform: translate(-50%, -50%);
+  background: var(--gold-soft);
+  box-shadow: 0 0 0 4px var(--blush-bg), 0 0 10px rgba(201, 168, 106, 0.5);
+  z-index: 1;
 }
 
-.schedule-dot { display: none; }
+.schedule-when,
+.schedule-desc { min-width: 0; } /* let grid tracks shrink so text wraps, no overflow */
 
-/* Glass card */
-.schedule-info {
-  flex: 1;
-  background: linear-gradient(180deg, rgba(74, 22, 16, 0.5), rgba(61, 18, 12, 0.5));
-  border: 1px solid rgba(201, 168, 106, 0.25);
-  border-radius: 16px;
-  padding: 1rem 1.2rem;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(231, 210, 162, 0.08);
-}
-.schedule-head {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  margin-bottom: 0.35rem;
-}
-.schedule-icon {
-  flex-shrink: 0;
-  width: 26px;
-  height: 26px;
-  color: var(--gold);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-.schedule-icon svg { width: 100%; height: 100%; }
-
-.schedule-info h4 {
-  font-size: 1.3rem;
+.schedule-time {
+  display: block;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(1.6rem, 4vw, 2rem);
   font-weight: 600;
   color: var(--gold-soft);
-  margin: 0;
+  line-height: 1.1;
 }
-
-.schedule-info p {
-  font-size: 0.92rem;
+.schedule-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.15rem, 3vw, 1.4rem);
+  font-weight: 600;
+  color: var(--text);
+  margin-top: 0.12rem;
+}
+.schedule-desc {
+  font-size: 0.9rem;
   font-weight: 300;
   color: var(--text-soft);
   line-height: 1.65;
+}
+
+/* Odd entries (1,3,5): time+title on the LEFT (right-aligned), text on the RIGHT */
+.schedule-item:nth-child(odd) .schedule-when { grid-column: 1; text-align: right; }
+.schedule-item:nth-child(odd) .schedule-desc { grid-column: 2; text-align: left; }
+/* Even entries (2,4): time+title on the RIGHT, text on the LEFT */
+.schedule-item:nth-child(even) .schedule-when { grid-column: 2; text-align: left; }
+.schedule-item:nth-child(even) .schedule-desc { grid-column: 1; text-align: right; }
+
+/* Mobile: line on the left, single left-aligned column */
+@media (max-width: 640px) {
+  .schedule-timeline::before { left: 6px; }
+  .schedule-item {
+    grid-template-columns: 1fr;
+    column-gap: 0;
+    row-gap: 0.35rem;
+    padding-left: 1.9rem;
+    margin-bottom: 2.2rem;
+  }
+  .schedule-item::before { left: 6px; top: 0.55rem; }
+  .schedule-item:nth-child(odd) .schedule-when,
+  .schedule-item:nth-child(even) .schedule-when,
+  .schedule-item:nth-child(odd) .schedule-desc,
+  .schedule-item:nth-child(even) .schedule-desc {
+    grid-column: 1;
+    text-align: left;
+  }
 }
 
 /* =============================================
@@ -1234,11 +1255,12 @@ a   { color: inherit; text-decoration: none; }
    FOOTER
    ============================================= */
 footer {
-  background: linear-gradient(180deg, #3D120C 0%, #2E0D08 100%);
+  /* Seamless blend: top matches the section above (#rsvp = #3D120C), then
+     gently darkens downward — no hard divider line, smooth like the hero. */
+  background: linear-gradient(180deg, #3D120C 0%, #340F0A 40%, #290B07 100%);
   color: rgba(244, 231, 226, 0.62);
   text-align: center;
-  padding: 4.2rem 1.5rem 3.6rem;
-  border-top: 1px solid rgba(201, 168, 106, 0.18);
+  padding: 5rem 1.5rem 3.6rem;
 }
 .footer-names {
   font-family: 'Great Vibes', 'Cormorant Garamond', cursive;
@@ -1596,7 +1618,6 @@ footer {
   .attendance-btn { font-size: 0.82rem; padding: 0.8rem 0.3rem; gap: 0.3rem; }
   .location-body { padding: 1.75rem 1.4rem; }
   .rsvp-card { padding: 1.75rem 1.4rem; }
-  .schedule-item { gap: 1rem; }
   .gallery-grid { column-count: 1; }
 }
 
