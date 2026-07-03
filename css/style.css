@@ -1091,16 +1091,19 @@ footer {
 }
 .footer-names {
   font-family: 'Great Vibes', 'Cormorant Garamond', cursive;
-  font-size: clamp(2.7rem, 9vw, 3.7rem);
+  font-size: clamp(2.6rem, 8.5vw, 3.6rem);
   font-weight: 400;
   background: var(--gold-metallic);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: var(--gold-soft); /* fallback if background-clip unsupported */
-  margin-bottom: 0.4rem;
-  line-height: 1.15;
-  filter: drop-shadow(0 2px 10px rgba(201, 168, 106, 0.2));
+  /* Great Vibes has wide swashes/descenders — padding keeps the background-clip
+     box from cropping them; roomy line-height stops top/bottom clipping. */
+  padding: 0.12em 0.3em 0.22em;
+  margin-bottom: 0.3rem;
+  line-height: 1.5;
+  overflow: visible;
 }
 .footer-date { font-size: 0.82rem; letter-spacing: 0.14em; font-weight: 300; color: var(--gold-soft); opacity: 0.85; margin-bottom: 0.75rem; }
 .footer-ornament { color: var(--gold-soft); margin: 1.4rem 0; }
