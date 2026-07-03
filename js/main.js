@@ -21,7 +21,7 @@ const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyWroKr8O5B4-KSIdan
 // =============================================
 // MUSIC — file: audio/wedding-music.mp3
 // =============================================
-const MUSIC_SRC = 'audio/wedding-music.mp3';
+const MUSIC_SRC = 'audio/wedding-music.mp3?v=20270715';
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 let audio = null;
