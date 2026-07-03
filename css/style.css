@@ -5,6 +5,9 @@
 :root {
   --blush-bg:    #2E0D08;  /* main page background — deep wine-black */
   --blush-soft:  #3D120C;  /* alternating section tint */
+  /* rounded-panel radius (dark sections) — near-half-circle dome on phones
+     (40vw hits the 50%-width cap), strong-but-capped on desktop */
+  --panel-r: clamp(5rem, 40vw, 14rem);
   --blush-card:  #4A1610;  /* card / chip / input backgrounds */
   --blush:       #5E231C;  /* subtle borders on dark panels */
   --blush-line:  rgba(231, 210, 162, 0.16);  /* hairline dividers */
@@ -590,17 +593,24 @@ a   { color: inherit; text-decoration: none; }
 #story, #ceremony, #schedule {
   position: relative;
   z-index: 2;
-  /* very large radius so the top & bottom read as near-half-circle domes.
-     vw-based so phones (where the radius hits the 50%-width cap) get a full
-     dome; capped at 17rem so full-width desktop panels don't become absurd
-     600px-tall domes. margin = -radius so the deep corner overlaps into the
-     neighbour and reveals its lighter colour (never leave < radius or a dark
-     sliver shows); padding re-adds it so inner content keeps normal spacing. */
-  border-radius: clamp(6rem, 48vw, 17rem);
-  margin-block: calc(-1 * clamp(6rem, 48vw, 17rem));
-  padding-block: calc(clamp(5rem, 13vw, 9rem) + clamp(6rem, 48vw, 17rem));
+  /* Large radius so the top & bottom read as near-half-circle domes. vw-based
+     so phones (where it hits the 50%-width cap) get a near-full dome; capped so
+     full-width desktop panels aren't absurd 600px domes. margin = -radius so
+     the deep corner overlaps into the neighbour and reveals its lighter colour
+     (never leave < radius or a dark sliver shows); padding = base + radius so
+     the panel's own content clears its dome. */
+  border-radius: var(--panel-r);
+  margin-block: calc(-1 * var(--panel-r));
+  padding-block: calc(clamp(5rem, 13vw, 9rem) + var(--panel-r));
 }
-#location, #gallery, #rsvp { position: relative; z-index: 1; }
+/* The light sections are overlapped by the dark domes from both sides, so they
+   need the SAME padding — otherwise the domes bulge over their content (title,
+   map, photos). This keeps a clear flat light band in the middle for content. */
+#location, #gallery, #rsvp {
+  position: relative;
+  z-index: 1;
+  padding-block: calc(clamp(5rem, 13vw, 9rem) + var(--panel-r));
+}
 
 /* =============================================
    OUR STORY
