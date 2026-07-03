@@ -491,6 +491,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const envelopeWrap   = document.querySelector('.cover');
   const mainContent    = document.getElementById('main-content');
 
+  // Give the hero video a head start buffering while the guest reads the cover,
+  // so it's far more likely to be ready to play the instant the envelope opens.
+  const heroVidPreload = document.querySelector('.hero-video');
+  if (heroVidPreload) { try { heroVidPreload.load(); } catch (e) {} }
+
   setupMusicToggle();
   initSmoothScroll();
   initHeroMotion();
@@ -507,24 +512,58 @@ document.addEventListener('DOMContentLoaded', () => {
     // Music starts with the click (counts as user interaction → autoplay allowed)
     startMusic();
 
-    // Hero video starts with the click too (no autoplay on load)
+    // Hero video starts with the click too (no autoplay on load). We track when
+    // it is *actually rendering frames* ('playing') and reveal the site only once
+    // BOTH the flap/seal choreography has run AND the video is up — the guest
+    // never sees the hero before the video plays. play() runs here, so the clip
+    // also keeps buffering and starts on its own the moment enough data arrives.
+    // A hard MAX_WAIT_MS cap guarantees the page still reveals if the video is
+    // slow, blocked or missing, so the cover can never get stuck.
+    const CHOREO_MS = 2300;      // flap (2.2s) + seal (2.3s) finished ≈ here
+    const MAX_WAIT_MS = 10000;   // safety cap → always reveal eventually
     const heroVid = document.querySelector('.hero-video');
-    if (heroVid) { heroVid.play().catch(() => {}); }
+    let videoReady = !heroVid;   // no video element → nothing to wait for
+    let choreoDone = false;
+    let revealStarted = false;
+
+    function doReveal() {
+      if (revealStarted) return;
+      revealStarted = true;
+      envelopeScreen.classList.add('closing');    // 0.7s screen fade …
+      setTimeout(() => {                           // … then swap to the site
+        envelopeScreen.style.display = 'none';
+        mainContent.classList.add('visible');
+        if (lenis) lenis.start();
+        if (hasGSAP) ScrollTrigger.refresh();
+      }, 700);
+    }
+    // Reveal once the choreography is done AND the video is playing.
+    function tryReveal() { if (videoReady && choreoDone) doReveal(); }
+
+    if (heroVid) {
+      heroVid.addEventListener('playing', () => { videoReady = true; tryReveal(); }, { once: true });
+      // A failed/missing video (bad path, unsupported codec) → stop waiting for it
+      // so the reveal falls back to the choreography time instead of MAX_WAIT. A
+      // dead <source> fires 'error' on the <source> (not the <video>), so cover both.
+      heroVid.addEventListener('error', () => { videoReady = true; tryReveal(); }, { once: true });
+      const heroSource = heroVid.querySelector('source');
+      if (heroSource) heroSource.addEventListener('error', () => { videoReady = true; tryReveal(); }, { once: true });
+      const playPromise = heroVid.play();
+      if (playPromise && playPromise.then) {
+        playPromise
+          .then(() => { videoReady = true; tryReveal(); })
+          .catch(() => { videoReady = true; tryReveal(); }); // blocked/missing → don't hang
+      }
+    }
 
     // Petals drift out midway through the flap opening
     setTimeout(spawnPetals, 1100);
 
-    // Screen exit — the flap (2.2s) has opened & the seal (2.3s) lifted away;
-    // the 0.7s fade then finishes exactly at the reveal for a seamless ~3s open
-    setTimeout(() => envelopeScreen.classList.add('closing'), 2300);
-
-    // Reveal main content + unlock scrolling
-    setTimeout(() => {
-      envelopeScreen.style.display = 'none';
-      mainContent.classList.add('visible');
-      if (lenis) lenis.start();
-      if (hasGSAP) ScrollTrigger.refresh();
-    }, 3000);
+    // Choreography timer: in the common case the video is ready by now, so this
+    // reproduces the old seamless ~3s open exactly (2.3s hold → 0.7s fade).
+    setTimeout(() => { choreoDone = true; tryReveal(); }, CHOREO_MS);
+    // Safety cap: reveal no matter what once MAX_WAIT_MS has passed.
+    setTimeout(doReveal, MAX_WAIT_MS);
   }
 
   // Open on tap/click. Listen on the whole screen via pointerup (covers
