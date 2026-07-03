@@ -509,10 +509,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (heroVid) { heroVid.play().catch(() => {}); }
 
     // Petals burst out as the flap lifts open
-    setTimeout(spawnPetals, 500);
+    setTimeout(spawnPetals, 900);
 
-    // Screen exit — after the flap has opened & the seal lifted away
-    setTimeout(() => envelopeScreen.classList.add('closing'), 1150);
+    // Screen exit — after the flap has slowly opened & the seal lifted away
+    setTimeout(() => envelopeScreen.classList.add('closing'), 2200);
 
     // Reveal main content + unlock scrolling
     setTimeout(() => {
@@ -520,7 +520,7 @@ document.addEventListener('DOMContentLoaded', () => {
       mainContent.classList.add('visible');
       if (lenis) lenis.start();
       if (hasGSAP) ScrollTrigger.refresh();
-    }, 2000);
+    }, 3200);
   }
 
   // Open on tap/click. Listen on the whole screen via pointerup (covers
