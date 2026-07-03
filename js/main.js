@@ -128,8 +128,11 @@ function googleCalendarUrl() {
     action: 'TEMPLATE',
     text: 'Hochzeit von Vithu & Saru',
     dates: '20270529T140000Z/20270529T210000Z', // 16:00–23:00 Europe/Zurich
-    details: 'Wir feiern! Empfang ab 16:00 Uhr.',
-    location: 'Saalbau Kirchberg, Neuhofstrasse 33, 3422 Kirchberg',
+    details: 'Wir feiern im Saalbau Kirchberg! Empfang ab 16:00 Uhr.',
+    // Venue name kept out of `location` so the calendar geocodes the street
+    // address correctly (the "Saalbau Kirchberg, " prefix sent it to the wrong
+    // Industriestrasse); the venue name lives in `details` above instead.
+    location: 'Neuhofstrasse 33, 3422 Kirchberg',
   });
   return 'https://calendar.google.com/calendar/render?' + p.toString();
 }
@@ -138,7 +141,7 @@ function googleCalendarUrl() {
 function setupCalendarButton(btn) {
   if (!btn) return;
   if (isAppleDevice()) {
-    btn.href = 'wedding.ics';           // opens Apple Calendar directly
+    btn.href = 'wedding.ics?v=20270716'; // opens Apple Calendar directly (cache-bust on updates)
     btn.removeAttribute('target');
   } else {
     btn.href = googleCalendarUrl();     // opens Google Calendar app/site
