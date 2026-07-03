@@ -590,9 +590,15 @@ a   { color: inherit; text-decoration: none; }
 #story, #ceremony, #schedule {
   position: relative;
   z-index: 2;
-  border-radius: clamp(2.5rem, 7vw, 4rem);
-  margin-block: calc(-1 * clamp(2.5rem, 7vw, 4rem));
-  padding-block: calc(clamp(5rem, 13vw, 9rem) + clamp(2.5rem, 7vw, 4rem));
+  /* very large radius so the top & bottom read as near-half-circle domes.
+     vw-based so phones (where the radius hits the 50%-width cap) get a full
+     dome; capped at 17rem so full-width desktop panels don't become absurd
+     600px-tall domes. margin = -radius so the deep corner overlaps into the
+     neighbour and reveals its lighter colour (never leave < radius or a dark
+     sliver shows); padding re-adds it so inner content keeps normal spacing. */
+  border-radius: clamp(6rem, 48vw, 17rem);
+  margin-block: calc(-1 * clamp(6rem, 48vw, 17rem));
+  padding-block: calc(clamp(5rem, 13vw, 9rem) + clamp(6rem, 48vw, 17rem));
 }
 #location, #gallery, #rsvp { position: relative; z-index: 1; }
 
@@ -933,12 +939,8 @@ a   { color: inherit; text-decoration: none; }
 
 /* Mobile: line on the left, single left-aligned column */
 @media (max-width: 640px) {
-  /* smaller rounded-panel radius/overlap on phones so it isn't oversized */
-  #story, #ceremony, #schedule {
-    border-radius: clamp(1.5rem, 6vw, 2.25rem);
-    margin-block: calc(-1 * clamp(1.5rem, 6vw, 2.25rem));
-    padding-block: calc(clamp(5rem, 13vw, 9rem) + clamp(1.5rem, 6vw, 2.25rem));
-  }
+  /* rounded-panel radius is left to the main rule's vw scaling — on phones the
+     48vw radius hits the 50%-width cap and forms a near-half-circle dome. */
   .schedule-timeline::before { left: 6px; }
   .schedule-item {
     grid-template-columns: 1fr;
