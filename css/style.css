@@ -941,7 +941,15 @@ a   { color: inherit; text-decoration: none; }
 }
 
 .schedule-when,
-.schedule-desc { min-width: 0; } /* let grid tracks shrink so text wraps, no overflow */
+.schedule-desc {
+  min-width: 0; /* let grid tracks shrink so text wraps, no overflow */
+  /* Force both cells onto the same grid row. Without this, on even rows the DOM
+     order is .when(col 2) then .desc(col 1); the default sparse auto-placement
+     sees the cursor already past col 1 and bumps .desc to a NEW row → it sat
+     ~one row (~60px) lower than its time. Pinning both to row 1 keeps them
+     aligned on every row. (Reset to auto on mobile, where they stack.) */
+  grid-row: 1;
+}
 
 .schedule-time {
   display: block;
@@ -991,6 +999,7 @@ a   { color: inherit; text-decoration: none; }
   .schedule-item:nth-child(odd) .schedule-desc,
   .schedule-item:nth-child(even) .schedule-desc {
     grid-column: 1;
+    grid-row: auto; /* stack when + desc vertically (undo the desktop row pin) */
     text-align: left;
   }
 }
