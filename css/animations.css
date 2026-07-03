@@ -68,7 +68,7 @@
   to   { transform: scale(1.08) translateY(-30px); opacity: 0; }
 }
 #envelope-screen.closing {
-  animation: screenFadeOut 0.85s var(--ease) forwards;
+  animation: screenFadeOut 0.7s ease-in forwards;
   pointer-events: none;
 }
 
