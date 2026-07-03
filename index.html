@@ -18,8 +18,8 @@
       rel="stylesheet"
     />
 
-    <link rel="stylesheet" href="css/style.css?v=20270705" />
-    <link rel="stylesheet" href="css/animations.css?v=20270705" />
+    <link rel="stylesheet" href="css/style.css?v=20270706" />
+    <link rel="stylesheet" href="css/animations.css?v=20270706" />
   </head>
   <body>
     <!-- Petal layer — petals fall here on envelope open & RSVP success -->
@@ -35,55 +35,13 @@
         tabindex="0"
         aria-label="Einladung öffnen"
       >
-        <!-- Embossed, tone-on-tone wax seal with a fine hanging thread -->
+        <!-- Wax seal (V & S) hanging from a fine gold thread -->
         <div class="cover-seal">
-          <svg
-            class="seal-svg"
-            viewBox="0 0 120 120"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            aria-hidden="true"
-          >
-            <circle
-              cx="60"
-              cy="60"
-              r="55"
-              fill="none"
-              stroke="rgba(120,103,90,0.45)"
-              stroke-width="1.4"
-            />
-            <circle
-              cx="60"
-              cy="60"
-              r="49"
-              fill="none"
-              stroke="rgba(120,103,90,0.30)"
-              stroke-width="0.9"
-            />
-            <!-- Two interlocking hearts -->
-            <path
-              d="M51 75C51 75 33 63 33 51c0-6.8 5.3-10.5 10.2-10.5C46.5 40.5 50.3 42.5 51 45.8 51.8 42.5 55.5 40.5 58.8 40.5C63.8 40.5 69 44.3 69 51c0 12-18 24-18 24z"
-              fill="rgba(120,103,90,0.42)"
-            />
-            <path
-              d="M69 79.5C69 79.5 51 67.5 51 55.5c0-6.8 5.3-10.5 10.2-10.5C64.5 45 68.3 47 69 50.3 69.8 47 73.5 45 76.8 45C81.8 45 87 48.8 87 55.5c0 12-18 24-18 24z"
-              fill="none"
-              stroke="rgba(120,103,90,0.5)"
-              stroke-width="2"
-            />
-            <path id="tp" d="M60 14 A46 46 0 1 1 59.95 14" fill="none" />
-            <text
-              font-size="8.4"
-              fill="rgba(120,103,90,0.6)"
-              font-family="DM Sans, sans-serif"
-              letter-spacing="3.4"
-              font-weight="600"
-            >
-              <textPath href="#tp" startOffset="1%">
-                UNSERE EINLADUNG ✦ UNSERE EINLADUNG ✦
-              </textPath>
-            </text>
-          </svg>
+          <img
+            class="cover-seal-img"
+            src="images/siegel.png?v=20270706"
+            alt="Wachssiegel mit den Initialen V und S"
+          />
         </div>
 
         <p class="cover-script">Diese Einladung ist<br />exklusiv für dich</p>
@@ -147,7 +105,7 @@
           playsinline
           preload="auto"
         >
-          <source src="video/wedding-highlight.mp4?v=20270705" type="video/mp4" />
+          <source src="video/wedding-highlight.mp4?v=20270706" type="video/mp4" />
         </video>
         <div class="hero-bg" role="img" aria-label="Foto des Paares"></div>
         <div class="hero-overlay"></div>
@@ -226,44 +184,84 @@
           </p>
 
           <div class="story-timeline">
-            <!-- TODO: Replace with your real story -->
+            <!-- TODO: Replace with your real story. Foto-Kreise: <img> in .story-photo einfügen. -->
             <div class="story-entry reveal">
-              <span class="story-chip">Frühjahr 2021</span>
-              <h3>Erste Schritte</h3>
-              <p>
-                Alles begann in einem Tanzkurs — zwei Menschen, die als
-                Tanzpartner zusammenkamen und noch nicht wussten, dass sie viel
-                mehr füreinander bestimmt waren. Mit jedem gemeinsamen Schritt
-                auf der Tanzfläche wuchs etwas Besonderes.
-              </p>
+              <div class="story-photo">
+                <span class="story-photo-ph" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 8h3l1.5-2h7L17 8h3v11H4z" /><circle cx="12" cy="13" r="3.2" />
+                  </svg>
+                  <span>Foto hier</span>
+                </span>
+              </div>
+              <div class="story-text">
+                <span class="story-chip">Frühjahr 2021</span>
+                <h3>Erste Schritte</h3>
+                <p>
+                  Alles begann in einem Tanzkurs — zwei Menschen, die als
+                  Tanzpartner zusammenkamen und noch nicht wussten, dass sie viel
+                  mehr füreinander bestimmt waren. Mit jedem gemeinsamen Schritt
+                  auf der Tanzfläche wuchs etwas Besonderes.
+                </p>
+              </div>
             </div>
 
             <div class="story-entry reveal">
-              <span class="story-chip">Sommer 2021</span>
-              <h3>Das erste Date</h3>
-              <p>
-                Ein Spaziergang am Fluss, ein geteiltes Eis und ein Gespräch,
-                das bis Mitternacht dauerte. Am Ende des Abends war alles klar.
-              </p>
+              <div class="story-photo">
+                <span class="story-photo-ph" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 8h3l1.5-2h7L17 8h3v11H4z" /><circle cx="12" cy="13" r="3.2" />
+                  </svg>
+                  <span>Foto hier</span>
+                </span>
+              </div>
+              <div class="story-text">
+                <span class="story-chip">Sommer 2021</span>
+                <h3>Das erste Date</h3>
+                <p>
+                  Ein Spaziergang am Fluss, ein geteiltes Eis und ein Gespräch,
+                  das bis Mitternacht dauerte. Am Ende des Abends war alles klar.
+                </p>
+              </div>
             </div>
 
             <div class="story-entry reveal">
-              <span class="story-chip">Winter 2023</span>
-              <h3>Der Antrag</h3>
-              <p>
-                An einem ruhigen Abend bei Kerzenschein, mit einem Herzen voller
-                Liebe, wurde die Frage gestellt. Die Antwort stand nie infrage —
-                es war immer ein Ja.
-              </p>
+              <div class="story-photo">
+                <span class="story-photo-ph" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 8h3l1.5-2h7L17 8h3v11H4z" /><circle cx="12" cy="13" r="3.2" />
+                  </svg>
+                  <span>Foto hier</span>
+                </span>
+              </div>
+              <div class="story-text">
+                <span class="story-chip">Winter 2023</span>
+                <h3>Der Antrag</h3>
+                <p>
+                  An einem ruhigen Abend bei Kerzenschein, mit einem Herzen voller
+                  Liebe, wurde die Frage gestellt. Die Antwort stand nie infrage —
+                  es war immer ein Ja.
+                </p>
+              </div>
             </div>
 
             <div class="story-entry reveal">
-              <span class="story-chip">April 2027</span>
-              <h3>Unser großer Tag</h3>
-              <p>
-                Und nun laden wir dich ein — unsere Familie und liebsten Freunde
-                — dieses nächste Kapitel mit uns zu feiern.
-              </p>
+              <div class="story-photo">
+                <span class="story-photo-ph" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 8h3l1.5-2h7L17 8h3v11H4z" /><circle cx="12" cy="13" r="3.2" />
+                  </svg>
+                  <span>Foto hier</span>
+                </span>
+              </div>
+              <div class="story-text">
+                <span class="story-chip">April 2027</span>
+                <h3>Unser großer Tag</h3>
+                <p>
+                  Und nun laden wir dich ein — unsere Familie und liebsten Freunde
+                  — dieses nächste Kapitel mit uns zu feiern.
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -744,9 +742,15 @@
           <div class="schedule-list">
             <div class="schedule-item reveal">
               <span class="schedule-time">13:30</span>
-              <div class="schedule-dot"></div>
               <div class="schedule-info">
-                <h4>Einlass &amp; Empfang</h4>
+                <div class="schedule-head">
+                  <span class="schedule-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M4 4h16l-8 9z" /><path d="M12 13v6" /><path d="M8 19h8" />
+                    </svg>
+                  </span>
+                  <h4>Einlass &amp; Empfang</h4>
+                </div>
                 <p>
                   Willkommen! Die Türen öffnen sich und wir empfangen unsere
                   Gäste.
@@ -756,9 +760,15 @@
 
             <div class="schedule-item reveal">
               <span class="schedule-time">14:00</span>
-              <div class="schedule-dot"></div>
               <div class="schedule-info">
-                <h4>Trauungszeremonie</h4>
+                <div class="schedule-head">
+                  <span class="schedule-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="12" cy="15" r="5.5" /><path d="M9 8.5 12 4l3 4.5" />
+                    </svg>
+                  </span>
+                  <h4>Trauungszeremonie</h4>
+                </div>
                 <p>
                   Der feierliche Moment, auf den wir so lange gewartet haben —
                   wir geben uns das Jawort.
@@ -768,18 +778,30 @@
 
             <div class="schedule-item reveal">
               <span class="schedule-time">15:00</span>
-              <div class="schedule-dot"></div>
               <div class="schedule-info">
-                <h4>Sektempfang</h4>
+                <div class="schedule-head">
+                  <span class="schedule-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M9 3h6l-1 7a2 2 0 0 1-4 0z" /><path d="M12 12v7" /><path d="M9 21h6" />
+                    </svg>
+                  </span>
+                  <h4>Sektempfang</h4>
+                </div>
                 <p>Anstoßen, Lachen und die ersten Fotos als Ehepaar.</p>
               </div>
             </div>
 
             <div class="schedule-item reveal">
               <span class="schedule-time">17:00</span>
-              <div class="schedule-dot"></div>
               <div class="schedule-info">
-                <h4>Abendessen</h4>
+                <div class="schedule-head">
+                  <span class="schedule-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M6 2v7a2 2 0 0 1-2 2m2-2a2 2 0 0 0 2-2V2M6 11v11" /><path d="M17 2c-1.7 0-3 2.2-3 5s1.3 4 3 4v10" />
+                    </svg>
+                  </span>
+                  <h4>Abendessen</h4>
+                </div>
                 <p>
                   Ein festliches Dinner mit herzlichen Reden und guter
                   Gesellschaft.
@@ -789,9 +811,15 @@
 
             <div class="schedule-item reveal">
               <span class="schedule-time">20:00</span>
-              <div class="schedule-dot"></div>
               <div class="schedule-info">
-                <h4>Tanz &amp; Feier</h4>
+                <div class="schedule-head">
+                  <span class="schedule-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M9 18V5l10-2v13" /><circle cx="6.5" cy="18" r="2.5" /><circle cx="16.5" cy="16" r="2.5" />
+                    </svg>
+                  </span>
+                  <h4>Tanz &amp; Feier</h4>
+                </div>
                 <p>
                   Die Tanzfläche ist eröffnet — lasst uns bis in die frühen
                   Morgenstunden feiern!
@@ -819,6 +847,27 @@
           </p>
 
           <div class="rsvp-card reveal">
+            <!-- Decorative gold filigree corners -->
+            <svg class="rsvp-corner rsvp-corner--tl" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+              <g stroke="var(--gold)" stroke-width="1.1" fill="none">
+                <path d="M2 98 C2 54 20 24 62 7" />
+                <path d="M2 98 C30 90 44 70 50 43" />
+                <path d="M62 7 c-10 2 -14 10 -10 18 c9 -2 13 -10 10 -18z" fill="var(--gold)" stroke="none" />
+                <path d="M50 43 c-9 0 -14 6 -13 15 c9 0 14 -7 13 -15z" fill="var(--gold)" stroke="none" />
+                <circle cx="30" cy="25" r="1.6" fill="var(--gold)" stroke="none" />
+                <circle cx="15" cy="60" r="1.4" fill="var(--gold)" stroke="none" />
+              </g>
+            </svg>
+            <svg class="rsvp-corner rsvp-corner--br" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+              <g stroke="var(--gold)" stroke-width="1.1" fill="none">
+                <path d="M2 98 C2 54 20 24 62 7" />
+                <path d="M2 98 C30 90 44 70 50 43" />
+                <path d="M62 7 c-10 2 -14 10 -10 18 c9 -2 13 -10 10 -18z" fill="var(--gold)" stroke="none" />
+                <path d="M50 43 c-9 0 -14 6 -13 15 c9 0 14 -7 13 -15z" fill="var(--gold)" stroke="none" />
+                <circle cx="30" cy="25" r="1.6" fill="var(--gold)" stroke="none" />
+                <circle cx="15" cy="60" r="1.4" fill="var(--gold)" stroke="none" />
+              </g>
+            </svg>
             <!-- Shown on reload if this browser already submitted (prevents double entries) -->
             <div
               id="rsvp-success"
@@ -1110,7 +1159,7 @@
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 
-    <script src="js/countdown.js?v=20270705"></script>
-    <script src="js/main.js?v=20270705"></script>
+    <script src="js/countdown.js?v=20270706"></script>
+    <script src="js/main.js?v=20270706"></script>
   </body>
 </html>
