@@ -606,21 +606,30 @@ a   { color: inherit; text-decoration: none; }
   text-align: left;
 }
 
-/* central gold vine line */
+/* winding gold vine, faint in the background — behind photos & text */
 .story-timeline::before {
   content: '';
   position: absolute;
   left: 50%;
-  top: 8px;
-  bottom: 8px;
-  width: 2px;
+  top: 0;
+  bottom: 0;
+  width: 240px;
   transform: translateX(-50%);
-  background: linear-gradient(180deg, transparent, var(--gold) 8%, var(--gold-soft) 50%, var(--gold) 92%, transparent);
-  opacity: 0.55;
+  background-image: url('../images/story-vine.svg');
+  background-size: 240px 420px;
+  background-repeat: repeat-y;
+  background-position: center top;
+  opacity: 0.3;
+  pointer-events: none;
+  z-index: 0;
+  /* fade the vine out at the very top & bottom edges */
+  -webkit-mask-image: linear-gradient(180deg, transparent, #000 6%, #000 94%, transparent);
+          mask-image: linear-gradient(180deg, transparent, #000 6%, #000 94%, transparent);
 }
 
 .story-entry {
   position: relative;
+  z-index: 1;
   display: flex;
   align-items: center;
   gap: clamp(1.2rem, 4vw, 3rem);
@@ -698,6 +707,8 @@ a   { color: inherit; text-decoration: none; }
   .story-entry:nth-child(even) { flex-direction: column; text-align: center; gap: 1rem; }
   .story-entry:nth-child(even) .story-text,
   .story-text { text-align: center; }
+  /* fainter vine so the centred text stays perfectly readable */
+  .story-timeline::before { opacity: 0.16; width: 200px; background-size: 200px 350px; }
 }
 
 /* =============================================
@@ -1578,7 +1589,6 @@ footer {
 @media (max-width: 600px) {
   .countdown { gap: 0.5rem; flex-wrap: wrap; }
   .countdown-unit { min-width: 66px; padding: 0.8rem 0.6rem 0.6rem; }
-  .story-entry::before { left: calc(-2.25rem + 2px); }
   .lightbox-nav { width: 44px; height: 44px; }
 }
 
