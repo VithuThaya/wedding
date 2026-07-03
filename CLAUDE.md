@@ -155,11 +155,12 @@ Browser autoplay policy: music only starts after user interaction (the envelope 
 
 ## Video Integration
 
-File: `video/wedding-highlight.mp4` (committed, **~15.8 MB**, H.264, vertical 1090×1920 source → scaled to 1440px height, **compressed** with ffmpeg).
+File: `video/wedding-highlight.mp4` (committed, **~5.8 MB**, H.264, vertical 1090×1920 source → scaled to **1080px height** (614×1080), **compressed** with ffmpeg, CRF 27).
 
-- **⚠️ Deploy lesson (2026-07-02):** an uncompressed **68 MB** clip made the **GitHub Pages deploy time out** (`##[error]Timeout reached, aborting!` — the publish step hangs in `deployment_queued` past the ~10-min limit), so the site silently stayed on the previous commit and the video didn't load. **Keep the video small** (single-digit / low-double-digit MB). Recompress any new clip before committing:
-  `ffmpeg -i in.mp4 -vf "scale=-2:1440" -c:v libx264 -profile:v high -pix_fmt yuv420p -crf 24 -preset slow -an -movflags +faststart out.mp4` (strip audio `-an` — the hero video is silent; `+faststart` lets it start before fully downloaded).
-- The `<source>` in `index.html` carries a `?v=YYYYMMDD` cache-bust so phones don't serve a stale clip when the file is swapped (same name). Currently `?v=20270120`.
+- **⚠️ Mobile "video didn't show" (2026-07-03):** at **15.8 MB** the clip loaded too slowly over mobile data — `openEnvelope()` calls `heroVid.play()` immediately on the seal tap, so if the video isn't buffered yet nothing paints and (since `couple.jpg` poster was deleted) you just see the wine-gradient `.hero-bg` fallback. Fix: **recompressed to ~5.8 MB** (CRF 24→27, height 1440→1080). Note the live site is a **project page under `/wedding/`** (`https://vithuthaya.github.io/wedding/…`) — test asset URLs against that base, not the domain root, or you'll get a misleading 404.
+- **⚠️ Deploy lesson (2026-07-02):** an uncompressed **68 MB** clip made the **GitHub Pages deploy time out** (`##[error]Timeout reached, aborting!` — the publish step hangs in `deployment_queued` past the ~10-min limit), so the site silently stayed on the previous commit and the video didn't load. **Keep the video small** (single-digit MB is ideal). Recompress any new clip before committing:
+  `ffmpeg -i in.mp4 -vf "scale=-2:1080" -c:v libx264 -profile:v high -pix_fmt yuv420p -crf 27 -preset slow -an -movflags +faststart out.mp4` (strip audio `-an` — the hero video is silent; `+faststart` lets it start before fully downloaded).
+- The `<source>` in `index.html` carries a `?v=YYYYMMDD` cache-bust so phones don't serve a stale clip when the file is swapped (same name). Currently `?v=20270703`.
 
 - `<video muted loop playsinline preload="auto">` — **no `autoplay`**. It would otherwise start playing while the cover is still closed. Instead `openEnvelope()` in `main.js` calls `heroVid.play().catch(()=>{})` on the seal tap, so the video starts together with the music + petals.
 - **Layering (z-index):** `.hero-video` is `z-index: 1`, sitting **above** the photo fallback `.hero-bg` (`z-index: 0`) but **below** `.hero-overlay`/`.hero-vignette` (`z-index: 1`, later in DOM). The photo `div` comes *after* the video in the DOM, so without this the photo painted on top and the video was invisible. If the video is missing/blocked, its `poster="couple.jpg"` covers the same area, so the fallback still looks right.
@@ -243,4 +244,6 @@ All animations and transitions are disabled via `@media (prefers-reduced-motion:
 
 **Resolved this session:** hero video display (z-index layering), scroll-cue removed, gallery photos in + compressed + masonry layout, video gated to seal click. Mobile animations bug from last session appears resolved (site rendered correctly on the user's iPhone, incl. gallery).
 
-**Reminder:** local CSS/JS in `index.html` are cache-busted with a `?v=YYYYMMDD` query — **bump it whenever CSS/JS changes** so phones don't serve stale files (mobile Chrome bit us before). Currently at `?v=20270120`.
+**Reminder:** local CSS/JS in `index.html` are cache-busted with a `?v=YYYYMMDD` query — **bump it whenever CSS/JS changes** so phones don't serve stale files (mobile Chrome bit us before). Currently at `?v=20270703`.
+
+**Update 2026-07-03 (session 5):** hero video **wouldn't show on mobile** — at 15.8 MB it wasn't buffered by the time `openEnvelope()` fires `play()`, so only the wine-gradient fallback painted. **Recompressed 15.8 MB → 5.8 MB** (CRF 27, height 1440→1080, 614×1080), bumped all `?v=` to `20270703`. Verified the live file serves (200) at the real `/wedding/` base path. **Optional next step:** re-add a `poster` (extract a frame from the video as a small JPG) so a still image shows instantly even before the video buffers. Also added `.claude/settings.json` (`worktree.bgIsolation: none`) so background sessions edit in place per the push-to-main workflow.
