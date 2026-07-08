@@ -49,8 +49,10 @@ Wedding-1/
 │   ├── placeholder/
 │   │   ├── couple.jpg      # hero background — landscape, min 1920×1080px
 │   │   └── venue.jpg       # location card photo — landscape, ~1400×600px or larger
-│   └── gallery/            # gallery photos 1.jpg…6.jpg (optional — tiles fall back to placeholder/* if missing)
-│       └── README.txt      # drop-file hint + sizing guidance
+│   ├── gallery/            # gallery photos 1.jpg…6.jpg (optional — tiles fall back to placeholder/* if missing)
+│   │   └── README.txt      # drop-file hint + sizing guidance
+│   └── story/              # #story timeline photos (700×700 square crops for the round .story-photo circles)
+│                           #   erste_schritte.jpg · erste_date.jpg · antrag.jpg · grosser_tag.jpg
 ├── video/
 │   ├── wedding-highlight.mp4  # silent looping hero background video, max 60s, 1080p H.264
 │   └── README.txt          # drop-file hint
@@ -230,10 +232,9 @@ Notes:
 **Done** — couple names (Vithu & Saru), date (29. Mai 2027), reception time (ab 16:00), venue (Saalbau Kirchberg, Neuhofstrasse 33, 3422 Kirchberg), Maps link, RSVP deadline (Ende 2026), nav monogram (V & S), `WEDDING_DATE` in `countdown.js` (`2027-05-29T16:00:00`), and "Du" address throughout.
 
 **Still to replace:**
-- Story quote + 4 timeline entries (`#story`) — currently placeholder text (kept on purpose)
 - Schedule times + descriptions (`#schedule`) — still the generic program; note it references a "Trauungszeremonie" though the event is a reception, so revisit when finalizing
 
-**Done since:** Gallery photos (1–6) added & compressed; `WEB_APP_URL` set & verified live; hero video + music wired.
+**Done since:** Gallery photos (1–6) added & compressed; `WEB_APP_URL` set & verified live; hero video + music wired. **Story `#story` finalized (2026-07-08):** real texts (quote + 4 headings/entries, written by the couple) **and** all 4 timeline photos in — `images/story/{erste_schritte,erste_date,antrag,grosser_tag}.jpg`, each cropped square + 700×700 + compressed for the round `.story-photo` circle. Order: **Erste Schritte** (childhood-photo collage — a wide 2-up, so the round frame clips its outer edges; the only imperfect circle fit), **Das erste Date** (car selfie), **Der Antrag** (Gurten proposal), **Unser grosser Tag** (portrait). Crop recipe: `ffmpeg -i in -vf "crop=<sq>:<sq>:<x>:<y>,scale=700:700" -q:v 3 out.jpg`, x/y chosen to centre the couple's faces in the central disk. Filenames **must** be lowercase `.jpg` (case-sensitive Pages). ⚠️ macOS FS is case-insensitive → to rename `X.JPG`→`x.jpg` use temp+`mv`, never `cp x.jpg && rm X.JPG` (same inode → deletes the copy).
 
 ## `prefers-reduced-motion`
 
@@ -244,7 +245,7 @@ All animations and transitions are disabled via `@media (prefers-reduced-motion:
 > Updated 2026-07-02 (session 4, end). Live on **GitHub Pages → `vithuthaya.github.io`**. This session: (a) **separated Reception from the traditional Hindu wedding** — added `#ceremony` section (16.05.2027, Kulturverein Murugan Bern), hero `.hero-note` + RSVP `.rsvp-note` (site/RSVP is only for the Reception), relabelled Reception location badge; (b) a 68 MB hero video **broke the Pages deploy (timeout)** → **compressed to ~15.8 MB** with ffmpeg; (c) removed placeholder images — Location now an **embedded Google Map**, hero uses a themed gradient fallback (`couple.jpg`/`venue.jpg` deleted), gallery `onerror` fallbacks removed. CSS/JS + video cache-bust now `?v=20270116`.
 
 1. ~~**Background music polish.**~~ **DONE (session 11):** `audio/wedding-music.mp3` recompressed **320 kbps → 96 kbps stereo** with ffmpeg (`10.3 MB → 4.2 MB`, full 4:26 length kept so the loop stays seamless — not trimmed). `MUSIC_SRC` in `main.js` now carries `?v=20270715` so returning phones fetch the smaller file. Optional future tweak: fade-in volume (`0.55` in `startMusic()`) or go mono (~2.5 MB) if size still matters.
-2. **Story content** (`#story`) — replace placeholder text + 4 timeline entries.
+2. ~~**Story content** (`#story`).~~ **DONE (2026-07-08, session 13):** couple wrote the real texts (quote + 4 entries) and supplied all 4 timeline photos — see *Content Placeholders → Done since*. Only open story tweak: „Erste Schritte" is a 2-photo childhood collage that the round frame clips — offered the user single-photo/re-crop alternatives; left as-is pending their call.
 3. **Schedule** (`#schedule`) — generic program; still says "Trauungszeremonie" though the event is a **reception** — fix with real times.
 4. **Real-device test** the Farewell page + "Zum Kalender hinzufügen" on actual iOS & Android.
 
