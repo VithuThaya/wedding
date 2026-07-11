@@ -514,12 +514,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Hero video starts with the click too (no autoplay on load). We track when
     // it is *actually rendering frames* ('playing') and reveal the site only once
-    // BOTH the flap/seal choreography has run AND the video is up — the guest
+    // BOTH the cover fade/zoom choreography has run AND the video is up — the guest
     // never sees the hero before the video plays. play() runs here, so the clip
     // also keeps buffering and starts on its own the moment enough data arrives.
     // A hard MAX_WAIT_MS cap guarantees the page still reveals if the video is
     // slow, blocked or missing, so the cover can never get stuck.
-    const CHOREO_MS = 2300;      // flap (2.2s) + seal (2.3s) finished ≈ here
+    const CHOREO_MS = 900;       // content fade + lift finished ≈ here
     const MAX_WAIT_MS = 10000;   // safety cap → always reveal eventually
     const heroVid = document.querySelector('.hero-video');
     let videoReady = !heroVid;   // no video element → nothing to wait for
@@ -556,25 +556,24 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    // Petals drift out midway through the flap opening
-    setTimeout(spawnPetals, 1100);
+    // Petals drift out as the content fades away
+    setTimeout(spawnPetals, 250);
 
-    // Choreography timer: in the common case the video is ready by now, so this
-    // reproduces the old seamless ~3s open exactly (2.3s hold → 0.7s fade).
+    // Choreography timer: in the common case the video is ready by now, so the
+    // content fade/lift (~0.9s) runs, then the 0.7s screen fade reveals the site.
     setTimeout(() => { choreoDone = true; tryReveal(); }, CHOREO_MS);
     // Safety cap: reveal no matter what once MAX_WAIT_MS has passed.
     setTimeout(doReveal, MAX_WAIT_MS);
   }
 
-  // Open on tap/click. Listen on the whole screen via pointerup (covers
+  // Open on tap/click. The gold Enter button is the clear affordance (a native
+  // <button>, so keyboard Enter/Space work for free and bubble a click here), but
+  // a tap anywhere on the ivory screen opens too. Listen via pointerup (covers
   // mouse + touch + pen reliably; some mobile setups + smooth-scroll libs
   // swallow the synthetic `click`, so don't depend on it alone).
   if (envelopeScreen && envelopeWrap) {
     envelopeScreen.addEventListener('pointerup', openEnvelope);
     envelopeScreen.addEventListener('click', openEnvelope); // fallback for no-pointer browsers
-    envelopeWrap.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openEnvelope(); }
-    });
   }
 
   // =============================================

@@ -56,8 +56,8 @@
       rel="stylesheet"
     />
 
-    <link rel="stylesheet" href="css/style.css?v=20270717" />
-    <link rel="stylesheet" href="css/animations.css?v=20270717" />
+    <link rel="stylesheet" href="css/style.css?v=20270718" />
+    <link rel="stylesheet" href="css/animations.css?v=20270718" />
   </head>
   <body>
     <!-- Petal layer — petals fall here on envelope open & RSVP success -->
@@ -67,25 +67,22 @@
        ENVELOPE INTRO
        ========================================== -->
     <div id="envelope-screen">
-      <div
-        class="cover"
-        role="button"
-        tabindex="0"
-        aria-label="Einladung öffnen"
-      >
-        <!-- Wax-sealed envelope: flap opens on tap, seal lifts away -->
-        <div class="envelope">
-          <div class="env-interior"></div>
-          <div class="env-front"></div>
-          <div class="env-flap"></div>
+      <!-- Ivory invitation cover: wax seal + exclusivity line + Enter button -->
+      <div class="cover">
+        <div class="cover-inner">
           <img
             class="cover-seal"
             src="images/siegel.png?v=20270715"
             alt="Wachssiegel mit den Initialen V und S"
           />
-          <p class="cover-script">Diese Einladung ist<br />exklusiv für dich</p>
-          <span class="cover-hint">tippen zum Öffnen</span>
+          <p class="cover-script">
+            Diese<br />Einladung<br />ist exklusiv<br />
+            <span class="accent">für dich</span>
+          </p>
         </div>
+        <button type="button" class="cover-enter" aria-label="Einladung öffnen">
+          Enter
+        </button>
       </div>
     </div>
 
@@ -140,7 +137,7 @@
         <!-- Optional background video — falls vorhanden, sonst Foto -->
         <video class="hero-video" muted loop playsinline preload="auto">
           <source
-            src="video/wedding-highlight.mp4?v=20270708"
+            src="video/wedding-highlight.mp4?v=20270706"
             type="video/mp4"
           />
         </video>
@@ -223,7 +220,7 @@
               <div class="story-photo">
                 <img
                   src="images/story/erste_schritte.jpg?v=20270708"
-                  alt="Vithu & Saru als Kinder"
+                  alt="Vithu & Saru – die ersten Nachrichten"
                   loading="lazy"
                   width="700"
                   height="700"
@@ -243,13 +240,20 @@
 
             <div class="story-entry reveal">
               <div class="story-photo">
-                <img
-                  src="images/story/erste_date.jpg?v=20270708"
-                  alt="Vithu & Saru beim ersten Date"
-                  loading="lazy"
-                  width="700"
-                  height="700"
-                />
+                <span class="story-photo-ph" aria-hidden="true">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M4 8h3l1.5-2h7L17 8h3v11H4z" />
+                    <circle cx="12" cy="13" r="3.2" />
+                  </svg>
+                  <span>Foto hier</span>
+                </span>
               </div>
               <div class="story-text">
                 <span class="story-chip">Frühling 2024</span>
@@ -1438,7 +1442,7 @@
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 
-    <script src="js/countdown.js?v=20270717"></script>
-    <script src="js/main.js?v=20270717"></script>
+    <script src="js/countdown.js?v=20270718"></script>
+    <script src="js/main.js?v=20270718"></script>
   </body>
 </html>
