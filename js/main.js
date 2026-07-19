@@ -123,12 +123,18 @@ function isAppleDevice() {
   return /iPhone|iPad|iPod|Macintosh/.test(navigator.userAgent);
 }
 
+function calText(key) {
+  return (typeof window.weddingT === 'function') ? window.weddingT(key)
+    : (key === 'cal_title' ? 'Hochzeit von Vithu & Saru'
+                           : 'Wir feiern im Saalbau Kirchberg! Empfang ab 16:00 Uhr.');
+}
+
 function googleCalendarUrl() {
   const p = new URLSearchParams({
     action: 'TEMPLATE',
-    text: 'Hochzeit von Vithu & Saru',
+    text: calText('cal_title'),
     dates: '20270529T140000Z/20270529T210000Z', // 16:00–23:00 Europe/Zurich
-    details: 'Wir feiern im Saalbau Kirchberg! Empfang ab 16:00 Uhr.',
+    details: calText('cal_details'),
     // Venue name kept out of `location` so the calendar geocodes the street
     // address correctly (the "Saalbau Kirchberg, " prefix sent it to the wrong
     // Industriestrasse); the venue name lives in `details` above instead.
@@ -137,11 +143,27 @@ function googleCalendarUrl() {
   return 'https://calendar.google.com/calendar/render?' + p.toString();
 }
 
+// Build the Apple .ics as a Blob so its text follows the chosen language
+// (replaces the static wedding.ics link, which could only be one language).
+function icsBlobUrl() {
+  const ics = [
+    'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Vithu & Saru//Wedding//EN',
+    'CALSCALE:GREGORIAN', 'METHOD:PUBLISH', 'BEGIN:VEVENT',
+    'UID:vithu-saru-2027-05-29@wedding', 'DTSTAMP:20260101T000000Z',
+    'DTSTART:20270529T140000Z', 'DTEND:20270529T210000Z',
+    'SUMMARY:' + calText('cal_title'),
+    'LOCATION:Neuhofstrasse 33\\, 3422 Kirchberg',
+    'DESCRIPTION:' + calText('cal_details'),
+    'END:VEVENT', 'END:VCALENDAR',
+  ].join('\r\n');
+  return URL.createObjectURL(new Blob([ics], { type: 'text/calendar' }));
+}
+
 // Point the calendar button at the best target for this device
 function setupCalendarButton(btn) {
   if (!btn) return;
   if (isAppleDevice()) {
-    btn.href = 'wedding.ics?v=20270716'; // opens Apple Calendar directly (cache-bust on updates)
+    btn.href = icsBlobUrl();            // language-aware .ics, opens Apple Calendar
     btn.removeAttribute('target');
   } else {
     btn.href = googleCalendarUrl();     // opens Google Calendar app/site
@@ -150,25 +172,34 @@ function setupCalendarButton(btn) {
   }
 }
 
-function showFarewell(attendance) {
-  const screen = document.getElementById('farewell-screen');
-  if (!screen) return;
-  const isYes = attendance === 'Ja';
+let _farewellAttendance = null;
 
+// Render the farewell texts + calendar button for the current language.
+// Re-run on language change while the farewell is open.
+function renderFarewell() {
+  if (_farewellAttendance == null) return;
+  const isYes = _farewellAttendance === 'Ja';
   const titleEl = document.getElementById('farewell-title');
   const textEl  = document.getElementById('farewell-text');
   const calBtn  = document.getElementById('farewell-cal');
+  const t = (typeof window.weddingT === 'function') ? window.weddingT : (k) => k;
 
-  if (titleEl) titleEl.textContent = isYes ? 'Vielen Dank!' : 'Danke für deine Rückmeldung';
-  if (textEl) {
-    textEl.textContent = isYes
-      ? 'Wir können es kaum erwarten, mit dir zu feiern. Bis bald auf der Tanzfläche!'
-      : 'Schade, dass du nicht dabei sein kannst — danke, dass du uns Bescheid gegeben hast. Du wirst uns fehlen.';
-  }
+  if (titleEl) titleEl.textContent = t(isYes ? 'farewell_title_yes' : 'farewell_title_no');
+  if (textEl)  textEl.textContent  = t(isYes ? 'farewell_text_yes'  : 'farewell_text_no');
   if (calBtn) {
     if (isYes) { setupCalendarButton(calBtn); calBtn.hidden = false; }
     else { calBtn.hidden = true; }
   }
+}
+
+// Keep an open farewell in sync when the language toggles
+document.addEventListener('langchange', renderFarewell);
+
+function showFarewell(attendance) {
+  const screen = document.getElementById('farewell-screen');
+  if (!screen) return;
+  _farewellAttendance = attendance;
+  renderFarewell();
 
   screen.classList.add('open');
   screen.setAttribute('aria-hidden', 'false');
@@ -647,7 +678,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     submitBtn.disabled = true;
-    submitBtn.textContent = 'Wird gesendet…';
+    submitBtn.textContent = (typeof window.weddingT === 'function') ? window.weddingT('rsvp_sending') : 'Wird gesendet…';
 
     const payload = {
       attendance:  selectedAttendance, // "Ja" | "Nein"

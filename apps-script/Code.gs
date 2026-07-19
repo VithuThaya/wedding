@@ -19,24 +19,24 @@ function doPost(e) {
     var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
     var data = JSON.parse(e.postData.contents);
 
-    // Spaltenüberschriften erstellen, falls die Tabelle noch leer ist
+    // Create the header row if the sheet is still empty
     if (sheet.getLastRow() === 0) {
       sheet.appendRow([
-        "Zeitstempel",
+        "Timestamp",
         "Name",
-        "Status (Zusage/Absage)",
-        "Anzahl Gäste",
-        "Unverträglichkeiten / Allergien",
-        "Musikwunsch",
-        "Nachricht an das Brautpaar"
+        "Status (Confirmed/Declined)",
+        "Number of guests",
+        "Dietary / Vegetarian",
+        "Song request",
+        "Message to the couple"
       ]);
     }
 
-    // Zeile anhängen
+    // Append the row
     sheet.appendRow([
-      new Date().toLocaleString("de-DE"),
+      new Date().toLocaleString("en-GB"),
       data.name || "-",
-      data.attendance === "Ja" ? "Zusage" : "Absage",
+      data.attendance === "Ja" ? "Confirmed" : "Declined",
       data.guests || "-",
       data.dietary || "-",
       data.songRequest || "-",

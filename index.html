@@ -56,10 +56,16 @@
       rel="stylesheet"
     />
 
-    <link rel="stylesheet" href="css/style.css?v=20270718" />
+    <link rel="stylesheet" href="css/style.css?v=20270720" />
     <link rel="stylesheet" href="css/animations.css?v=20270718" />
   </head>
   <body>
+    <!-- Language toggle (DE/EN) -->
+    <div class="lang-switch" role="group" aria-label="Sprache / Language">
+      <button type="button" class="lang-btn" data-lang="de">DE</button>
+      <button type="button" class="lang-btn" data-lang="en">EN</button>
+    </div>
+
     <!-- Petal layer — petals fall here on envelope open & RSVP success -->
     <div id="petal-layer" aria-hidden="true"></div>
 
@@ -73,14 +79,14 @@
           <img
             class="cover-seal"
             src="images/siegel.png?v=20270715"
-            alt="Wachssiegel mit den Initialen V und S"
+            alt="Wachssiegel mit den Initialen V und S" data-i18n-alt="cover_seal_alt"
           />
-          <p class="cover-script">
+          <p class="cover-script" data-i18n-html="cover_script">
             Diese<br />Einladung<br />ist exklusiv<br />
             <span class="accent">für dich</span>
           </p>
         </div>
-        <button type="button" class="cover-enter" aria-label="Einladung öffnen">
+        <button type="button" class="cover-enter" aria-label="Einladung öffnen" data-i18n-aria-label="cover_open_aria">
           Enter
         </button>
       </div>
@@ -90,7 +96,7 @@
     <button
       id="music-toggle"
       class="music-toggle"
-      aria-label="Musik pausieren oder fortsetzen"
+      aria-label="Musik pausieren oder fortsetzen" data-i18n-aria-label="music_aria"
       hidden
     >
       <span class="music-bars" aria-hidden="true"
@@ -106,21 +112,21 @@
         <a
           href="#hero"
           class="nav-monogram"
-          aria-label="Zum Anfang"
+          aria-label="Zum Anfang" data-i18n-aria-label="nav_home_aria"
           data-nav-link
         >
           <span class="mono-letters">V&nbsp;&amp;&nbsp;S</span>
         </a>
         <nav class="nav-links">
-          <a href="#story" data-nav-link>Geschichte</a>
-          <a href="#location" data-nav-link>Location</a>
-          <a href="#gallery" data-nav-link>Galerie</a>
-          <a href="#schedule" data-nav-link>Ablauf</a>
+          <a href="#story" data-nav-link data-i18n="nav_story">Geschichte</a>
+          <a href="#location" data-nav-link data-i18n="nav_location">Location</a>
+          <a href="#gallery" data-nav-link data-i18n="nav_gallery">Galerie</a>
+          <a href="#schedule" data-nav-link data-i18n="nav_schedule">Ablauf</a>
         </nav>
-        <a href="#rsvp" class="nav-cta" data-nav-link>Zusagen</a>
+        <a href="#rsvp" class="nav-cta" data-nav-link data-i18n="nav_cta">Zusagen</a>
         <button
           class="nav-toggle"
-          aria-label="Menü öffnen"
+          aria-label="Menü öffnen" data-i18n-aria-label="nav_menu_aria"
           aria-expanded="false"
         >
           <span></span><span></span>
@@ -141,12 +147,12 @@
             type="video/mp4"
           />
         </video>
-        <div class="hero-bg" role="img" aria-label="Foto des Paares"></div>
+        <div class="hero-bg" role="img" aria-label="Foto des Paares" data-i18n-aria-label="hero_bg_alt"></div>
         <div class="hero-overlay"></div>
         <div class="hero-vignette" aria-hidden="true"></div>
 
         <div class="hero-content">
-          <p class="hero-eyebrow">
+          <p class="hero-eyebrow" data-i18n-html="hero_eyebrow">
             <span class="eyebrow-line"></span>Lasst uns gemeinsam Feiern<span
               class="eyebrow-line"
             ></span>
@@ -158,40 +164,40 @@
             <span class="hero-name">Saru</span>
           </h1>
 
-          <p class="hero-intro">
+          <p class="hero-intro" data-i18n="hero_intro">
             Wir freuen uns, diesen besonderen Tag mit dir zu feiern.
           </p>
 
           <div
             class="countdown"
             role="timer"
-            aria-label="Countdown bis zur Reception"
+            aria-label="Countdown bis zur Reception" data-i18n-aria-label="countdown_aria"
           >
             <div class="countdown-unit">
               <span class="countdown-number" id="count-days">—</span>
-              <span class="countdown-label">Tage</span>
+              <span class="countdown-label" data-i18n="cd_days">Tage</span>
             </div>
             <div class="countdown-unit">
               <span class="countdown-number" id="count-hours">—</span>
-              <span class="countdown-label">Stunden</span>
+              <span class="countdown-label" data-i18n="cd_hours">Stunden</span>
             </div>
             <div class="countdown-unit">
               <span class="countdown-number" id="count-minutes">—</span>
-              <span class="countdown-label">Minuten</span>
+              <span class="countdown-label" data-i18n="cd_minutes">Minuten</span>
             </div>
             <div class="countdown-unit">
               <span class="countdown-number" id="count-seconds">—</span>
-              <span class="countdown-label">Sekunden</span>
+              <span class="countdown-label" data-i18n="cd_seconds">Sekunden</span>
             </div>
           </div>
 
-          <p class="hero-date">29. Mai 2027</p>
-          <p class="hero-location">Saalbau &middot; Kirchberg</p>
-          <p class="hero-note">
+          <p class="hero-date" data-i18n="hero_date">29. Mai 2027</p>
+          <p class="hero-location" data-i18n="hero_location">Saalbau &middot; Kirchberg</p>
+          <p class="hero-note" data-i18n="hero_note">
             Diese Einladung gilt f&uuml;r die Reception (Afterparty).
           </p>
 
-          <a href="#rsvp" class="btn-primary hero-cta" data-nav-link
+          <a href="#rsvp" class="btn-primary hero-cta" data-nav-link data-i18n="hero_cta"
             >Jetzt zusagen</a
           >
         </div>
@@ -206,11 +212,11 @@
 
           <div class="divider-line reveal reveal-delay-1"></div>
 
-          <p class="section-eyebrow reveal">Unsere Geschichte</p>
-          <h2 class="section-title reveal reveal-delay-1">
+          <p class="section-eyebrow reveal" data-i18n="story_eyebrow">Unsere Geschichte</p>
+          <h2 class="section-title reveal reveal-delay-1" data-i18n="story_title">
             Zwei Seelen, ein Schicksal
           </h2>
-          <p class="section-lead reveal reveal-delay-2">
+          <p class="section-lead reveal reveal-delay-2" data-i18n="story_lead">
             Zwei Seelen, ein Schicksal — und eine Liebe, die daraus entstand.
           </p>
 
@@ -220,16 +226,16 @@
               <div class="story-photo">
                 <img
                   src="images/story/erste_schritte.jpg?v=20270708"
-                  alt="Vithu & Saru – die ersten Nachrichten"
+                  alt="Vithu & Saru – die ersten Nachrichten" data-i18n-alt="story1_alt"
                   loading="lazy"
                   width="700"
                   height="700"
                 />
               </div>
               <div class="story-text">
-                <span class="story-chip">Frühjahr 2024</span>
-                <h3>Erste Schritte</h3>
-                <p>
+                <span class="story-chip" data-i18n="story1_chip">Frühjahr 2024</span>
+                <h3 data-i18n="story1_h">Erste Schritte</h3>
+                <p data-i18n="story1_p">
                   Zwei Kolleginnen wurden zu stillen Wegbereiterinnen unseres
                   Schicksals. Sie stellten uns einander vor, und was mit ein
                   paar Nachrichten begann, entwickelte sich zu tagelangen
@@ -242,16 +248,16 @@
               <div class="story-photo">
                 <img
                   src="images/story/erste_date.jpg?v=20270708"
-                  alt="Vithu & Saru beim ersten Date"
+                  alt="Vithu & Saru beim ersten Date" data-i18n-alt="story2_alt"
                   loading="lazy"
                   width="700"
                   height="700"
                 />
               </div>
               <div class="story-text">
-                <span class="story-chip">Frühling 2024</span>
-                <h3>Das erste Date</h3>
-                <p>
+                <span class="story-chip" data-i18n="story2_chip">Frühling 2024</span>
+                <h3 data-i18n="story2_h">Das erste Date</h3>
+                <p data-i18n="story2_p">
                   Unser erstes Treffen fühlte sich an, als hätte das Leben
                   diesen Moment schon lange für uns vorgesehen. Obwohl sich
                   unsere Familien bereits kannten, waren unsere eigenen Wege
@@ -266,16 +272,16 @@
               <div class="story-photo">
                 <img
                   src="images/story/antrag.jpg?v=20270708"
-                  alt="Der Heiratsantrag auf dem Gurten"
+                  alt="Der Heiratsantrag auf dem Gurten" data-i18n-alt="story3_alt"
                   loading="lazy"
                   width="700"
                   height="700"
                 />
               </div>
               <div class="story-text">
-                <span class="story-chip">Frühjahr 2026</span>
-                <h3>Der Antrag</h3>
-                <p>
+                <span class="story-chip" data-i18n="story3_chip">Frühjahr 2026</span>
+                <h3 data-i18n="story3_h">Der Antrag</h3>
+                <p data-i18n="story3_p">
                   Der Heiratsantrag war eine wunderschöne Überraschung. Er
                   erzählte mir, wir würden auf den Gurten fahren, um dort essen
                   zu gehen. Unter dem Vorwand, Fotos machen zu wollen, führte er
@@ -293,16 +299,16 @@
               <div class="story-photo">
                 <img
                   src="images/story/grosser_tag.jpg?v=20270708"
-                  alt="Vithu & Saru feiern zusammen"
+                  alt="Vithu & Saru feiern zusammen" data-i18n-alt="story4_alt"
                   loading="lazy"
                   width="700"
                   height="700"
                 />
               </div>
               <div class="story-text">
-                <span class="story-chip">Mai 2027</span>
-                <h3>Unser grosser Tag</h3>
-                <p>
+                <span class="story-chip" data-i18n="story4_chip">Mai 2027</span>
+                <h3 data-i18n="story4_h">Unser grosser Tag</h3>
+                <p data-i18n="story4_p">
                   Und nun laden wir dich ein — unsere Familie und liebsten
                   Freunde — dieses nächste Kapitel mit uns zu feiern.
                 </p>
@@ -315,11 +321,11 @@
       <!-- LOCATION -->
       <section id="location" class="section">
         <div class="section-inner">
-          <p class="section-eyebrow reveal">Wo &amp; Wann</p>
-          <h2 class="section-title reveal reveal-delay-1">
+          <p class="section-eyebrow reveal" data-i18n="loc_eyebrow">Wo &amp; Wann</p>
+          <h2 class="section-title reveal reveal-delay-1" data-i18n="loc_title">
             Location &amp; Anfahrt
           </h2>
-          <p class="section-lead reveal reveal-delay-2">
+          <p class="section-lead reveal reveal-delay-2" data-i18n="loc_lead">
             Wir feiern unseren großen Tag an einem Ort, der so besonders ist wie
             dieser Anlass. Wir freuen uns darauf, ihn mit dir zu teilen!
           </p>
@@ -333,7 +339,7 @@
                 tabindex="0"
                 aria-expanded="false"
                 aria-controls="location-details"
-                aria-label="Karte &amp; Details aufklappen"
+                aria-label="Karte &amp; Details aufklappen" data-i18n-aria-label="map_aria"
               >
                 <div class="expand-map-card">
                   <div class="expand-map-gradient"></div>
@@ -506,13 +512,13 @@
                     </div>
                   </div>
                 </div>
-                <p class="expand-map-hint">
+                <p class="expand-map-hint" data-i18n="map_hint">
                   F&uuml;r Karte &amp; Details tippen
                 </p>
               </div>
             </div>
             <div class="location-body" id="location-details">
-              <span class="location-badge">Reception &middot; Afterparty</span>
+              <span class="location-badge" data-i18n="loc_badge">Reception &middot; Afterparty</span>
               <h3>Saalbau Kirchberg</h3>
               <address>
                 Neuhofstrasse 33<br />
@@ -531,7 +537,7 @@
                     <rect x="3" y="4.5" width="18" height="16" rx="2.5" />
                     <path d="M3 9h18M8 2.5v4M16 2.5v4" />
                   </svg>
-                  29. Mai 2027
+                  <span data-i18n="loc_meta_date">29. Mai 2027</span>
                 </li>
                 <li>
                   <svg
@@ -545,7 +551,7 @@
                     <circle cx="12" cy="12" r="9" />
                     <path d="M12 7v5l3.5 2" />
                   </svg>
-                  Reception ab 16:00 Uhr
+                  <span data-i18n="loc_meta_time">Reception ab 16:00 Uhr</span>
                 </li>
                 <li>
                   <svg
@@ -560,7 +566,7 @@
                       d="M12 3.5l2.2 4.4 4.8.7-3.5 3.4.8 4.8L12 18.9l-4.3 2.3.8-4.8-3.5-3.4 4.8-.7z"
                     />
                   </svg>
-                  Festlich / Traditionelle
+                  <span data-i18n="loc_meta_dress">Festlich / Traditionelle</span>
                 </li>
               </ul>
               <a
@@ -569,7 +575,7 @@
                 rel="noopener"
                 class="btn-outline"
               >
-                Route anzeigen
+                <span data-i18n="btn_route">Route anzeigen</span>
                 <svg
                   viewBox="0 0 24 24"
                   fill="none"
@@ -588,11 +594,11 @@
       <!-- TRADITIONAL CEREMONY (separate physical invitation) -->
       <section id="ceremony" class="section">
         <div class="section-inner">
-          <p class="section-eyebrow reveal">Vorab</p>
-          <h2 class="section-title reveal reveal-delay-1">
+          <p class="section-eyebrow reveal" data-i18n="cer_eyebrow">Vorab</p>
+          <h2 class="section-title reveal reveal-delay-1" data-i18n="cer_title">
             Traditionelle Hochzeit
           </h2>
-          <p class="section-lead reveal reveal-delay-2">
+          <p class="section-lead reveal reveal-delay-2" data-i18n="cer_lead">
             Unsere traditionelle hinduistische Zeremonie findet an einem eigenen
             Tag statt. Daf&uuml;r erh&auml;ltst du eine separate,
             pers&ouml;nliche Einladung &mdash; diese Website und die
@@ -610,7 +616,7 @@
                 tabindex="0"
                 aria-expanded="false"
                 aria-controls="ceremony-details"
-                aria-label="Karte &amp; Details aufklappen"
+                aria-label="Karte &amp; Details aufklappen" data-i18n-aria-label="map_aria"
               >
                 <div class="expand-map-card">
                   <div class="expand-map-gradient"></div>
@@ -783,13 +789,13 @@
                     </div>
                   </div>
                 </div>
-                <p class="expand-map-hint">
+                <p class="expand-map-hint" data-i18n="map_hint">
                   F&uuml;r Karte &amp; Details tippen
                 </p>
               </div>
             </div>
             <div class="location-body" id="ceremony-details">
-              <span class="location-badge">Traditionelle Zeremonie</span>
+              <span class="location-badge" data-i18n="cer_badge">Traditionelle Zeremonie</span>
               <h3>Kulturverein Murugan Bern</h3>
               <address>
                 G&uuml;rbestrasse 9<br />
@@ -808,7 +814,7 @@
                     <rect x="3" y="4.5" width="18" height="16" rx="2.5" />
                     <path d="M3 9h18M8 2.5v4M16 2.5v4" />
                   </svg>
-                  16. Mai 2027
+                  <span data-i18n="cer_meta_date">16. Mai 2027</span>
                 </li>
               </ul>
               <a
@@ -817,7 +823,7 @@
                 rel="noopener"
                 class="btn-outline"
               >
-                Route anzeigen
+                <span data-i18n="btn_route">Route anzeigen</span>
                 <svg
                   viewBox="0 0 24 24"
                   fill="none"
@@ -836,9 +842,9 @@
       <!-- GALLERY -->
       <section id="gallery" class="section">
         <div class="section-inner section-inner--wide">
-          <p class="section-eyebrow reveal">Augenblicke</p>
-          <h2 class="section-title reveal reveal-delay-1">Unsere Galerie</h2>
-          <p class="section-lead reveal reveal-delay-2">
+          <p class="section-eyebrow reveal" data-i18n="gal_eyebrow">Augenblicke</p>
+          <h2 class="section-title reveal reveal-delay-1" data-i18n="gal_title">Unsere Galerie</h2>
+          <p class="section-lead reveal reveal-delay-2" data-i18n="gal_lead">
             Ein paar Momente, die uns hierher gebracht haben — bald gefüllt mit
             deinen liebsten Erinnerungen an unseren Tag.
           </p>
@@ -855,7 +861,7 @@
             <figure class="gallery-item" data-index="0">
               <img
                 src="images/gallery/1.jpg"
-                alt="Momentaufnahme des Paares"
+                alt="Momentaufnahme des Paares" data-i18n-alt="gal1_alt"
                 loading="lazy"
               />
               <span class="gallery-zoom" aria-hidden="true">
@@ -873,7 +879,7 @@
             <figure class="gallery-item" data-index="1">
               <img
                 src="images/gallery/2.jpg"
-                alt="Gemeinsamer Moment"
+                alt="Gemeinsamer Moment" data-i18n-alt="gal2_alt"
                 loading="lazy"
               />
               <span class="gallery-zoom" aria-hidden="true">
@@ -891,7 +897,7 @@
             <figure class="gallery-item" data-index="2">
               <img
                 src="images/gallery/3.jpg"
-                alt="Erinnerung an einen besonderen Tag"
+                alt="Erinnerung an einen besonderen Tag" data-i18n-alt="gal3_alt"
                 loading="lazy"
               />
               <span class="gallery-zoom" aria-hidden="true">
@@ -909,7 +915,7 @@
             <figure class="gallery-item" data-index="3">
               <img
                 src="images/gallery/4.jpg?v=20270716"
-                alt="Gemeinsame Reise"
+                alt="Gemeinsame Reise" data-i18n-alt="gal4_alt"
                 loading="lazy"
               />
               <span class="gallery-zoom" aria-hidden="true">
@@ -927,7 +933,7 @@
             <figure class="gallery-item" data-index="4">
               <img
                 src="images/gallery/5.jpg"
-                alt="Ein Lächeln zu zweit"
+                alt="Ein Lächeln zu zweit" data-i18n-alt="gal5_alt"
                 loading="lazy"
               />
               <span class="gallery-zoom" aria-hidden="true">
@@ -945,7 +951,7 @@
             <figure class="gallery-item" data-index="5">
               <img
                 src="images/gallery/6.jpg"
-                alt="Ein Versprechen"
+                alt="Ein Versprechen" data-i18n-alt="gal6_alt"
                 loading="lazy"
               />
               <span class="gallery-zoom" aria-hidden="true">
@@ -991,9 +997,9 @@
       <!-- SCHEDULE -->
       <section id="schedule" class="section">
         <div class="section-inner">
-          <p class="section-eyebrow reveal">Der Tag</p>
-          <h2 class="section-title reveal reveal-delay-1">Tagesablauf</h2>
-          <p class="section-lead reveal reveal-delay-2">
+          <p class="section-eyebrow reveal" data-i18n="sch_eyebrow">Der Tag</p>
+          <h2 class="section-title reveal reveal-delay-1" data-i18n="sch_title">Tagesablauf</h2>
+          <p class="section-lead reveal reveal-delay-2" data-i18n="sch_lead">
             Was dich an unserem großen Tag erwartet.
           </p>
 
@@ -1002,9 +1008,9 @@
             <div class="schedule-item reveal">
               <div class="schedule-when">
                 <span class="schedule-time">13:30</span>
-                <h4 class="schedule-title">Einlass &amp; Empfang</h4>
+                <h4 class="schedule-title" data-i18n="sch1_h">Einlass &amp; Empfang</h4>
               </div>
-              <p class="schedule-desc">
+              <p class="schedule-desc" data-i18n="sch1_d">
                 Willkommen! Die Türen öffnen sich und wir empfangen unsere
                 Gäste.
               </p>
@@ -1013,9 +1019,9 @@
             <div class="schedule-item reveal">
               <div class="schedule-when">
                 <span class="schedule-time">14:00</span>
-                <h4 class="schedule-title">Trauungszeremonie</h4>
+                <h4 class="schedule-title" data-i18n="sch2_h">Trauungszeremonie</h4>
               </div>
-              <p class="schedule-desc">
+              <p class="schedule-desc" data-i18n="sch2_d">
                 Der feierliche Moment, auf den wir so lange gewartet haben — wir
                 geben uns das Jawort.
               </p>
@@ -1024,9 +1030,9 @@
             <div class="schedule-item reveal">
               <div class="schedule-when">
                 <span class="schedule-time">15:00</span>
-                <h4 class="schedule-title">Sektempfang</h4>
+                <h4 class="schedule-title" data-i18n="sch3_h">Sektempfang</h4>
               </div>
-              <p class="schedule-desc">
+              <p class="schedule-desc" data-i18n="sch3_d">
                 Anstoßen, Lachen und die ersten Fotos als Ehepaar.
               </p>
             </div>
@@ -1034,9 +1040,9 @@
             <div class="schedule-item reveal">
               <div class="schedule-when">
                 <span class="schedule-time">17:00</span>
-                <h4 class="schedule-title">Abendessen</h4>
+                <h4 class="schedule-title" data-i18n="sch4_h">Abendessen</h4>
               </div>
-              <p class="schedule-desc">
+              <p class="schedule-desc" data-i18n="sch4_d">
                 Ein festliches Dinner mit herzlichen Reden und guter
                 Gesellschaft.
               </p>
@@ -1045,9 +1051,9 @@
             <div class="schedule-item reveal">
               <div class="schedule-when">
                 <span class="schedule-time">20:00</span>
-                <h4 class="schedule-title">Tanz &amp; Feier</h4>
+                <h4 class="schedule-title" data-i18n="sch5_h">Tanz &amp; Feier</h4>
               </div>
-              <p class="schedule-desc">
+              <p class="schedule-desc" data-i18n="sch5_d">
                 Die Tanzfläche ist eröffnet — lasst uns bis in die frühen
                 Morgenstunden feiern!
               </p>
@@ -1059,17 +1065,17 @@
       <!-- RSVP -->
       <section id="rsvp" class="section">
         <div class="section-inner">
-          <p class="section-eyebrow reveal">Rückmeldung</p>
-          <h2 class="section-title reveal reveal-delay-1">Bist du dabei?</h2>
-          <p class="section-lead reveal reveal-delay-2">
+          <p class="section-eyebrow reveal" data-i18n="rsvp_eyebrow">Rückmeldung</p>
+          <h2 class="section-title reveal reveal-delay-1" data-i18n="rsvp_title">Bist du dabei?</h2>
+          <p class="section-lead reveal reveal-delay-2" data-i18n-html="rsvp_lead">
             Bitte gib uns bis <strong>Ende Januar 2027</strong> Bescheid, ob du
             dabei sein kannst. Wir planen unseren großen Tag und möchten
             sicherstellen, dass für jeden gesorgt ist.
           </p>
-          <p class="rsvp-note reveal reveal-delay-2">
+          <p class="rsvp-note reveal reveal-delay-2" data-i18n-html="rsvp_note">
             Deine Rückmeldung bezieht sich nur auf die
-            <strong>Reception am 29. Mai 2027</strong> — für die traditionelle
-            Hochzeit gilt die separate Einladungskarte.
+            <strong>Reception am Samstag, 29. Mai 2027</strong> — für die
+            traditionelle Hochzeit gilt die separate Einladungskarte.
           </p>
 
           <div class="rsvp-card reveal">
@@ -1161,8 +1167,8 @@
                   <path d="M5 12.5l4.5 4.5L19 7" />
                 </svg>
               </div>
-              <h3>Schon erledigt!</h3>
-              <p>
+              <h3 data-i18n="rsvp_done_h">Schon erledigt!</h3>
+              <p data-i18n-html="rsvp_done_p">
                 Du hast uns bereits Bescheid gegeben — vielen Dank.<br />
                 Möchtest du etwas ändern? Schreib uns an
                 <a href="mailto:vithursan.thayananthan@gmail.com"
@@ -1174,12 +1180,12 @@
             <div id="rsvp-form-wrap">
               <form id="rsvp-form" novalidate>
                 <div class="form-group">
-                  <label>Nimmst du teil? *</label>
+                  <label data-i18n="lbl_attend">Nimmst du teil? *</label>
                   <div
                     class="attendance-group"
                     id="attendance-group"
                     role="group"
-                    aria-label="Teilnahme auswählen"
+                    aria-label="Teilnahme auswählen" data-i18n-aria-label="attend_aria"
                   >
                     <button
                       type="button"
@@ -1196,7 +1202,7 @@
                           <path d="M5 12.5l4.5 4.5L19 7" />
                         </svg>
                       </span>
-                      Ja
+                      <span data-i18n="btn_yes">Ja</span>
                     </button>
                     <button
                       type="button"
@@ -1213,30 +1219,30 @@
                           <path d="M6 6l12 12M18 6L6 18" />
                         </svg>
                       </span>
-                      Nein
+                      <span data-i18n="btn_no">Nein</span>
                     </button>
                   </div>
                 </div>
 
                 <div class="form-group">
-                  <label for="fullname">Name *</label>
+                  <label for="fullname" data-i18n="lbl_name">Name *</label>
                   <input
                     type="text"
                     id="fullname"
                     name="fullname"
-                    placeholder="Dein vollständiger Name"
+                    placeholder="Dein vollständiger Name" data-i18n-placeholder="ph_name"
                     required
                     autocomplete="name"
                   />
                 </div>
 
                 <div class="form-group">
-                  <label for="guest-count">Anzahl Gäste (inkl. dir)</label>
+                  <label for="guest-count" data-i18n="lbl_guests">Anzahl Gäste (inkl. dir)</label>
                   <div class="stepper">
                     <button
                       type="button"
                       id="guest-minus"
-                      aria-label="Weniger Gäste"
+                      aria-label="Weniger Gäste" data-i18n-aria-label="guests_minus_aria"
                     >
                       −
                     </button>
@@ -1248,12 +1254,12 @@
                       min="1"
                       max="10"
                       readonly
-                      aria-label="Anzahl Gäste"
+                      aria-label="Anzahl Gäste" data-i18n-aria-label="guests_input_aria"
                     />
                     <button
                       type="button"
                       id="guest-plus"
-                      aria-label="Mehr Gäste"
+                      aria-label="Mehr Gäste" data-i18n-aria-label="guests_plus_aria"
                     >
                       +
                     </button>
@@ -1261,17 +1267,17 @@
                 </div>
 
                 <div class="form-group">
-                  <label>Isst du vegetarisch?</label>
+                  <label data-i18n="lbl_veg">Isst du vegetarisch?</label>
                   <div
                     class="attendance-group"
                     id="veg-group"
                     role="group"
-                    aria-label="Vegetarisch auswählen"
+                    aria-label="Vegetarisch auswählen" data-i18n-aria-label="veg_aria"
                   >
                     <button
                       type="button"
                       class="attendance-btn"
-                      data-value="Vegetarisch"
+                      data-value="Vegetarian"
                     >
                       <span class="att-icon att-yes" aria-hidden="true">
                         <svg
@@ -1283,12 +1289,12 @@
                           <path d="M5 12.5l4.5 4.5L19 7" />
                         </svg>
                       </span>
-                      Ja
+                      <span data-i18n="btn_yes">Ja</span>
                     </button>
                     <button
                       type="button"
                       class="attendance-btn"
-                      data-value="Nicht vegetarisch"
+                      data-value="Not vegetarian"
                     >
                       <span class="att-icon att-no" aria-hidden="true">
                         <svg
@@ -1300,31 +1306,31 @@
                           <path d="M6 6l12 12M18 6L6 18" />
                         </svg>
                       </span>
-                      Nein
+                      <span data-i18n="btn_no">Nein</span>
                     </button>
                   </div>
                 </div>
 
                 <div class="form-group">
-                  <label for="song">Musikwunsch</label>
+                  <label for="song" data-i18n="lbl_song">Musikwunsch</label>
                   <input
                     type="text"
                     id="song"
                     name="song"
-                    placeholder="Ein Song, der dich auf die Tanzfläche bringt!"
+                    placeholder="Ein Song, der dich auf die Tanzfläche bringt!" data-i18n-placeholder="ph_song"
                   />
                 </div>
 
                 <div class="form-group">
-                  <label for="message">Nachricht an das Brautpaar</label>
+                  <label for="message" data-i18n="lbl_message">Nachricht an das Brautpaar</label>
                   <textarea
                     id="message"
                     name="message"
-                    placeholder="Teile deine Wünsche, eine Erinnerung oder ein paar liebe Worte…"
+                    placeholder="Teile deine Wünsche, eine Erinnerung oder ein paar liebe Worte…" data-i18n-placeholder="ph_message"
                   ></textarea>
                 </div>
 
-                <button type="submit" id="rsvp-submit" class="btn-submit">
+                <button type="submit" id="rsvp-submit" class="btn-submit" data-i18n="btn_submit">
                   Rückmeldung senden
                 </button>
               </form>
@@ -1336,7 +1342,7 @@
       <!-- FOOTER -->
       <footer>
         <p class="footer-names">Vithu &amp; Saru</p>
-        <p class="footer-date">29. Mai 2027 &middot; Kirchberg</p>
+        <p class="footer-date" data-i18n="footer_date">29. Mai 2027 &middot; Kirchberg</p>
         <p class="footer-ornament" aria-hidden="true">
           <svg
             viewBox="0 0 120 16"
@@ -1354,7 +1360,7 @@
             <circle cx="72" cy="8" r="1.2" fill="currentColor" stroke="none" />
           </svg>
         </p>
-        <p class="footer-credit">Mit Liebe gemacht</p>
+        <p class="footer-credit" data-i18n="footer_credit">Mit Liebe gemacht</p>
       </footer>
     </div>
     <!-- /main-content -->
@@ -1368,7 +1374,7 @@
       aria-hidden="true"
       role="dialog"
       aria-modal="true"
-      aria-label="Danke für deine Rückmeldung"
+      aria-label="Danke für deine Rückmeldung" data-i18n-aria-label="farewell_aria"
     >
       <div class="farewell-petals" aria-hidden="true"></div>
       <div class="farewell-inner">
@@ -1395,7 +1401,7 @@
 
         <div class="farewell-divider" aria-hidden="true"></div>
 
-        <p class="farewell-meta">29. Mai 2027 &middot; Saalbau Kirchberg</p>
+        <p class="farewell-meta" data-i18n="farewell_meta">29. Mai 2027 &middot; Saalbau Kirchberg</p>
 
         <a id="farewell-cal" class="farewell-cal" href="#" hidden>
           <svg
@@ -1408,10 +1414,10 @@
             <rect x="3" y="4.5" width="18" height="16" rx="2.5" />
             <path d="M3 9h18M8 2.5v4M16 2.5v4M12 12.5v5M9.5 15h5" />
           </svg>
-          Zum Kalender hinzufügen
+          <span data-i18n="farewell_cal">Zum Kalender hinzufügen</span>
         </a>
 
-        <p class="farewell-contact">
+        <p class="farewell-contact" data-i18n-html="farewell_contact">
           Möchtest du etwas ändern? Schreib uns an<br />
           <a href="mailto:vithursan.thayananthan@gmail.com"
             >vithursan.thayananthan@gmail.com</a
@@ -1429,9 +1435,9 @@
       aria-hidden="true"
       role="dialog"
       aria-modal="true"
-      aria-label="Galerie-Ansicht"
+      aria-label="Galerie-Ansicht" data-i18n-aria-label="lightbox_aria"
     >
-      <button class="lightbox-close" aria-label="Schließen">
+      <button class="lightbox-close" aria-label="Schließen" data-i18n-aria-label="lightbox_close">
         <svg
           viewBox="0 0 24 24"
           fill="none"
@@ -1441,7 +1447,7 @@
           <path d="M6 6l12 12M18 6L6 18" />
         </svg>
       </button>
-      <button class="lightbox-nav lightbox-prev" aria-label="Vorheriges Foto">
+      <button class="lightbox-nav lightbox-prev" aria-label="Vorheriges Foto" data-i18n-aria-label="lightbox_prev">
         <svg
           viewBox="0 0 24 24"
           fill="none"
@@ -1454,7 +1460,7 @@
       <figure class="lightbox-stage">
         <img id="lightbox-img" src="" alt="" />
       </figure>
-      <button class="lightbox-nav lightbox-next" aria-label="Nächstes Foto">
+      <button class="lightbox-nav lightbox-next" aria-label="Nächstes Foto" data-i18n-aria-label="lightbox_next">
         <svg
           viewBox="0 0 24 24"
           fill="none"
@@ -1471,7 +1477,8 @@
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 
+    <script src="js/i18n.js?v=20270720"></script>
     <script src="js/countdown.js?v=20270718"></script>
-    <script src="js/main.js?v=20270719"></script>
+    <script src="js/main.js?v=20270720"></script>
   </body>
 </html>

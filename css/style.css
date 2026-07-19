@@ -1984,3 +1984,47 @@ footer {
   .expand-map.expanded .expand-map-card { width: 300px; height: 250px; }
   .location-map-stage { padding: 2.25rem 1rem 2rem; }
 }
+
+/* Language switch (DE/EN) — floats bottom-left, mirrors the music button.
+   z-index sits above the cover (1000) but below farewell (1050) & lightbox (1100). */
+.lang-switch {
+  position: fixed;
+  bottom: 18px;
+  left: 18px;
+  z-index: 1001;
+  display: inline-flex;
+  gap: 2px;
+  padding: 3px;
+  border-radius: 999px;
+  background: rgba(46, 13, 8, 0.55);
+  -webkit-backdrop-filter: blur(9px);
+  backdrop-filter: blur(9px);
+  border: 1px solid var(--gold-light);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.28);
+}
+.lang-btn {
+  appearance: none;
+  -webkit-appearance: none;
+  border: 0;
+  background: transparent;
+  color: var(--gold-soft);
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  padding: 5px 11px;
+  border-radius: 999px;
+  cursor: pointer;
+  line-height: 1;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+.lang-btn:hover { color: var(--gold-light); }
+.lang-btn.active {
+  background: var(--gold-metallic, var(--gold));
+  color: #2e0d08;
+}
+.lang-btn:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+@media (max-width: 640px) {
+  .lang-switch { bottom: 14px; left: 14px; }
+  .lang-btn { font-size: 0.68rem; padding: 5px 9px; }
+}
