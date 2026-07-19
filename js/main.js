@@ -115,12 +115,13 @@ function spawnPetals(layer) {
 // =============================================
 const RSVP_FLAG = 'vs_rsvp_done';
 
-// Apple devices (incl. iPadOS, which reports as "Macintosh") open a real
-// .ics directly in Apple Calendar. Everyone else gets a Google Calendar
-// link that opens the calendar app/site with the event pre-filled — no
-// file download on either path.
-function isAppleDevice() {
-  return /iPhone|iPad|iPod|Macintosh/.test(navigator.userAgent);
+// Only Safari opens a raw .ics inline (straight into Apple Calendar). Chrome /
+// Firefox / Edge would just *download* the file, so they get the Google Calendar
+// link instead, which opens the event directly in the browser — no download.
+function isSafari() {
+  const ua = navigator.userAgent;
+  return /Safari/.test(ua) &&
+    !/Chrome|CriOS|Chromium|Edg|EdgiOS|OPR|OPiOS|FxiOS|Android/.test(ua);
 }
 
 function calText(key) {
@@ -162,8 +163,8 @@ function icsBlobUrl() {
 // Point the calendar button at the best target for this device
 function setupCalendarButton(btn) {
   if (!btn) return;
-  if (isAppleDevice()) {
-    btn.href = icsBlobUrl();            // language-aware .ics, opens Apple Calendar
+  if (isSafari()) {
+    btn.href = icsBlobUrl();            // Safari opens the .ics straight in Apple Calendar
     btn.removeAttribute('target');
   } else {
     btn.href = googleCalendarUrl();     // opens Google Calendar app/site
