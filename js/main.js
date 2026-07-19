@@ -579,14 +579,17 @@ document.addEventListener('DOMContentLoaded', () => {
   // =============================================
   // ATTENDANCE TOGGLE
   // =============================================
-  const attendanceBtns = document.querySelectorAll('.attendance-btn');
-  let selectedAttendance = '';
-
-  attendanceBtns.forEach((btn) => {
-    btn.addEventListener('click', () => {
-      attendanceBtns.forEach((b) => b.classList.remove('active'));
-      btn.classList.add('active');
-      selectedAttendance = btn.dataset.value;
+  // Toggle button groups (Teilnahme + Vegetarisch) — one active per group,
+  // selected value stored on the group's own dataset.
+  document.querySelectorAll('.attendance-group').forEach((group) => {
+    const btns = group.querySelectorAll('.attendance-btn');
+    btns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        btns.forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+        group.dataset.value = btn.dataset.value;
+        group.classList.remove('input-error');
+      });
     });
   });
 
@@ -621,20 +624,18 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const nameInput = form.querySelector('[name="fullname"]');
-  const attendanceGroup = form.querySelector('.attendance-group');
+  const attendanceGroup = document.getElementById('attendance-group');
   // Clear error highlight as soon as the user fixes the field
   nameInput.addEventListener('input', () => nameInput.classList.remove('input-error'));
-  attendanceBtns.forEach((b) =>
-    b.addEventListener('click', () => attendanceGroup.classList.remove('input-error'))
-  );
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     // Required: Status (Ja/Nein)
+    const selectedAttendance = attendanceGroup.dataset.value || '';
     if (!selectedAttendance) {
       attendanceGroup.classList.add('input-error');
-      document.querySelector('.attendance-btn').focus();
+      attendanceGroup.querySelector('.attendance-btn').focus();
       return;
     }
 
@@ -652,7 +653,7 @@ document.addEventListener('DOMContentLoaded', () => {
       attendance:  selectedAttendance, // "Ja" | "Nein"
       name:        nameInput.value.trim(),
       guests:      guestInput.value,
-      dietary:     form.querySelector('[name="dietary"]').value,
+      dietary:     document.getElementById('veg-group').dataset.value || '',
       songRequest: form.querySelector('[name="song"]').value,
       message:     form.querySelector('[name="message"]').value,
     };
