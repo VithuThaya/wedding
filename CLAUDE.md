@@ -244,6 +244,14 @@ Notes:
 - If the Sheet already has an older header row, clear it once so the new headers get created.
 - The form has **no email field** and only **Ja/Nein** (no "Vielleicht").
 
+## Security (session 16c review)
+
+Static site — no backend/auth/DB/uploads, so most classic vulns are N/A. Two fixes shipped from a `/ecc:security-review`:
+- **Spreadsheet formula/CSV injection** — `apps-script/Code.gs` now runs every free-text field (`name`, `guests`, `dietary`, `songRequest`, `message`) through **`safeCell()`**, which prefixes a leading `= + - @ \t \r` with an apostrophe so Google Sheets stores it as text, not a formula. **⚠️ Needs redeploy:** re-paste `Code.gs` into the Sheet's Apps Script editor + redeploy for it to take effect.
+- **Subresource Integrity (SRI)** — the Lenis/GSAP `<script>` tags in `index.html` now carry `integrity="sha384-…" crossorigin="anonymous"` (hashes computed from the pinned CDN files; verified all three still load in a real browser). If you ever bump a CDN version, **recompute the hash** (`curl -sSL <url> | openssl dgst -sha384 -binary | openssl base64 -A`) or the script will be blocked.
+
+Verified safe (no change needed): no hardcoded secrets (the Apps-Script `/exec` URL is public by design), `innerHTML` in `i18n.js` only ever gets **static dict** values (no user input → no XSS), both `target="_blank"` links have `rel="noopener"`. Known-accepted low risks: the RSVP endpoint is anonymous/unthrottled (spam; couple can delete rows), and `doPost` echoes `error.toString()` (unreadable by the `no-cors` client).
+
 ## Content Placeholders
 
 **Done** — couple names (Vithu & Saru), date (29. Mai 2027), reception time (ab 16:00), venue (Saalbau Kirchberg, Neuhofstrasse 33, 3422 Kirchberg), Maps link, RSVP deadline (Ende 2026), nav monogram (V & S), `WEDDING_DATE` in `countdown.js` (`2027-05-29T16:00:00`), and "Du" address throughout.

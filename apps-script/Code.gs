@@ -14,6 +14,16 @@
  * NOTE: If your sheet already has the OLD header row (Vorname/Nachname/…),
  * clear the sheet once so these fresh headers get written on the next submit.
  */
+// Neutralize spreadsheet formula/CSV injection: a value that begins with
+// = + - @ (or a tab / carriage return) is prefixed with an apostrophe so
+// Google Sheets stores it as plain text instead of evaluating it as a formula.
+// Returns "-" for empty values (matches the previous `|| "-"` behaviour).
+function safeCell(v) {
+  var s = (v == null ? "" : String(v));
+  if (s === "") return "-";
+  return /^[=+\-@\t\r]/.test(s) ? "'" + s : s;
+}
+
 function doPost(e) {
   try {
     var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
@@ -35,12 +45,12 @@ function doPost(e) {
     // Append the row
     sheet.appendRow([
       new Date().toLocaleString("en-GB"),
-      data.name || "-",
+      safeCell(data.name),
       data.attendance === "Ja" ? "Confirmed" : "Declined",
-      data.guests || "-",
-      data.dietary || "-",
-      data.songRequest || "-",
-      data.message || "-"
+      safeCell(data.guests),
+      safeCell(data.dietary),
+      safeCell(data.songRequest),
+      safeCell(data.message)
     ]);
 
     return ContentService.createTextOutput(JSON.stringify({ status: "success" }))
